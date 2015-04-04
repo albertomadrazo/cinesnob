@@ -1,0 +1,19 @@
+{% extends "califas/base.html"%}
+{% load static %}
+{% block head %}{% endblock %}
+{% block title %}{% endblock %}
+{% block content %}
+	<h1>Entrar a Cinesnub</h1>
+
+	<form id="login_form" method="post" action="{% url 'user_login' %}">
+		{% csrf_token %}
+		Usuario: <input type="text" name="username" value="" size="50" /><br />
+		Contraseña: <input type="password" name="password" value="" size="50" /><br />
+
+		<input type="submit" value="submit" />
+	</form>
+{% endblock %}
+{% block imports %}
+{% endblock %}
+</body>
+</html>

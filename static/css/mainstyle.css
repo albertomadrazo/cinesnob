@@ -1,0 +1,57 @@
+*{
+	margin: 0;
+	padding: 0;
+	font-family: tahoma;
+}
+a{
+	font-weight: bold;
+	text-decoration: none;
+}
+a:link{
+	color: rgb(221, 106, 28);
+}
+a:visited{
+	color: rgb(127, 81, 33)
+}
+a:hover{
+	color: rgb(62, 170, 35);	
+}
+body{
+	background: #B6B6B6;
+
+}
+ul{
+	list-style-type: none;
+}
+#header{
+	background: black; /*rgb(50, 32, 44);*/
+	color: yellow;
+	width:100%;
+	height:75px;
+}
+.menu-element{
+	display: inline;
+	padding-right: 60px;
+	list-style-type: none;
+	color: yellow;
+	position: relative;
+}
+
+#hero img{
+	width:100%;
+	height:250px;
+}
+.menu{
+	position:relative;
+}
+.submenu{
+	visibility: hidden;
+	position: absolute;
+	top:0;
+	left:0;
+	width:120px;
+	background: black;
+	color: yellow;
+	border-radius: 0 0 5px 5px;
+}
+

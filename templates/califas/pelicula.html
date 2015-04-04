@@ -1,0 +1,24 @@
+{% extends "califas/base.html" %}
+{% load static %}
+{% block head %}{% endblock %}
+{% block title %}{% endblock %}
+{% block content %}
+<!--******************************************************************************-->
+<h2>{{ director_name }}</h2><br />
+{% if titles %}
+	<ul>
+	{% for titulo in titles %}
+		<li>Película: <strong>{{ titulo.movie_name }}</strong></li>
+		<li>A&ntilde;o: <strong>{{ titulo.year }}</strong></li>
+		<li>G&eacute;nero: <strong>{{ titulo.genre }}</strong></li>
+		<li>Calificaci&oacute;n: <strong>{{ titulo.rating }}</strong></li>
+		<li>Review: <strong>{{ titulo.review }}</strong></li>
+	{% endfor %}
+	</ul>
+{% else %}
+	<h1>Este señor no ha hecho ninguna película.</h1>
+{% endif %}
+{% endblock %}
+{% block imports %}
+<script type="text/javascript" src="{% static "js/nueva.js" %}"></script>
+{% endblock %}

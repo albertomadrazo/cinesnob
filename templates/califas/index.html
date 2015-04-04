@@ -1,0 +1,29 @@
+{% extends "califas/base.html" %}
+{% load static %}
+
+{% block head %}{% endblock %}
+{% block title %}CINESNUB{% endblock %}
+{% block content %}
+	<div id="hero">
+		<img src="{% static "images/cinema.jpg" %}" />
+	</div>
+	
+{% if user.is_authenticated %}
+	<h1>Cómo estás {{ user }}</h1>
+{% endif %}
+
+Directores <br /><br />
+{% if directors_list %}
+	<ul>
+	{% for director in directors_list %}
+    	<li>
+    	<a href="/califas/director/{{ director.slug }}">{{ director.director_name }}</a></li>
+	{% endfor %}
+	</ul>
+{% else %}
+	<strong>There are no directors present.</strong>
+{% endif %}
+{% endblock %}
+{% block imports %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,10 @@
+{% extends "califas/base.html" %}
+{% block content %}
+	{% if usuarios %}
+		<ul>
+		{% for user in usuarios %}
+			<li>{{ user.username }}</li>
+		{% endfor %}
+		</ul>
+	{% endif %}
+{% endblock %}

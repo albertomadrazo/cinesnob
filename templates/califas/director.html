@@ -1,0 +1,25 @@
+{% extends "califas/base.html" %}
+{% load static %}
+{% block head %}{% endblock %}
+{% block title %}{% endblock %}
+{% block content %}
+<div id="hero">
+	<img src="{% static "images/cinema.jpg" %}" />
+</div>
+<h1>{{ director_name }}</h1>
+{% if director_name %}
+	{% if titles %}
+		<ul>
+			{% for mytitle in titles %}
+				<li><a href="/califas/pelicula/{{ director_name.slug }}/{{ mytitle.slug }}" value="chingon">{{ mytitle.movie_name }} {{ mytitle.year }}</a></li>
+			{% endfor %}
+		</ul>
+
+	{% else %}
+		<strong>No titles currently in this category.</strong>
+	{% endif %}
+{% else %}
+	The specified director {{ director_name }} does not exist! yet.
+{% endif %}
+{% endblock %}
+{%block imports %}{% endblock %}

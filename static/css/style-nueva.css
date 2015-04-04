@@ -1,0 +1,38 @@
+#cont-nueva{
+	float: left;
+	width: 200px;
+	display: inline;
+}
+#textarea-review{
+	height: 100px;
+}
+#add-img{
+	display: inline;
+	width: 150px;
+	height: 200px;
+	background: gray;
+	float: left;
+}
+
+#your_rating{
+	/*display: none;*/
+	position:absolute;
+	left:-20000px;
+}
+#pacheco{
+	display: none;
+}
+#new-option-button{
+	background: orange;
+	border-style: double;
+	width:100px;
+}
+
+#stars ul{
+	padding:0px;
+	margin: 0px;
+}
+
+#stars li{
+	display: inline; /* para que sea en la misma línea */
+}

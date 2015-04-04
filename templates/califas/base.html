@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	{% block head %}{% endblock %}
+	<title>{% block title %}{% endblock %}</title>
+</head>
+
+<body>
+<div id="header">
+	<h1>CINESNUB</h1>
+	<ul id="menu-list">
+		<li class="menu-element">
+			<span class="menu"><a href="{% url 'index' %}">Inicio</a></span>
+			<div class="submenu">
+				<ul>
+		 			<li><a href="{% url 'index' %}">Inicio</a></li>
+		 			{% if user.is_authenticated %}
+					<li><a href="{% url 'user_logout' %}">Salir</a></li>
+					{% else %}
+					<li><a href="{% url 'user_login' %}">Entrar</a></li>
+					<li><a href="{% url 'registrarse' %}">Regístrate</a></li>
+					{% endif %}
+				</ul>				
+			</div>
+		</li>
+		{% if user.is_authenticated %}
+		<li class="menu-element">
+		<span class="menu">Mi Snobismo</span>
+			<div class="submenu">
+				<ul>
+		 			<li>Mi Snobismo</li>
+					<li><a href="{% url 'index' %}">Películas</a></li>
+					<li><a href="/director/">Directores</a></li>
+					<li>dosvidania</li>
+				</ul>				
+			</div>
+		</li>
+		{% endif %}
+		<li class="menu-element">Recomendaciones</li>
+		{% if user.is_authenticated %}
+		<li class="menu-element"><a href="{% url 'nueva' %}">Nueva Película</a></li>
+		<li class="menu-element">Mis Amigos</li>
+		{% endif %}
+	</ul>
+</div>
+
+{% block content %}
+{% endblock %}
+	<link rel="stylesheet" type="text/css" href="{% static "css/mainstyle.css" %}">
+	<script type="text/javascript" src="{% static "js/jquery.js" %}"></script>
+	<script type="text/javascript" src="{% static "js/califas.js" %}"></script>
+{% block imports %}
+
+{% endblock %}
+</body>
+</html>

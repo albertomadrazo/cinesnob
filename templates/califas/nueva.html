@@ -1,0 +1,62 @@
+{% extends "califas/base.html" %}
+{% load static %}
+
+{% block content %}
+<form id="category_form" method="post" action="/califas/nueva/">
+	{% csrf_token %}
+
+	<input type="text" id="director_name" name="director_nameko" placeholder="Director" /><br />
+
+	{% for hidden in title_form.hidden_fields %}
+		{{ hidden }}
+	{% endfor %}
+	
+	{% for field in title_form.movie_name %}
+		{{ field.errors }}
+		{{ field.help_text }}
+		{{ field }}
+	{% endfor %}
+	<br />
+	{% for field in title_form.year %}
+		{{ field.errors }}
+		{{ field.help_text }}
+		{{ field }}
+	{% endfor %}
+	{% for field in title_form.genre %}
+		<div id="cont-opciones">
+		{{ field.errors }}
+		{{ field.help_text }}
+		{{ field }}
+	</div>
+	{% endfor %}
+	<br />
+
+	<div id="your_rating_visible">
+		<input type="checkbox" id='uno' onclick="starMeter(1);" />
+		<input type="checkbox" id='dos' onclick="starMeter(2);" />
+		<input type="checkbox" id='tres' onclick="starMeter(3);" />
+		<input type="checkbox" id='cuatro' onclick="starMeter(4);" />
+		<input type="checkbox" id='cinco' onclick="starMeter(5);" />
+	</div>
+	<div id="your_rating">
+		{% for check in title_form.rating %}
+			{{ check }}
+		{% endfor %}
+	</div>
+	<br />
+	{% for field in title_form.review %}
+		{{ field.errors }}
+		{{ field.help_text }}
+		{{ field }}
+	{% endfor %}
+	<input type="submit" name="submit" value="Agregar" />
+</form>
+{% endblock %}
+<script type="text/javascript" src="{% static "js/jquery.js" %}"></script>
+<script type="text/javascript" src="{% static "js/califas.js" %}"></script>
+{% block imports %}
+	<script type="text/javascript" src="{% static "js/nueva.js" %}"></script>
+	<link rel="stylesheet" type="text/css" href="{% static "css/style-nueva.css" %}" />
+{% endblock %}
+</body>
+</html>
