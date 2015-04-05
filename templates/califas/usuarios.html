@@ -2,8 +2,8 @@
 {% block content %}
 	{% if usuarios %}
 		<ul>
-		{% for user in usuarios %}
-			<li>{{ user.username }}</li>
+		{% for usuario in usuarios %}
+			<li><a href="{% url 'perfil' usuario.username %}">{{ usuario.username }}</a></li>
 		{% endfor %}
 		</ul>
 	{% endif %}

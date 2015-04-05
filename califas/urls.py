@@ -14,6 +14,8 @@ urlpatterns = patterns('',
 		url(r'^login/$', views.user_login, name='user_login'),
 		url(r'^logout/$', views.user_logout, name='user_logout'),
 		url(r'^usuarios/$', views.lista_usuarios, name='lista_usuarios'),
+		url(r'^perfil/(?P<username>[\w\-]+)$', views.perfil, name='perfil'),
+
 		#url(r'^(?P<director_name_url>\w+)/(?P<movie_name_detail>\w+)$', views.pelicula, name='pelicula'),
 
 )		

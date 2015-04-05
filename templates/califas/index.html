@@ -4,13 +4,16 @@
 {% block head %}{% endblock %}
 {% block title %}CINESNUB{% endblock %}
 {% block content %}
-	<div id="hero">
-		<img src="{% static "images/cinema.jpg" %}" />
-	</div>
 	
 {% if user.is_authenticated %}
 	<h1>Cómo estás {{ user }}</h1>
+{% else %}
+	<div><img src="{% static "images/lordofrings1.jpg" %}"></div>
+	<div><img src="{% static "images/birdman.jpg" %}"></div>
+	<div><img src="{% static "images/psycho.jpg" %}"></div>
+	<br />
 {% endif %}
+
 
 Directores <br /><br />
 {% if directors_list %}
@@ -24,6 +27,7 @@ Directores <br /><br />
 	<strong>There are no directors present.</strong>
 {% endif %}
 {% endblock %}
-{% block imports %}{% endblock %}
-</body>
-</html>
+{% block imports %}
+<link rel="stylesheet" type="text/css" href="{% static "css/index.css" %}" />
+
+{% endblock %}

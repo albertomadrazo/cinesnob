@@ -4,8 +4,9 @@ from django.contrib.auth.models import User
 
 class Director(models.Model):
 
-	#username = models.ForeignKey(User)
-	
+	user_name = models.ForeignKey(User)
+	#user = models.ForeignKey(User)
+
 	director_name = models.CharField(max_length=128, unique=True)
 	slug = models.SlugField(unique=True)
 
@@ -48,6 +49,7 @@ class UserProfile(models.Model):
 	website = models.URLField(blank=True)
 	picture = models.ImageField(upload_to='profile_images', blank=True)
 	about_user = models.TextField(max_length=155, blank=True)
+	#friends = models.ManyToManyField('self')
 
 	def __unicode__(self):
 		return self.user.username
