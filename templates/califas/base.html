@@ -41,7 +41,7 @@
 		<li class="menu-element">Recomendaciones</li>
 		{% if user.is_authenticated %}
 		<li class="menu-element"><a href="{% url 'nueva' %}">Nueva Película</a></li>
-		<li class="menu-element"><a href="{% url 'lista_usuarios' %}">Mis Amigos</a></li>
+		<li class="menu-element"><a href="{% url 'friend_list' %}">Mis Amigos</a></li>
 		{% endif %}
 	</ul>
 </div>

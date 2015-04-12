@@ -1,0 +1,33 @@
+{% extends "califas/base.html" %}
+{% block content %}
+	<div style="float:left; padding-right:15px;">
+	<h2>Usuarios</h2>
+	{% if all_users %}
+		<ul>
+		{% for user in all_users %}
+
+			<li><a href="{% url 'perfil' user.username %}">
+			{% if amigo.username == user %}
+				Yo
+			{% else %}
+				{{ user.username }}</a>&#x263a;</li>
+			{% endif %}
+		{% endfor %}
+		</ul>
+	{% endif %}
+	</div>
+
+	<div>
+	<h2>Mis amigos</h2>
+	{% if amigos %}
+		<ul>
+		{% for amigo in amigos %}
+			<li>{{ amigo }}</li>
+		{% endfor %}
+		</ul>
+	{% else %}
+		Te dicen el sinamigos.<br />
+	{% endif %}
+	</div>
+
+{% endblock %}

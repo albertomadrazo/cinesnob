@@ -8,7 +8,7 @@
 <form id="category_form" method="post" action="/califas/nueva/">
 	{% csrf_token %}
 
-	<input type="text" id="director_name" name="director_nameko" placeholder="Director" /><br />
+	<input type="text" id="director_name" name="director_name" placeholder="Director" /><br />
 
 	{% for hidden in title_form.hidden_fields %}
 		{{ hidden }}

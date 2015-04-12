@@ -1,0 +1,35 @@
+{% extends "califas/base.html" %}
+{% load static %}
+
+{% block head %}{% endblock %}
+{% block content %}
+		
+		{{ mierda }}
+		{% if mi_perfil %}
+			{{ mi_perfil.user }}<br />
+			{{ mi_perfil.website }}<br />
+			<img src="{{ MEDIA_URL }}{{ mi_perfil.picture }}"><br />
+			<p>{{ mi_perfil.about }}</p><br />
+		{% endif %}
+
+		{% if mi_perfil.user != user %}
+		<div>
+			<a href="{% url 'befriend' %}?usuario={{ user }}&amigarse={{ mi_perfil.user }}">
+			Hacerse amigo
+			</a>
+			</div>
+		{% endif %}
+
+		<h2>Películas Favoritas</h2>
+		{% if favorite_movies %}
+			<ul>
+			{% for movie in favorite_movies %}
+				<li>{{ movie.movie_name}} - {{ movie.director }} {{ movie.rating }}</li>
+			{% endfor %}
+			</ul>
+		{% endif %}
+
+{% endblock %}
+{% block imports %}
+<link rel="stylesheet" type="text/css" href="{% static "css/perfil.css" %}" />
+{% endblock %}

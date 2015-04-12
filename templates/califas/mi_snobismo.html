@@ -1,0 +1,16 @@
+{% extends "califas/base.html" %}
+{% load static %}
+
+{% block head %}{% endblock %}
+{% block content %}
+		{{ mierda }}
+		{% if mi_perfil %}
+			{{ mi_perfil.user }}<br />
+			{{ mi_perfil.website }}<br />
+			<img src="{{ MEDIA_URL }}{{ mi_perfil.picture }}"><br />
+			{{ mi_perfil.about }}
+		{% endif %}
+{% endblock %}
+{% block imports %}
+<link rel="stylesheet" type="text/css" href="{% static "css/mi_snobismo.css" %}" />
+{% endblock %}

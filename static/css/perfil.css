@@ -1,0 +1,14 @@
+img{
+	max-width: 200px;
+	max-height:200px;
+	width: auto;
+	height: auto;
+}
+
+#add_friend{
+	max-width: 125px;
+	max-height: 20px;
+	width:auto;
+	height: auto;
+	background: orange;
+}

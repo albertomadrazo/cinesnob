@@ -4,9 +4,9 @@
 {% block head %}{% endblock %}
 {% block title %}CINESNUB{% endblock %}
 {% block content %}
-	
+
 {% if user.is_authenticated %}
-	<h1>Cómo estás {{ user }}</h1>
+	<h2>Cómo estás {{ user }}</h2>
 {% else %}
 	<div><img src="{% static "images/lordofrings1.jpg" %}"></div>
 	<div><img src="{% static "images/birdman.jpg" %}"></div>
@@ -14,8 +14,19 @@
 	<br />
 {% endif %}
 
+<h3>Te recomendamos</h3>
+	<ul>
+	{% if recommendations %}
+		{% for recom in recommendations %}
+		<li>{{ recom.movie_name }}</li>
+		{% endfor %}
+	{% else %}
+		<li>Que vayas a tu cine favorito!</li>
+	</ul>
+	{% endif %}
+	
 
-Directores <br /><br />
+<h3>Directores</h3>
 {% if directors_list %}
 	<ul>
 	{% for director in directors_list %}
@@ -26,6 +37,7 @@ Directores <br /><br />
 {% else %}
 	<strong>There are no directors present.</strong>
 {% endif %}
+
 {% endblock %}
 {% block imports %}
 <link rel="stylesheet" type="text/css" href="{% static "css/index.css" %}" />

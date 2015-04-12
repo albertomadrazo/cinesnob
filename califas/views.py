@@ -1,72 +1,113 @@
 #--<encoding:utf8>--
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
-from califas.models import Director, Title, UserProfile
+from califas.models import Director, Title, UserProfile, Friend
 from califas.forms import TitleForm, DirectorForm, UserForm, UserProfileForm
 from django.core.urlresolvers import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-# from califas import funciones
+
+def get_user_or_profile(username):
+
+	user_or_profile = {}
+	user_name = User.objects.get(username=str(username))
+	user_or_profile['name'] = user_name
+
+	user = UserProfile.objects.all()
+	for my_user in user:
+		if my_user.user == user_name:
+			user_or_profile['profile'] = my_user
+			return user_or_profile
+
+	return None
+
 
 def index(request):
-	if request.user:
-		user_name = User.objects.filter(username=request.user)
 
-		directors_list = Director.objects.filter(user_name=user_name) # funciones.call_directors()
-		context_dict = {'directors_list': directors_list}
+	current_user = str(request.user.username)
+	context_dict = {}
 
+	
+	if current_user != '':
+		
+		the_user = get_user_or_profile(request.user)
+		print the_user
+
+		try:
+			directors_list = the_user['profile'].directors.all() 
+			context_dict = {'directors_list': directors_list}
+			print "QQQQQQQQQQ", context_dict['directors_list']
+		except:
+			context_dict = {'directors_list': ''}
+
+	recommendations = Title.objects.all().order_by('-rating')[:5]
+	context_dict['recommendations'] = recommendations
 	return render(request, 'califas/index.html', context_dict)
 
+
 def base(request):
+
 	context = RequestContext(request)
-	context_dict ={'uno':1}
+	context_dict ={'uno': 1}
 	return render(request, 'califas/base.html', context_dict)
 
-def director(request, director_name_slug): # request is a mandatory argument
-	print "DIRECTOR.VIEW"
-	context_dict ={}
+def director(request, director_name_slug): 
+ 
+ 	context_dict ={}
+	user = get_user_or_profile(request.user)
 
 	try:
-		director = Director.objects.get(slug=director_name_slug)
-		titles = Title.objects.filter(director=director)
+		directors = user['profile'].directors.all()
+		for direc in directors:
+			if direc.slug == director_name_slug:
+				director = direc
+
+		titles = Title.objects.filter(
+						director=director, user_name=user['name']).order_by('-year')
 		context_dict['titles'] = titles
 		context_dict['director_name'] = director
-		context_dict['director_name_slug'] = director_name_slug
-	except Director.DoesNotExist:
-		pass
-
-	for titulo in titles:
-		titulo.url = titulo.movie_name.replace(' ', '_')
+		context_dict['director_name_slug'] = director.director_name_slug
+	except:
+		print "You have no directors %s " % request.user
 
 	return render(request, 'califas/director.html', context_dict)
 
 @login_required
 def nueva(request):
-	print "NUEVA.VIEW"
 
 	if request.method == 'POST':
-		user_name = User.objects.filter(username=request.user)
-		director_name = request.POST[u'director_nameko']
+		director_found = False
+		user = get_user_or_profile(request.user)
+
+		director_name = request.POST[u'director_name']
 		title_form = TitleForm(request.POST)
 
 		# have we been provided with a valid form?
 		if title_form.is_valid():
-			nuevo_titulo = title_form.save(commit=False)#
+			nuevo_titulo = title_form.save(commit=False)
+			nuevo_titulo.user_name = user['name']
 
 			try:
-				director = Director.objects.get(user_name=user_name, director_name=director_name)
-				nuevo_titulo.director = director
-			except Director.DoesNotExist:
-				user_name = User.objects.get(username=request.user)
+				director = user['profile'].directors.get(director_name=director_name)
+			except:
+				director_list = Director.objects.all()
 
-				director = Director() # o DirectorForm?
-				director.user_name = user_name
-				director.director_name = director_name
-				director.save()
-				director = Director.objects.get(user_name=user_name, director_name=director_name)				
-				nuevo_titulo.director = director
+				for director in director_list:
+					print director.director_name, director_name
 
+					if director.director_name == director_name:
+						director_found = True
+
+					
+				if director_found == False:	
+					director = Director(director_name=director_name)
+					
+					director.save()
+	
+				user['profile'].directors.add(director)
+
+			nuevo_titulo.director = director
 			nuevo_titulo.save()
 #			# Now call the index() view.
 #			# The user will be shown the homepage.
@@ -75,7 +116,7 @@ def nueva(request):
 #			# The supplied form contains errors - just print them to the terminal
 			print title_form.errors
 
-		directors_list = Director.objects.filter(user_name=user_name) #funciones.call_directors()
+		directors_list = user['profile'].directors.all() #funciones.call_directors()
 		#url = HttpResponseRedirect(reverse('view.index'))
 		#return render_to_response('califas/', directors_list, context) #HttpResponseRedirect('/califas/index.html')
 		return render(request, 'califas/index.html', {'directors_list':directors_list})
@@ -96,7 +137,7 @@ def pelicula(request, director_name_slug, movie_name_slug):
 	context_dict = {'director_name': director_name_slug}
 	try:
 		director = Director.objects.get(slug=director_name_slug)
-		titles = Title.objects.filter(slug=movie_name_slug)
+		titles = Title.objects.filter(user_name=request.user, slug=movie_name_slug).order_by('-year')
 		context_dict['titles'] = titles
 		context_dict['director_name'] = director
 	except Director.DoesNotExist:
@@ -116,13 +157,20 @@ def registrarse(request):
 
 		if user_form.is_valid() and profile_form.is_valid():
 			user = user_form.save()
-
 			# Now we hash the password with the set_password method.
 			user.set_password(user.password)
-			user.save()
 
+			user.save()
 			profile = profile_form.save(commit=False)
+
 			profile.user = user
+			profile.nombre_usuario = str(profile.user.username)
+
+			# Here we create the UserProfile's friend table (ManyToMany)
+			befriend = Friend()
+			befriend.friend_name = user.username
+			befriend.is_friend = True
+			befriend.save()
 
 			if 'picture' in request.FILES:
 				profile.picture = request.FILES['picture']
@@ -165,33 +213,90 @@ def user_login(request):
 	else:
 		return render(request, 'califas/login.html', {})
 
+
 @login_required
 def user_logout(request):
 	logout(request)
 
 	return HttpResponseRedirect('/califas/')
 
-def lista_usuarios(request):
-	usuarios = User.objects.all()
 
-	context_dict = {'usuarios': usuarios }
+def friend_list(request):
 
-	return render(request, 'califas/usuarios.html', context_dict)
+	all_users = User.objects.all()
+	context_dict = {'all_users': all_users }
+	my_friends = UserProfile.objects.all()
+	user = User.objects.get(username = request.user)
+
+	for x in my_friends:
+		if x.user == user:
+			my_friends = x.friends.all()
+	amigos = {}
+	for y in my_friends:
+		amigos[y.friend_name] = y.friend_name
+
+	context_dict['amigos'] = amigos
+
+	return render(request, 'califas/amigos.html', context_dict)
+
 
 def perfil(request, username):
-	print "request.user ", request.user
-	mi_perfil = {}
 
-	username = User.objects.get(username=username)
-	perfil = UserProfile.objects.all()
-	for x in perfil:
-		print "?????????7ooooooooooo?", type(x.user)
-		if x.user == username:
-			mi_perfil['user'] = x.user
-			mi_perfil['website'] = x.website
-			print "wwwwwwwwwww", x.website
-			mi_perfil['picture'] = x.picture
-			mi_perfil['about'] = x.about_user
-			print mi_perfil
-	context_dict = {'mi_perfil': mi_perfil, 'mierda':'ok'}
+	user = get_user_or_profile(request.user)
+	stalked_user = get_user_or_profile(username)
+	perfiles = UserProfile.objects.all()
+	mi_perfil = {}
+	print "www", stalked_user
+
+	for perfil in perfiles:
+		print "----"
+		print perfiles
+		print perfil
+		print "w", stalked_user['profile']
+		if perfil.user == stalked_user['profile'].user:
+			mi_perfil['user'] = perfil.user
+			mi_perfil['website'] = perfil.website
+			mi_perfil['picture'] = perfil.picture
+			mi_perfil['about'] = perfil.about_user
+
+	# Las 3 peliculas favoritas del usuario
+	directors = stalked_user['profile'].directors.all()
+
+	#directors = Director.objects.filter(user_name=username) # .Title.objects.all()
+	movies = Title.objects.filter(user_name=stalked_user['name']).order_by('-rating')[:3]
+
+	print "Mis pelis: ", movies
+
+	context_dict = {
+		'mi_perfil': mi_perfil, 
+		'directors': directors, 
+		'favorite_movies': movies
+	}
+
 	return render(request, 'califas/perfil.html', context_dict)
+
+
+def befriend(request):
+
+	usuario = str(request.GET[u'usuario'])
+	amigarse = request.GET[u'amigarse']
+
+	next_friend = Friend.objects.all()
+	print "next_friend:" , next_friend
+	for a in next_friend:
+		if a.friend_name == amigarse:
+			next_friend = a
+
+	user = UserProfile.objects.all()
+
+	for x in user:
+		if x.user.username == usuario:
+			usuario = x
+			next_friend.save()
+			x.friends.add(next_friend)
+			x.save()
+
+		else:
+			print "no"
+
+	return HttpResponseRedirect('/califas/amigos')
