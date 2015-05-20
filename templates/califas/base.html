@@ -1,58 +1,88 @@
 <!DOCTYPE html>
 {% load static %}
-<html lang="en">
+<html lang="es">
 <head>
 	<meta charset="UTF-8">
 	{% block head %}{% endblock %}
 	<title>{% block title %}{% endblock %}</title>
+	<link rel="stylesheet" type="text/css" href="{% static "css/style.css" %}" />
 </head>
 
 <body>
-<div id="header">
-	<h1>CINESNOB</h1>
-	<ul id="menu-list">
-		<li class="menu-element">
-			<span class="menu"><a href="{% url 'index' %}">Inicio</a></span>
-			<div class="submenu">
-				<ul>
-		 			<li><a href="{% url 'index' %}">Inicio</a></li>
-		 			{% if user.is_authenticated %}
-					<li><a href="{% url 'user_logout' %}">Salir</a></li>
-					{% else %}
-					<li><a href="{% url 'user_login' %}">Entrar</a></li>
-					<li><a href="{% url 'registrarse' %}">Regístrate</a></li>
-					{% endif %}
-				</ul>				
+	<div id='header'>
+		<div id="fronton">
+			<div id="title-holder"><h1 class="title">CINESNOB</h1></div>
+			<div id="social-icons">
+				<div class='icon-social' id='icon-facebook'>
+					<a href="http://www.facebook.com/cinesnob"><img src="{% static "images/facebook.jpg" %}"></a>
+				</div>
+				<div class='icon-social' id='icon-twitter'>
+					<img src="{% static "images/twitter.jpg" %}">
+				</div>
+				<div class='icon-social' id='icon-googleplus'>
+					<img src="{% static "images/google.jpg" %}">
+				</div>
 			</div>
-		</li>
-		{% if user.is_authenticated %}
-		<li class="menu-element">
-		<span class="menu"><a href="{% url 'perfil' user %}">Mi Snobismo</a></span>
-			<div class="submenu">
-				<ul>
-		 			<li><a href="{% url 'perfil' user %}">Mi Snobismo</a></li>
-					<li><a href="{% url 'index' %}">Películas</a></li>
-					<li><a href="/director/">Directores</a></li>
-					<li>dosvidania</li>
-				</ul>				
-			</div>
-		</li>
-		{% endif %}
-		<li class="menu-element">Recomendaciones</li>
-		{% if user.is_authenticated %}
-		<li class="menu-element"><a href="{% url 'nueva' %}">Nueva Película</a></li>
-		<li class="menu-element"><a href="{% url 'friend_list' %}">Mis Amigos</a></li>
-		{% endif %}
-	</ul>
-</div>
+		</div>
+		<div id="menu-container">
+			<ul class="menu">
+				<li>
+					<div class="menu-element" id="menu-peliculas" value="0">
+						<a href="{% url 'index' %}">Películas</a>
+						<div class="sub" id="submenu0">
+							<ul>
+								<li><a href="{% url 'directores' %}">directores</a></li>
+								<li><a href="{% url 'nueva' %}">agregar película</a></li>
+							</ul>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="menu-element" id="menu-perfil" value="1">
+						<a href="{% url 'perfil' user %}">mi snobismo</a>
+						<div class="sub" id="submenu1">
+							<ul>
+								<li><a href="{% url 'friend_list' %}">mis amigos</a></li>
+								<li>otra gente bonita</li>
+							</ul>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="menu-element" id="menu-camaradas" value="2">
+						<a href="{% url 'friend_list' %}">Camaradas</a>
+						<div class="sub" id="submenu2">
+							<ul>
+								<li>Viejas locas</li>
+								<li>Nuevas</li>
+							</ul>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="menu-element" id="menu-reco" value="3">
+						<a href="#">Marquesina</a>
+						<div class="sub" id="submenu3">
+							<ul>
+								<li><a href="{% url 'epocas' %}">épocas</a></li>
+								<li><a href="{% url 'exitos' %}">grandes éxitos</a></li>
+							</ul>
+						</div>
+					</div>
+				</li>
+			</ul>
+
+		</div>
+	</div>
+	<div id="content-container">
 
 {% block content %}
 {% endblock %}
-	<link rel="stylesheet" type="text/css" href="{% static "css/mainstyle.css" %}">
-	<script type="text/javascript" src="{% static "js/jquery.js" %}"></script>
-	<script type="text/javascript" src="{% static "js/califas.js" %}"></script>
-{% block imports %}
 
+	</div>
+	<script type="text/javascript" src="{% static "js/jquery.js" %}"></script>
+	<script type="text/javascript" src="{% static "js/menu.js" %}"></script>
+{% block imports %}
 {% endblock %}
 </body>
 </html>

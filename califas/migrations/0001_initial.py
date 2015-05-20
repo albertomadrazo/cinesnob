@@ -18,9 +18,12 @@ class Migration(migrations.Migration):
             name='Director',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('nationality', models.CharField(default=b'gringo', max_length=50)),
+                ('nationality', models.CharField(max_length=50, blank=True)),
                 ('director_name', models.CharField(unique=True, max_length=128)),
                 ('slug', models.SlugField(unique=True)),
+                ('biography', models.TextField(max_length=500)),
+                ('birth', models.IntegerField(default=0)),
+                ('death', models.IntegerField(default=0)),
             ],
             options={
             },
@@ -31,8 +34,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('friend_name', models.CharField(default=b'', unique=True, max_length=100)),
-                ('is_friend', models.BooleanField(default=False)),
-                ('date_added', models.DateField(default=datetime.datetime(2015, 4, 10, 9, 16, 2, 515237, tzinfo=utc))),
+                ('member_since', models.DateField(default=datetime.datetime(2015, 4, 22, 1, 56, 12, 535392, tzinfo=utc))),
             ],
             options={
             },
@@ -48,6 +50,7 @@ class Migration(migrations.Migration):
                 ('genre', models.CharField(max_length=100)),
                 ('review', models.TextField(max_length=300)),
                 ('rating', models.IntegerField(default=0)),
+                ('poster', models.ImageField(upload_to=b'profile_images', blank=True)),
                 ('director', models.ForeignKey(to='califas.Director')),
                 ('user_name', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
             ],
@@ -60,14 +63,14 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('nombre_usuario', models.CharField(max_length=50)),
-                ('real_name', models.CharField(default=b'anonymous', max_length=128)),
-                ('last_name', models.CharField(default=b'anonymous', max_length=128)),
+                ('real_name', models.CharField(max_length=128, blank=True)),
+                ('last_name', models.CharField(max_length=128, blank=True)),
                 ('age', models.IntegerField(default=0)),
                 ('website', models.URLField(blank=True)),
-                ('picture', models.ImageField(upload_to=b'profile_images', blank=True)),
+                ('picture', models.ImageField(upload_to=b'movie_images', blank=True)),
                 ('about_user', models.TextField(max_length=155, blank=True)),
-                ('directors', models.ManyToManyField(to='califas.Director')),
-                ('friends', models.ManyToManyField(to='califas.Friend')),
+                ('directors', models.ManyToManyField(to='califas.Director', blank=True)),
+                ('friends', models.ManyToManyField(to='califas.Friend', blank=True)),
                 ('user', models.OneToOneField(to=settings.AUTH_USER_MODEL)),
             ],
             options={

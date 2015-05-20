@@ -4,16 +4,100 @@
 		"selected_items":
 		[
 			[
+				"movie-po",
+				"movie-pop-close"
+			],
+			[
+				"paddin",
+				"padding-top"
+			],
+			[
+				"margin",
+				"margin-right"
+			],
+			[
+				"bor",
+				"border-style"
+			],
+			[
+				"co",
+				"color"
+			],
+			[
+				"mar",
+				"margin-top"
+			],
+			[
+				"tex",
+				"text-align"
+			],
+			[
+				"padd",
+				"padding-left"
+			],
+			[
+				"su",
+				"submenu"
+			],
+			[
+				"sub",
+				"subNumber"
+			],
+			[
+				"over",
+				"overmenu"
+			],
+			[
+				"ov",
+				"oversubmenu"
+			],
+			[
+				"men",
+				"menu-inicio-sub"
+			],
+			[
+				"visibl",
+				"visibility"
+			],
+			[
+				"menu-",
+				"menu-inicio-sub"
+			],
+			[
+				"font",
+				"font-size"
+			],
+			[
+				"wdi",
+				"width"
+			],
+			[
+				"fo",
+				"font-family"
+			],
+			[
+				"director_name",
+				"director_name_slug"
+			],
+			[
+				"Directr",
+				"DirectorAdmin"
+			],
+			[
+				"frien",
+				"friend_list"
+			],
+			[
+				"strinf",
+				"stringify_user_field"
+			],
+			[
 				"H",
 				"HttpResponseRedirect"
 			],
 			[
 				"inli",
 				"inline-block"
-			],
-			[
-				"fo",
-				"ForeignKey"
 			],
 			[
 				"context",
@@ -30,10 +114,6 @@
 			[
 				"Titl",
 				"TitleForm"
-			],
-			[
-				"bor",
-				"border-style"
 			],
 			[
 				"mo",
@@ -72,10 +152,6 @@
 				"list-style-type"
 			],
 			[
-				"padd",
-				"padding"
-			],
-			[
 				"get",
 				"getElementsByClassName"
 			],
@@ -112,10 +188,6 @@
 				"text-align"
 			],
 			[
-				"font",
-				"font-size"
-			],
-			[
 				"text",
 				"text-align"
 			],
@@ -134,10 +206,6 @@
 			[
 				"v",
 				"void"
-			],
-			[
-				"paddin",
-				"padding"
 			],
 			[
 				"pad",
@@ -184,10 +252,6 @@
 				"text-align"
 			],
 			[
-				"tex",
-				"text-decoration"
-			],
-			[
 				"monster",
 				"capturedMonsters"
 			],
@@ -220,34 +284,10 @@
 	"buffers":
 	[
 		{
-			"file": "califas/views.py",
+			"file": "templates/califas/pelicula.html",
 			"settings":
 			{
-				"buffer_size": 6264,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "califas/admin.py",
-			"settings":
-			{
-				"buffer_size": 244,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "califas/urls.py",
-			"settings":
-			{
-				"buffer_size": 1007,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "templates/califas/index.html",
-			"settings":
-			{
-				"buffer_size": 836,
+				"buffer_size": 1168,
 				"line_ending": "Unix"
 			}
 		},
@@ -255,39 +295,87 @@
 			"file": "templates/califas/base.html",
 			"settings":
 			{
-				"buffer_size": 1706,
+				"buffer_size": 2406,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "templates/califas/nueva.html",
+			"file": "califas/views.py",
 			"settings":
 			{
-				"buffer_size": 1789,
+				"buffer_size": 10654,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "static/css/index.css",
+			"file": "dummy2/movie-detail.html",
 			"settings":
 			{
-				"buffer_size": 69,
+				"buffer_size": 1266,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "califas/models.py",
+			"file": "templates/califas/exitos.html",
 			"settings":
 			{
-				"buffer_size": 1770,
+				"buffer_size": 1545,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "califas/forms.py",
+			"file": "static/css/movie-detail.css",
 			"settings":
 			{
-				"buffer_size": 2127,
+				"buffer_size": 471,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "static/js/exitos.js",
+			"settings":
+			{
+				"buffer_size": 1829,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "static/css/exitos.css",
+			"settings":
+			{
+				"buffer_size": 709,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "TODO.txt",
+			"settings":
+			{
+				"buffer_size": 823,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "templates/califas/index.html",
+			"settings":
+			{
+				"buffer_size": 944,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/alberto/Desktop/web/bootstrap_sandbox/tutorial/js/bootstrap.min.js",
+			"settings":
+			{
+				"buffer_size": 35646,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "templates/califas/directores.html",
+			"settings":
+			{
+				"buffer_size": 450,
 				"line_ending": "Unix"
 			}
 		},
@@ -295,23 +383,127 @@
 			"file": "templates/califas/amigos.html",
 			"settings":
 			{
-				"buffer_size": 238,
+				"buffer_size": 593,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "templates/califas/perfil.html",
+			"file": "templates/califas/epocas.html",
 			"settings":
 			{
-				"buffer_size": 539,
+				"buffer_size": 746,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "static/css/perfil.css",
+			"file": "califas/forms.py",
 			"settings":
 			{
-				"buffer_size": 176,
+				"buffer_size": 2164,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "static/css/images.css",
+			"settings":
+			{
+				"buffer_size": 267,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "static/js/epocas.js",
+			"settings":
+			{
+				"buffer_size": 981,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "templates/califas/nueva.html",
+			"settings":
+			{
+				"buffer_size": 1834,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "static/js/nueva.js",
+			"settings":
+			{
+				"buffer_size": 2191,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "califas/urls.py",
+			"settings":
+			{
+				"buffer_size": 1248,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "templates/califas/login.html",
+			"settings":
+			{
+				"buffer_size": 622,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "templates/califas/registrarse.html",
+			"settings":
+			{
+				"buffer_size": 744,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/alberto/Desktop/web/bootstrap_sandbox/tutorial/index.html",
+			"settings":
+			{
+				"buffer_size": 4412,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "califas/models.py",
+			"settings":
+			{
+				"buffer_size": 2093,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "templates/califas/miminu.html",
+			"settings":
+			{
+				"buffer_size": 1263,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "static/js/menu.js",
+			"settings":
+			{
+				"buffer_size": 1086,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "static/css/style.css",
+			"settings":
+			{
+				"buffer_size": 2290,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/alberto/Desktop/web/putamadre.html",
+			"settings":
+			{
+				"buffer_size": 499,
 				"line_ending": "Unix"
 			}
 		}
@@ -374,6 +566,45 @@
 	},
 	"file_history":
 	[
+		"/home/alberto/Desktop/web/git-projects/cinesnob/dummy2/style.css",
+		"/home/alberto/Desktop/web/timer.html",
+		"/home/alberto/Desktop/web/bootstrap_sandbox/tutorial/read.html",
+		"/home/alberto/Desktop/web/bootstrap_sandbox/tutorial/bootstrap.css",
+		"/home/alberto/.config/sublime-text-3/Packages/Default/Preferences.sublime-settings",
+		"/home/alberto/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
+		"/home/alberto/Desktop/web/git-projects/cinesnob/dummy2/peliculas.html",
+		"/home/alberto/Desktop/web/git-projects/cinesnob2/static/css/peliculas.css",
+		"/home/alberto/Desktop/web/git-projects/cinesnob2/static/css/style-old.css",
+		"/home/alberto/Desktop/web/git-projects/cinesnob2/templates/califas/base-old2.html",
+		"/home/alberto/Desktop/web/git-projects/cinesnob2/templates/califas/jquery.js",
+		"/home/alberto/Desktop/web/git-projects/cinesnob2/static/css/style.css",
+		"/home/alberto/Desktop/web/git-projects/cinesnob2/templates/califas/nueva.html",
+		"/home/alberto/Desktop/web/git-projects/cinesnob2/califas/views.py",
+		"/home/alberto/Desktop/web/git-projects/cinesnob2/templates/califas/pelicula.html",
+		"/home/alberto/Desktop/web/git-projects/cinesnob2/templates/califas/bio.html",
+		"/home/alberto/Desktop/web/git-projects/cinesnob2/templates/califas/perfil.html",
+		"/home/alberto/Desktop/web/git-projects/cinesnob2/templates/califas/director.html",
+		"/home/alberto/Desktop/web/git-projects/cinesnob2/static/css/perfil.css",
+		"/home/alberto/Desktop/web/git-projects/cinesnob2/dummy2/movie-detail.html",
+		"/home/alberto/Desktop/web/git-projects/cinesnob2/static/css/index.css",
+		"/home/alberto/Desktop/web/git-projects/cinesnob2/templates/califas/index.html",
+		"/home/alberto/Desktop/web/git-projects/cinesnob2/dummy/css/style.css",
+		"/home/alberto/Desktop/web/git-projects/cinesnob2/dummy/js/menu.js",
+		"/home/alberto/Desktop/web/git-projects/cinesnob2/dummy/layout.html",
+		"/home/alberto/Desktop/web/git-projects/cinesnob2/califas/templatetags/get_range.py",
+		"/home/alberto/Desktop/web/git-projects/cinesnob2/dummy2/index.html",
+		"/home/alberto/Desktop/web/git-projects/cinesnob2/templates/califas/base.html",
+		"/home/alberto/Desktop/web/git-projects/cinesnob2/templates/califas/amigos.html",
+		"/home/alberto/Desktop/web/git-projects/cinesnob2/califas/urls.py",
+		"/home/alberto/Desktop/web/git-projects/cinesnob2/califas/admin.py",
+		"/home/alberto/Desktop/web/git-projects/cinesnob2/califas/forms.py",
+		"/home/alberto/Desktop/web/git-projects/cinesnob2/califas/models.py",
+		"/home/alberto/Desktop/web/bootstrap_sandbox/tutorial/index.html",
+		"/home/alberto/Desktop/web/spa/5/spa.html",
+		"/home/alberto/Desktop/web/spa/5/js/spa.shell.js",
+		"/home/alberto/Desktop/web/spa/5/js/spa.chat.js",
+		"/home/alberto/Desktop/web/git-projects/cinesnob/dummy/css/style.css",
+		"/home/alberto/Desktop/web/git-projects/cinesnob/dummy/style.css",
 		"/home/alberto/Desktop/web/git-projects/cinesnob/califas/migrations/0010_auto_20150405_0831.py",
 		"/home/alberto/Desktop/web/git-projects/cinesnob/templates/califas/amigos.html",
 		"/home/alberto/Desktop/web/git-projects/cinesnob/cinesnob/settings.py",
@@ -384,7 +615,6 @@
 		"/home/alberto/Desktop/web/git-projects/cinesnob/.gitignore",
 		"/home/alberto/Desktop/web/git-projects/cinesnub/califas/machine.py",
 		"/home/alberto/Desktop/web/git-projects/cinesnub/califas/funciones.py",
-		"/home/alberto/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
 		"/home/alberto/Desktop/web/git-projects/cinesnub/templates/califas/base.html",
 		"/home/alberto/Desktop/web/git-projects/cinesnub/templates/califas/prueba.html",
 		"/home/alberto/Desktop/web/git-projects/cinesnub/templates/califas/pelicula.html",
@@ -463,45 +693,7 @@
 		"/home/alberto/Desktop/web/django/tangodjango/tango/tango_with_django_project/templates/rango/category.html",
 		"/home/alberto/.config/sublime-text-3/Packages/User/Distraction Free.sublime-settings",
 		"/home/alberto/Desktop/web/django/tangodjango/tango/tango_with_django_project/templates/rango/about.html",
-		"/home/alberto/Desktop/web/django/mysite/mysite/settings.py",
-		"/home/alberto/Desktop/web/django/mysite/mysite/wsgi.py",
-		"/home/alberto/Desktop/web/django/mysite/static/css/blog.css",
-		"/home/alberto/Desktop/web/django/mysite/.gitignore",
-		"/home/alberto/Desktop/web/django/mysite/mysite/local_settings.py",
-		"/home/alberto/Desktop/web/django/mysite/requirements.txt",
-		"/home/alberto/Desktop/web/django/mysite/blog/urls.py",
-		"/home/alberto/Desktop/web/django/mysite/blog/templates/blog/post_list.html",
-		"/home/alberto/Desktop/web/django/mysite/blog/templates/blog/post_detail.html",
-		"/home/alberto/Desktop/web/django/mysite/blog/templates/blog/post_edit.html",
-		"/home/alberto/Desktop/web/django/mysite/blog/admin.py",
-		"/home/alberto/Desktop/web/django/mysite/blog/models.py",
-		"/home/alberto/Desktop/web/django/mysite/runtime.txt",
-		"/home/alberto/Desktop/web/django/mysite/Procfile",
-		"/home/alberto/Desktop/web/django/mysite/blog/templates/blog/post_draft_list.html",
-		"/home/alberto/Desktop/web/django/mysite/blog/views.py",
-		"/home/alberto/Desktop/web/django/mysite/blog/templates/blog/base.html",
-		"/home/alberto/Desktop/web/django/mysite/blog/forms.py",
-		"/home/alberto/Desktop/web/django/mysite/static/blog.css",
-		"/home/alberto/Desktop/web/django/mysite/polls/models.py",
-		"/home/alberto/Desktop/web/django/mysite/polls/urls.py",
-		"/home/alberto/Desktop/web/django/mysite/polls/admin.py",
-		"/home/alberto/Desktop/web/django/mysite/polls/templates/polls/index.html",
-		"/home/alberto/Desktop/web/django/mysite/polls/templates/polls/detail.html",
-		"/home/alberto/Desktop/web/django/mysite/polls/templates/polls/results.html",
-		"/home/alberto/Desktop/web/django/mysite/polls/views.py",
-		"/home/alberto/Desktop/web/node/EmployeeDB/package.json",
-		"/home/alberto/Desktop/web/node/EmployeeDB/employeeprovider.js",
-		"/home/alberto/Desktop/web/node/EmployeeDB/app.js",
-		"/home/alberto/Desktop/web/node/EmployeeDB/views/index.jade",
-		"/home/alberto/Desktop/web/node/EmployeeDB/views/layout.jade",
-		"/home/alberto/Desktop/web/node/EmployeeDB/views/employee_new.jade",
-		"/home/alberto/Desktop/web/nodetest2/package.json",
-		"/home/alberto/Desktop/web/nodetest2/views/layout.jade",
-		"/home/alberto/Desktop/web/nodetest2/public/stylesheets/style.css",
-		"/home/alberto/Desktop/web/nodetest2/app.js",
-		"/home/alberto/Desktop/web/nodetest2/routes/users.js",
-		"/home/alberto/Desktop/web/nodetest2/public/javascripts/global.js",
-		"/home/alberto/Desktop/web/nodetest2/views/index.jade"
+		"/home/alberto/Desktop/web/django/mysite/mysite/settings.py"
 	],
 	"find":
 	{
@@ -509,9 +701,12 @@
 	},
 	"find_in_files":
 	{
-		"height": 0.0,
+		"height": 93.0,
 		"where_history":
 		[
+			"/home/alberto/Desktop/web/git-projects/cinesnob/",
+			"/home/alberto/Desktop/web/git-projects/cinesnob2/",
+			""
 		]
 	},
 	"find_state":
@@ -519,6 +714,58 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"$(this)",
+			"5",
+			"-5",
+			"data",
+			".filter",
+			"que vayas",
+			"# if the user is logged in\n	if current_user != '':\n		the_user = get_user_or_profile(request.user)\n		try:\n			directors_list = the_user['profile'].directors.all() \n			context_dict = {'directors_list': directors_list}\n		except:\n			context_dict = {'directors_list': ''}\n\n	else:\n		return HttpResponseRedirect('/califas/login')",
+			"Title",
+			"inline-block",
+			"inline",
+			"black",
+			"	background: -moz-linear-gradient(#032f6f, #022E5F);\n	background: -webkit-linear-gradient(#032f6f, #022E5F);",
+			"		display: inline-block;\n",
+			"redirect",
+			"range",
+			"get_user_or_profile",
+			"profile_images",
+			"class=\"errorlist\">",
+			"request.FI",
+			"this field",
+			"FILE",
+			"'inline-block'",
+			"'display', 'block'",
+			"'visibility', 'visible'",
+			"'visibility', 'hidden'",
+			"'display', 'none'",
+			"inline-block",
+			"inline",
+			"list-item",
+			"block",
+			"inline-block",
+			"inline",
+			"'visibility', 'hidden'",
+			"'visibility', 'visible'",
+			"#menu-inicio",
+			"#menu-inicio-sub",
+			"configModule",
+			"initModule",
+			"oversubmenu",
+			"friend",
+			"recomendaciones",
+			"namek",
+			"User.objects.get",
+			"User.ofjects.get",
+			".add",
+			"get_my_user",
+			"DoesNotExist",
+			"UserProfile",
+			"Username",
+			"Username.objects",
+			"friend",
+			"friends",
 			"MEDIA",
 			"UserProfile",
 			"print",
@@ -562,6 +809,24 @@
 		"regex": false,
 		"replace_history":
 		[
+			"#111",
+			"'inline'",
+			"'display', 'inline-block'",
+			"'visibility', 'visible'",
+			"'visibility', 'hidden'",
+			"block",
+			"inline-block",
+			"inline",
+			"list-item",
+			"block",
+			"inline-block",
+			"'display', 'none'",
+			"'display', 'inline'",
+			".menu-element",
+			"#submenu1",
+			"oversub",
+			"recommendations",
+			"get_user_or_profile",
 			"BASE_DIR",
 			"cinesnob",
 			"add_director",
@@ -578,24 +843,82 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 6,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "califas/views.py",
+					"file": "templates/califas/pelicula.html",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 6264,
+						"buffer_size": 1168,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								5616,
-								5616
+								175,
+								175
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Djaneiro/Syntaxes/HTML (Django).tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 24,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "templates/califas/base.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2406,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2026,
+								2026
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Djaneiro/Syntaxes/HTML (Django).tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 631.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "califas/views.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 10654,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								10472,
+								10472
 							]
 						],
 						"settings":
@@ -604,34 +927,93 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2360.0,
+						"translation.y": 5222.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 8,
 					"type": "text"
 				},
 				{
-					"buffer": 1,
-					"file": "califas/admin.py",
+					"buffer": 3,
+					"file": "dummy2/movie-detail.html",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 244,
+						"buffer_size": 1266,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								244,
-								244
+								63,
+								63
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Djaneiro/Syntaxes/Python Django.tmLanguage"
+							"syntax": "Packages/Djaneiro/Syntaxes/HTML (Django).tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "templates/califas/exitos.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1545,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1353,
+								1353
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Djaneiro/Syntaxes/HTML (Django).tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "static/css/movie-detail.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 471,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								207,
+								207
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": -0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
@@ -639,25 +1021,83 @@
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "califas/urls.py",
+					"buffer": 6,
+					"file": "static/js/exitos.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1007,
+						"buffer_size": 1829,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								770,
-								770
+								1371,
+								1371
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Djaneiro/Syntaxes/Python Django.tmLanguage",
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 462.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "static/css/exitos.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 709,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								354,
+								354
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 145.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "TODO.txt",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 823,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								370,
+								370
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Djaneiro/Syntaxes/HTML (Django).tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
@@ -668,112 +1108,26 @@
 					"type": "text"
 				},
 				{
-					"buffer": 3,
+					"buffer": 9,
 					"file": "templates/califas/index.html",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 836,
+						"buffer_size": 944,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								836,
-								836
+								486,
+								486
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/Djaneiro/Syntaxes/HTML (Django).tmLanguage",
 							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 295.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 9,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "templates/califas/base.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1706,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1196,
-								1196
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Djaneiro/Syntaxes/HTML (Django).tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 351.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 6,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "templates/califas/nueva.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1789,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1789,
-								1789
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Djaneiro/Syntaxes/HTML (Django).tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 624.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 10,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "static/css/index.css",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 69,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								69,
-								69
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/CSS/CSS.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -781,153 +1135,565 @@
 					},
 					"stack_index": 11,
 					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 0,
-			"sheets":
-			[
-				{
-					"buffer": 7,
-					"file": "califas/models.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1770,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1508,
-								1508
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Djaneiro/Syntaxes/Python Django.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 399.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 8,
-					"file": "califas/forms.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2127,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1234,
-								1234
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Djaneiro/Syntaxes/Python Django.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 273.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 9,
-					"file": "templates/califas/amigos.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 238,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								164,
-								164
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Djaneiro/Syntaxes/HTML (Django).tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
 				},
 				{
 					"buffer": 10,
-					"file": "templates/califas/perfil.html",
+					"file": "/home/alberto/Desktop/web/bootstrap_sandbox/tutorial/js/bootstrap.min.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 539,
+						"buffer_size": 35646,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								52,
-								52
+								1067,
+								1067
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Djaneiro/Syntaxes/HTML (Django).tmLanguage"
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
 						},
-						"translation.x": 0.0,
+						"translation.x": 4312.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 7,
+					"stack_index": 15,
 					"type": "text"
 				},
 				{
 					"buffer": 11,
-					"file": "static/css/perfil.css",
+					"file": "templates/califas/directores.html",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 176,
+						"buffer_size": 450,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								138,
-								138
+								181,
+								181
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/CSS/CSS.tmLanguage"
+							"syntax": "Packages/Djaneiro/Syntaxes/HTML (Django).tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 8,
+					"stack_index": 16,
+					"type": "text"
+				},
+				{
+					"buffer": 12,
+					"file": "templates/califas/amigos.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 593,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								438,
+								438
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Djaneiro/Syntaxes/HTML (Django).tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 13,
+					"type": "text"
+				},
+				{
+					"buffer": 13,
+					"file": "templates/califas/epocas.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 746,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								257,
+								257
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Djaneiro/Syntaxes/HTML (Django).tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 14,
+					"type": "text"
+				},
+				{
+					"buffer": 14,
+					"file": "califas/forms.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2164,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2164,
+								2164
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Djaneiro/Syntaxes/Python Django.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 232.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 19,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 8,
+			"sheets":
+			[
+				{
+					"buffer": 15,
+					"file": "static/css/images.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 267,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								195,
+								195
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 23,
+					"type": "text"
+				},
+				{
+					"buffer": 16,
+					"file": "static/js/epocas.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 981,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								981,
+								981
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 73.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 10,
+					"type": "text"
+				},
+				{
+					"buffer": 17,
+					"file": "templates/califas/nueva.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1834,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								604,
+								604
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Djaneiro/Syntaxes/HTML (Django).tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 84.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 20,
+					"type": "text"
+				},
+				{
+					"buffer": 18,
+					"file": "static/js/nueva.js",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 2191,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1979,
+								1979
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 988.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 18,
+					"type": "text"
+				},
+				{
+					"buffer": 19,
+					"file": "califas/urls.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1248,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Djaneiro/Syntaxes/Python Django.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 17,
+					"type": "text"
+				},
+				{
+					"buffer": 20,
+					"file": "templates/califas/login.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 622,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								591,
+								591
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Djaneiro/Syntaxes/HTML (Django).tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 28,
+					"type": "text"
+				},
+				{
+					"buffer": 21,
+					"file": "templates/califas/registrarse.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 744,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								511,
+								511
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Djaneiro/Syntaxes/HTML (Django).tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 41.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 27,
+					"type": "text"
+				},
+				{
+					"buffer": 22,
+					"file": "/home/alberto/Desktop/web/bootstrap_sandbox/tutorial/index.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4412,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								255,
+								255
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Djaneiro/Syntaxes/HTML (Django).tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 12,
+					"type": "text"
+				},
+				{
+					"buffer": 23,
+					"file": "califas/models.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2093,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								680,
+								680
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Djaneiro/Syntaxes/Python Django.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 19.0,
+						"translation.y": 258.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
+					"type": "text"
+				},
+				{
+					"buffer": 24,
+					"file": "templates/califas/miminu.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1263,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1263,
+								1263
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Djaneiro/Syntaxes/HTML (Django).tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 689.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 26,
+					"type": "text"
+				},
+				{
+					"buffer": 25,
+					"file": "static/js/menu.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1086,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								216,
+								216
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 25,
+					"type": "text"
+				},
+				{
+					"buffer": 26,
+					"file": "static/css/style.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2290,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2028,
+								2028
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1315.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 22,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 2,
+					"file": "califas/views.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 10654,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Djaneiro/Syntaxes/Python Django.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 38.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 21,
+					"type": "text"
+				},
+				{
+					"buffer": 27,
+					"file": "/home/alberto/Desktop/web/putamadre.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 499,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								53,
+								53
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Djaneiro/Syntaxes/HTML (Django).tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
 					"type": "text"
 				}
 			]
@@ -949,24 +1715,31 @@
 				0,
 				0,
 				1,
+				2
+			],
+			[
+				1,
+				0,
+				2,
 				1
 			],
 			[
-				0,
 				1,
 				1,
+				2,
 				2
 			]
 		],
 		"cols":
 		[
 			0.0,
+			0.751825602017,
 			1.0
 		],
 		"rows":
 		[
 			0.0,
-			0.395907237657,
+			0.686286777455,
 			1.0
 		]
 	},
@@ -978,7 +1751,7 @@
 	"project": "cinesnob.sublime-project",
 	"replace":
 	{
-		"height": 40.0
+		"height": 64.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -996,7 +1769,7 @@
 		[
 			[
 				"",
-				"~/Desktop/web/git-projects/rango17/tango_with_django_project/rango17.sublime-project"
+				"~/Desktop/web/spa/6/spa_06.sublime-project"
 			]
 		],
 		"width": 380.0
@@ -1016,7 +1789,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 271.0,
+	"side_bar_width": 173.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

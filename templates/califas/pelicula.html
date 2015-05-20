@@ -1,20 +1,36 @@
 {% extends "califas/base.html" %}
 {% load static %}
-{% block head %}{% endblock %}
+{% load get_range %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static "css/movie-detail.css" %}" />
+{% endblock %}
 {% block title %}{% endblock %}
 {% block content %}
 <!--******************************************************************************-->
-<h2>{{ director_name }}</h2><br />
+<div id="ficha">
 {% if titles %}
-	<ul>
 	{% for titulo in titles %}
-		<li>Película: <strong>{{ titulo.movie_name }}</strong></li>
-		<li>A&ntilde;o: <strong>{{ titulo.year }}</strong></li>
-		<li>G&eacute;nero: <strong>{{ titulo.genre }}</strong></li>
-		<li>Calificaci&oacute;n: <strong>{{ titulo.rating }}</strong></li>
-		<li>Review: <strong>{{ titulo.review }}</strong></li>
+		<h2 id="rr">{{ titulo.movie_name }}</h2>
+		<p id="ddd">
+			Director: 	   <strong>{{ director_name }}</strong><br/>
+			Año: 	  	   <strong>{{ titulo.year }}</strong><br />
+			G&eacute;nero: <strong>{{ titulo.genre }}</strong><br/>
+			<p id="rating">
+			{% for a in titulo.rating|get_range %}
+				{{ a }}
+				<img src="{% static "images/star.png" %}" />
+			{% endfor %}
+			</p>
+		</p>
+		<br/>
+		<div id="review">
+			<p id="review">
+				{{ titulo.review }}
+			</p>
+		</div>
+</div>
+<div id="poster-big"><img id="poster" src="{{ MEDIA_URL }}{{ titulo.poster }}" /></div>
 	{% endfor %}
-	</ul>
 {% else %}
 	<h1>Este señor no ha hecho ninguna película.</h1>
 {% endif %}

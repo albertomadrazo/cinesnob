@@ -1,0 +1,16 @@
+{% extends "califas/base.html" %}
+{% load static %}
+{% block head %}{% endblock %}
+{%block title %}CINESNUB - Directores{% endblock %}
+{% block content %}
+
+	{% if directors_list %}
+		{% for director in directors_list %}
+			<strong>{{ director.director_name }}</strong><br/>
+			<em>{{ director.nationality }}</em><br/>
+			{{ director.birth }} -- {{ director.death }}<br/>		
+		{% endfor %}
+	{% endif %}
+
+{% endblock %}
+{% block imports %}{% endblock %}

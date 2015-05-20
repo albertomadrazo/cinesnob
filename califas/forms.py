@@ -30,7 +30,7 @@ class TitleForm(forms.ModelForm):
 	genre = forms.CharField(widget=forms.Select(choices=GENRE_CHOICES, attrs={'id':'opciones'}))
 	review = forms.CharField(widget=forms.Textarea, max_length=300, help_text='comentarios')
 	rating = forms.ChoiceField(widget=forms.RadioSelect(attrs={'id':'estrellas'}), choices=RATINGS, initial=0 )
-
+	poster = forms.FileField()
 	class Meta:
 		model = Title
 
@@ -38,7 +38,7 @@ class TitleForm(forms.ModelForm):
 		# This way we don't need every field in the model present
 		# Some fields may allow NULL values, so we may not want to include them
 		# Here, we are hiding the foreign key.
-		fields = ('movie_name', 'year', 'genre', 'review', 'rating')
+		fields = ('movie_name', 'year', 'genre', 'review', 'rating', 'poster')
 		# en la forma que se hace tengo que crear el director, pero no le estoy poniendo
 		# el campo, supongo que se puede resolver con un campo normal de html y despues usar
 		# esa info para primero crear el director y despues crear el titulo con todo lo demas

@@ -16,7 +16,9 @@ urlpatterns = patterns('',
 		url(r'^amigos/$', views.friend_list, name='friend_list'),
 		url(r'^perfil/(?P<username>[\w\-]+)$', views.perfil, name='perfil'),
 		url(r'^befriend/$', views.befriend, name='befriend'),
-
-		#url(r'^(?P<director_name_url>\w+)/(?P<movie_name_detail>\w+)$', views.pelicula, name='pelicula'),
-
+		url(r'^bio/(?P<director_name_slug>[\w\-]+)/$', views.biografia, name='biografia'),
+		url(r'^epocas/$', views.epocas, name='epocas'),
+		url(r'^get_movies_by_age/$', views.get_movies_by_age, name='get_movies_by_age'),
+		url(r'^directores/$', views.directores, name='directores'),
+		url(r'^exitos/$', views.get_movies_by_rating, name='exitos'),
 )		

@@ -5,9 +5,13 @@ from django.utils import timezone
 
 class Director(models.Model):
 
-	nationality = models.CharField(max_length=50, default='gringo')
+	nationality = models.CharField(max_length=50, blank=True)
 	director_name = models.CharField(max_length=128, unique=True)
 	slug = models.SlugField(unique=True) 
+
+	biography = models.TextField(max_length=500)
+	birth = models.IntegerField(default=0)
+	death = models.IntegerField(default=0)
 
 	def save(self, *args, **kwargs):
 		self.slug = slugify(self.director_name) 
@@ -27,6 +31,7 @@ class Title(models.Model):
 	genre = models.CharField(max_length=100)
 	review = models.TextField(max_length=300)
 	rating = models.IntegerField(default=0)
+	poster = models.ImageField(upload_to='movie_images', blank=True)
 
 	def save(self, *args, **kwargs):
 		self.slug = slugify(self.movie_name + '-' + str(self.year))
@@ -39,8 +44,7 @@ class Title(models.Model):
 class Friend(models.Model):
 
 	friend_name = models.CharField(max_length=100, default='', unique=True)
-	is_friend = models.BooleanField(default=False)
-	date_added = models.DateField(default=timezone.now())
+	member_since = models.DateField(default=timezone.now())
 
 	def __unicode__(self):
 		return self.friend_name
@@ -50,14 +54,14 @@ class UserProfile(models.Model):
 
 	user = models.OneToOneField(User)
 	nombre_usuario = models.CharField(max_length=50)
-	real_name = models.CharField(max_length=128, default='anonymous')
-	last_name = models.CharField(max_length=128, default='anonymous')
+	real_name = models.CharField(max_length=128, blank=True)
+	last_name = models.CharField(max_length=128, blank=True)
 	age = models.IntegerField(default=0)
 	website = models.URLField(blank=True)
 	picture = models.ImageField(upload_to='profile_images', blank=True)
 	about_user = models.TextField(max_length=155, blank=True)
-	friends = models.ManyToManyField(Friend)
-	directors = models.ManyToManyField(Director)
+	friends = models.ManyToManyField(Friend, blank=True)
+	directors = models.ManyToManyField(Director, blank=True)
 
 	def __unicode__(self):
 		return self.user.username

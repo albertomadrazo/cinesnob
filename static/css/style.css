@@ -1,0 +1,140 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+body{
+	font-family: sans-serif;
+	font-size: 16px;
+}
+a:link, a:hover, a:visited{
+	color: rgb(224, 79, 17);
+	text-decoration: none;
+}
+li, ul{
+	list-style-type: none;
+	display: block;
+}
+#header{
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	display: block;
+	width: 100%;
+	height: 75px;
+	margin-bottom: 30px;
+	background: #111;
+	color: #ddd;
+}
+.title{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#menu-container{
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+	width: 600px;
+}
+.menu-element{
+	border-radius: 2px 10px 0 0;
+	text-align: left;
+	position:relative;
+}
+#menu-peliculas{
+	width: 25%;
+	/*background: -moz-linear-gradient(#00559F, #002A9D);*/
+	/*background: -webkit-linear-gradient(#00559F, #002A9D);*/
+	float:left;
+}
+#menu-perfil{
+	width: 25%;	
+	/*background: -moz-linear-gradient(#003760, #00275A);*/
+	/*background: -webkit-linear-gradient(#003760, #00275A);*/
+	float:left;	
+}
+#menu-camaradas{
+	width: 25%;
+	/*background: -moz-linear-gradient(#0070C0, #0053B5);*/
+	/*background: -webkit-linear-gradient(#0070C0, #0053B5);*/
+	float:left;
+}
+#menu-reco{
+	width: 25%;
+	/*background: -moz-linear-gradient(#0070C0, #0053B5);*/
+	/*background: -webkit-linear-gradient(#0070C0, #0053B5);*/
+	float:left;
+}
+	.sub{
+		display: none;
+		width: 100%;
+		float:left;
+		border-radius: 0 0 5px 5px;
+		position:absolute;
+	}
+/*	.sub ul li{
+		float: left;
+		padding-left: 0.5em;
+		padding-right: 2em;
+		display: block;
+	}*/
+#submenu0{
+	background: #111;
+	width:100%;
+}
+#submenu1{
+	background: #111;
+	width:100%;
+}
+#submenu2{
+	background: #111;
+	width:100%;
+}
+#submenu3{
+	background: #111;
+	width:100%;
+}
+
+#content-container{
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 0;
+	width: 500px;
+}
+
+#content-container p{
+	margin-top: 0;
+	padding-left: 0.5em;
+}
+
+.icon-social{
+	padding-left: 0.3em;	
+	display: inline-block;
+}
+.icon-social img{
+	border-radius:0 30% 0 0;
+	height: 25px;
+	margin-top: auto;
+	margin-bottom: auto;
+	vertical-align: middle;
+}
+#title-holder{
+	display: inline-block;
+}
+#social-icons{
+	display: table-cell;
+	vertical-align: middle;
+	float: right;
+	/*border-style: solid;*/
+}
+
+#fronton{
+		/*border-style: solid;*/
+
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+	width: 600px;
+}

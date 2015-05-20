@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	{% block head %}{% endblock %}
+	<title>{% block title %}{% endblock %}</title>
+</head>
+
+<body>
+	<div id='header'>
+		<div id="fronton">
+			<div id="title-holder"><h1 class="title">CINESNOB</h1></div>
+			<div id="social-icons">
+				<div class='icon-social' id='icon-facebook'><img src="imgs/facebook.jpg"></div>
+				<div class='icon-social' id='icon-facebook'><img src="imgs/twitter.jpg"></div>
+				<div class='icon-social' id='icon-facebook'><img src="imgs/google.jpg"></div>
+			</div>
+		</div>
+		<div id="menu-container">
+			<ul class="menu">
+				<li>
+					<div class="menu-element" id="menu-inicio" value="0"><div>
+					<a href="{% url 'index' %}">Inicio</a></div></div>
+				</li>
+				<li>
+					<div class="menu-element" id="menu-peliculas" value="1"><div>
+					<a href="{% url 'index' %}">Pelis</a></div></div>
+				</li>
+				<li>
+					<div class="menu-element" id="menu-perfil" value="2"><div>
+					<a href="{% url 'perfil_user' %}">Snobismo</div></div>
+				</li>
+				<li>
+					<div class="menu-element" id="menu-camaradas" value="3">
+					<div><a href="{%  url 'friend-list' %}">Camaradas</a></div>
+					</div>
+				</li>
+				<li>
+					<div class="menu-element" id="menu-reco" value="3"><div>
+					<a href="{% url 'recommended' %}">Marquesina</a></div></div>
+				</li>
+			</ul>
+
+			<div class="sub" id="submenu0">
+				<ul>
+				{% if user.is_authenticated %}
+					<li><div class="menu-element"><a href="{% url 'user_logout' %}">Salir</a></div></li>
+				{% else %}
+					<li><div class="menu-element"><a href="{% url 'user_login' %}">Entrar</a></div></li>
+					<li><div class="menu-element"><a href="{% url 'registrarse' %}">Registrarse</div></li>
+				{% endif %}
+
+				</ul>
+			</div>
+			<div class="sub" id="submenu1">
+				<ul>
+					<li><a href="{% url 'show_directors' %}">Por Director</a></li>
+					<li><a href="{% url 'nueva' %}">Nueva Película</li>
+				</ul>
+			</div>
+			<div class="sub" id="submenu2">
+				<ul>
+					<li><a href="{% url 'friend_list' %}">Mis Amigos</a></li>
+				</ul>
+			</div>
+			<div class="sub" id="submenu3">
+				<ul>
+					<li><a href="{% url 'recommended' 'old' %}">Viejas</a></li>
+					<li><a href="{% url 'recommended' 'new' %}">Nuevas</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+{% block content %}
+{% endblock %}
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/menu.js"></script>
+{% block imports %}
+{% endblock %}
+</body>
+</html>

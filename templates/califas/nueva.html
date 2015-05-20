@@ -2,10 +2,9 @@
 {% load static %}
 
 {% block content %}
-{% if user.is_authenticated %}
-	<h1>{{ user }}</h1>
-{% endif %}
-<form id="category_form" method="post" action="/califas/nueva/">
+<h2>Nueva Película</h2>
+<br/>
+<form id="category_form" method="post" action="/califas/nueva/" enctype="multipart/form-data">
 	{% csrf_token %}
 
 	<input type="text" id="director_name" name="director_name" placeholder="Director" /><br />
@@ -47,6 +46,10 @@
 		{% endfor %}
 	</div>
 	<br />
+	{% for field in title_form.poster %}
+		{{ field }}
+	{% endfor %}
+
 	{% for field in title_form.review %}
 		{{ field.errors }}
 		{{ field.help_text }}
@@ -61,5 +64,3 @@
 	<script type="text/javascript" src="{% static "js/nueva.js" %}"></script>
 	<link rel="stylesheet" type="text/css" href="{% static "css/style-nueva.css" %}" />
 {% endblock %}
-</body>
-</html>

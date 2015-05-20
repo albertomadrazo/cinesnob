@@ -1,0 +1,31 @@
+{% extends 'califas/base.html' %}
+{% load static %}
+{% load get_range %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static "css/images.css" %}"/>
+{% endblock %}
+{% block title %}CINESNOB - ÉPOCAS{% endblock %}
+{% block content %}
+Época
+<select id="opts">
+	<option>1900s</option>
+	<option>1910s</option>
+	<option>1920s</option>
+	<option>1930s</option>
+	<option>1940s</option>
+	<option>1950s</option>
+	<option>1960s</option>
+	<option>1970s</option>
+	<option>1980s</option>
+	<option>1990s</option>
+	<option>2000s</option>
+	<option>2010s</option>
+</select>
+<br/><br/>
+<div id="movies-container">
+</div>
+
+{% endblock %}
+{% block imports %}
+<script type="text/javascript" src="{% static "js/epocas.js" %}"></script>
+{% endblock %}

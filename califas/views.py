@@ -8,6 +8,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
+import json
+
 def get_user_or_profile(username):
 
 	user_or_profile = {}
@@ -28,22 +30,41 @@ def index(request):
 	current_user = str(request.user.username)
 	context_dict = {}
 
-	
+	# if the user is logged in
 	if current_user != '':
-		
-		the_user = get_user_or_profile(request.user)
-		print the_user
+		# the_user = get_user_or_profile(request.user)
+		# try:
+		# 	directors_list = the_user['profile'].directors.all() 
+		# 	context_dict = {'directors_list': directors_list}
+		# except:
+		# 	context_dict = {'directors_list': ''}
+		recommendations = Title.objects.all().order_by('-rating')[:6]
+		context_dict['recommendations'] = recommendations	
 
+		return render(request, 'califas/index.html', context_dict)
+
+	else:
+		return HttpResponseRedirect('/califas/login')# if the user is logged in
+
+
+def directores(request):
+
+	current_user = str(request.user.username)
+	context_dict = {}
+	# if the user is logged in
+	if current_user != '':
+		the_user = get_user_or_profile(request.user)
 		try:
 			directors_list = the_user['profile'].directors.all() 
-			context_dict = {'directors_list': directors_list}
-			print "QQQQQQQQQQ", context_dict['directors_list']
+			context_dict['directors_list'] = directors_list
 		except:
 			context_dict = {'directors_list': ''}
 
-	recommendations = Title.objects.all().order_by('-rating')[:5]
-	context_dict['recommendations'] = recommendations
-	return render(request, 'califas/index.html', context_dict)
+	else:
+		return HttpResponseRedirect('/califas/login')# if the user is logged in
+	print "###", directors_list[0]
+	#print "WWWWWWWWWWW ",directors_list, type(directors_list)
+	return render(request, 'califas/directores.html', context_dict)
 
 
 def base(request):
@@ -51,6 +72,7 @@ def base(request):
 	context = RequestContext(request)
 	context_dict ={'uno': 1}
 	return render(request, 'califas/base.html', context_dict)
+
 
 def director(request, director_name_slug): 
  
@@ -81,10 +103,15 @@ def nueva(request):
 		user = get_user_or_profile(request.user)
 
 		director_name = request.POST[u'director_name']
-		title_form = TitleForm(request.POST)
+	
+		title_form = TitleForm(request.POST, request.FILES)
 
+		#title_form.poster = request.FILES['poster']
+		print "$$$$$$$$$$", title_form
+		# title_form.save(commit=False)
 		# have we been provided with a valid form?
 		if title_form.is_valid():
+			print "*"
 			nuevo_titulo = title_form.save(commit=False)
 			nuevo_titulo.user_name = user['name']
 
@@ -108,11 +135,14 @@ def nueva(request):
 				user['profile'].directors.add(director)
 
 			nuevo_titulo.director = director
+			nuevo_titulo.poster = request.FILES['poster']
 			nuevo_titulo.save()
 #			# Now call the index() view.
 #			# The user will be shown the homepage.
 #			return index(request)
 		else:
+			print "**"
+
 #			# The supplied form contains errors - just print them to the terminal
 			print title_form.errors
 
@@ -124,6 +154,7 @@ def nueva(request):
 	else:
 		# If the supplied request was not a post, display the form.
 		title_form = TitleForm()
+
 	# Bad form (or no details), no form supplied...
 	# Render the form with error messages(if any).
 		
@@ -169,7 +200,6 @@ def registrarse(request):
 			# Here we create the UserProfile's friend table (ManyToMany)
 			befriend = Friend()
 			befriend.friend_name = user.username
-			befriend.is_friend = True
 			befriend.save()
 
 			if 'picture' in request.FILES:
@@ -300,3 +330,58 @@ def befriend(request):
 			print "no"
 
 	return HttpResponseRedirect('/califas/amigos')
+
+
+def biografia(request, director_name_slug):
+
+	context_dict = {}
+
+	director = Director.objects.get(slug=director_name_slug)
+	if director:
+		context_dict['director'] = director
+
+	filmography = Title.objects.filter(director=director)
+	context_dict['filmography'] = filmography
+
+	return render(request, 'califas/bio.html', context_dict)
+
+
+def epocas(request):
+	return render(request, 'califas/epocas.html', {})
+
+def get_movies_by_age(request):
+	# Remove the last letter 's' so it can be used as a number.
+	vola = int(request.GET['value'][:-1])
+	vola2 = str(vola + 9)
+	print "&&&&&& ", vola, vola2
+	movies_from_age = Title.objects.all().filter(year__range=[vola, vola2])
+	movies_dict = {}
+	movies_list = []
+	k = 0
+	for i in movies_from_age:
+		movies_list.append({})
+		movies_list[k]["director"] = str(i.director.director_name)
+		movies_list[k]["movie_name"] = str(i.movie_name)
+		movies_list[k]["slug"] = str(i.slug)
+		movies_list[k]["year"] = str(i.year)
+		movies_list[k]["rating"] = str(i.rating)
+		movies_list[k]["poster"] = str(i.poster)
+		k += 1
+	print 'movies_list ', movies_list
+	las_movies = json.dumps(movies_list)
+	print "WWWWWWWWWW ", las_movies
+	print 'movies_from_age ', movies_from_age
+
+	return HttpResponse(las_movies)
+
+def get_movies_by_rating(request):
+	titles = Title.objects.all().order_by('-rating')[:20]
+	print "----------", titles
+	# for ti in titles:
+	# 	print ti
+
+	return render(request, 'califas/exitos.html', {'titles': titles})
+
+
+def title_detail(request, movie_name_slug):
+	pass

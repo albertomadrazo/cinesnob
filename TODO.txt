@@ -1,0 +1,25 @@
+TODO:
+	Programación
+
+	- Tests
+	- Formatear el movie detail.
+	- Buscar la manera de reusar el código de exitos.js para cada ocasión 
+	  que se quiera mostrar el detalle de una película.
+	- Subir la aplicación a internet.
+	- Aumentar las estrellas a 10 para que haya más rango.
+	- Checar que no haya problemas con los caractéres extranjeros y hacer que
+	  el slug use sólo caracteres ASCII.
+	
+	Diseño
+
+	- Hacer el diseño responsive
+	- Mejorar el diseño, el actual está muy simple y no dice nada.
+	- Poner presentables a los amigos.
+	- Aprender animación en jQuery porque falta animar todo.
+	- Cambiarle el nombre.
+
+WISHLIST
+	- Ajax para ver qué hacen los amigos del usuario.
+	- Que sea una aplicación de facebook, para que se puedan usar los amigos de ahí.
+	- Un visor de imágenes para que el usuario las corte a su gusto.
+	-

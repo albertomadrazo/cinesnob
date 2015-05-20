@@ -10,6 +10,8 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+from production_secrets import production_secrets
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 TEMPLATE_PATH = os.path.join(BASE_DIR, 'templates')
@@ -23,7 +25,7 @@ DATABASE_PATH = os.path.join(BASE_DIR, 'califas.db')
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '@zss7kwa)v2!w$$cr-2ug&96n^4^xw89!&-qxbt987&^*tt_*5'
+SECRET_KEY = production_secrets()['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True

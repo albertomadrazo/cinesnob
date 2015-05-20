@@ -1,0 +1,51 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+#movie-pop-container{
+	width: 100%;
+	height: 100%;
+	visibility: hidden;
+	position: fixed;
+	left:0;
+	top:0;
+}
+#movie-pop-veil{
+	width: 100%;
+	height: 100%;
+	background: black;
+	left:0;
+	top:0;
+	opacity: 0.9;
+	position:absolute;
+}
+#movie-pop{
+
+	width: 500px;
+	height: 500px;
+	background: white;
+	margin: auto;
+	opacity: none;
+	position:relative;
+	top:5em;
+	z-index:1;
+	border-radius: 10px;
+}
+#movie-pop-contents{
+	display:block;
+}
+#movie-pop-close{
+	width:100%;
+	/*width: 30px;*/
+	height: 30px;
+	background: red;
+/*	margin: 5px 5px 0 0;
+*/	z-index:2;
+	border-radius: 10px 10px 0 0;
+	display:block;
+	text-align: right;
+}
+
+.invisible{
+	display:none;
+}

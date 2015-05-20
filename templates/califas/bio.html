@@ -1,0 +1,26 @@
+{% extends "califas/base.html" %}
+{% load static %}
+{% block content %}
+{% if director %}
+	<h2>{{ director.director_name }}</h2>
+	<h3>{{director.nationality}}</h3>
+	<h3>{{ director.birth }} - {{ director.death }}</h3>
+	<p>
+	{{ director.biography }}
+	</p>
+	<br />
+	<h4>Filmografía</h4>
+{% endif %}
+
+{% if filmography %}
+	<ul>
+	{% for film in filmography %}
+		<li>{{ film.movie_name }} - {{ film.year }}</li>
+	{% endfor %}
+	</ul>
+{% else %}
+	Este señor no ha hecho ninguna película.
+{% endif %}
+{% endblock %}
+{% block imports %}
+{% endblock %}

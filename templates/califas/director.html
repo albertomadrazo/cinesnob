@@ -3,10 +3,8 @@
 {% block head %}{% endblock %}
 {% block title %}{% endblock %}
 {% block content %}
-<div id="hero">
-	<img src="{% static "images/cinema.jpg" %}" />
-</div>
-<h1>{{ director_name }}</h1>
+
+<h2><a href="/califas/bio/{{ director_name.slug }}">{{ director_name }}</h2>
 {% if director_name %}
 	{% if titles %}
 		<ul>
