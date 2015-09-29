@@ -1,7 +1,7 @@
-// /////////////////////////////////////////////////////////////////////////
+// This code seems to be obsolete!
 $(document).ready(function(){
 	$('.menu').on('mouseover', function(){
-		//alert("perros");
+		alert("perros");
 		$(this).next('.submenu').css({'visibility': 'visible'});
 	});
 

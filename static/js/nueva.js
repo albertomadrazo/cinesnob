@@ -3,21 +3,28 @@
 */
 var globos = { 'generoSeleccionado': false };
 
+
+$(document).ready(function(){
+	$('#opciones').click(function(){
+
+		var e = document.getElementById('opciones');
+		var whichOption = e.options[e.selectedIndex].text;
+		if(whichOption === "Otro"){
+			$("#opciones").toggle();
+			$('#cont-opciones').append("<input type ='text' id='new-option' placeholder='genero' />");
+			$('#cont-opciones').append("<div id='new-option-button' onclick='addNewGenre();'>G&eacute;nero</div>");
+		}
+	});
+});
+
 /*$('#your_rating :checkbox').click(function(){
 
 	var rating = $(this).id;
 	$('#your_rating :checkbox[value=4]').attr('checked', true);
 	alert(rating);
 });
-
-function molocho(){
-	return "Pedazo de chingon";
 }*/
 
-function prueba(){
-	return "jolines";
-	//$('#your_rating :radio')
-}
 
 function starMeter(rating){
 	//var rating = $("input[type='checkbox']:checked").val();
@@ -65,20 +72,4 @@ function addNewGenre(){
 	$('#new-option, #new-option-button').remove();
 	globos['generoSeleccionado'] = true;
 }
-function reddy(){
-	alert("ready!!!!");
-}
 
-$(document).ready(function(){
-
-	$('#opciones').click(function(){
-
-		var e = document.getElementById('opciones');
-		var whichOption = e.options[e.selectedIndex].text;
-		if(whichOption === "otro"){
-			$("#opciones").toggle();
-			$('#cont-opciones').append("<input type ='text' id='new-option' placeholder='genero' />");
-			$('#cont-opciones').append("<div id='new-option-button' onclick='addNewGenre();'>Enter genre</div>");
-		}
-	});
-});

@@ -1,6 +1,10 @@
 {% extends "califas/base.html" %}
 {% load static %}
+{% block head %}
 
+<link rel="stylesheet" type="text/css" href="{% static "css/style-nueva.css" %}" />
+
+{% endblock %}
 {% block content %}
 <h2>Nueva Película</h2>
 <br/>
@@ -62,5 +66,4 @@
 <script type="text/javascript" src="{% static "js/califas.js" %}"></script>
 {% block imports %}
 	<script type="text/javascript" src="{% static "js/nueva.js" %}"></script>
-	<link rel="stylesheet" type="text/css" href="{% static "css/style-nueva.css" %}" />
 {% endblock %}

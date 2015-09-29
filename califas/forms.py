@@ -7,7 +7,7 @@ GENRE_CHOICES = (('accion','Acción'),
 				 ('terror', 'Terror'),
 				 ('drama', 'Drama'),
 				 ('comedia', 'Comedia'),
-				 ('otro', 'otro'), )
+				 ('otro', 'Otro'), )
 
 RATINGS = ( ('1',''),
 			('2',''),

@@ -10,17 +10,21 @@ from django.contrib.auth.models import User
 
 import json
 
-def get_user_or_profile(username):
+# Gets the username from the User class and the UserProfile class
+def get_user_and_profile(username):
 
-	user_or_profile = {}
+	user_and_profile = {}
+
 	user_name = User.objects.get(username=str(username))
-	user_or_profile['name'] = user_name
+	user_and_profile['name'] = user_name
 
 	user = UserProfile.objects.all()
+
+	# = TODO = Needs a way to only pass the value of the User class if it doesn't find the UserProfile class
 	for my_user in user:
 		if my_user.user == user_name:
-			user_or_profile['profile'] = my_user
-			return user_or_profile
+			user_and_profile['profile'] = my_user
+			return user_and_profile
 
 	return None
 
@@ -31,8 +35,8 @@ def index(request):
 	context_dict = {}
 
 	# if the user is logged in
-	if current_user != '':
-		# the_user = get_user_or_profile(request.user)
+	if current_user:
+		# the_user = get_user_and_profile(request.user)
 		# try:
 		# 	directors_list = the_user['profile'].directors.all() 
 		# 	context_dict = {'directors_list': directors_list}
@@ -44,63 +48,69 @@ def index(request):
 		return render(request, 'califas/index.html', context_dict)
 
 	else:
-		return HttpResponseRedirect('/califas/login')# if the user is logged in
+		return HttpResponseRedirect('/califas/login')# if the user is not logged in
 
-
-def directores(request):
+# Function to show directors
+def show_directors(request):
 
 	current_user = str(request.user.username)
 	context_dict = {}
 	# if the user is logged in
-	if current_user != '':
-		the_user = get_user_or_profile(request.user)
+	if current_user:
+		the_user = get_user_and_profile(request.user)
 		try:
+			# Is this getting only the directors belonging to this specific user?
+			# What I want (I think I remember) is all the directors.
 			directors_list = the_user['profile'].directors.all() 
 			context_dict['directors_list'] = directors_list
 		except:
 			context_dict = {'directors_list': ''}
 
 	else:
-		return HttpResponseRedirect('/califas/login')# if the user is logged in
-	print "###", directors_list[0]
-	#print "WWWWWWWWWWW ",directors_list, type(directors_list)
+		return HttpResponseRedirect('/califas/login')# if the user is NOT logged in
+
 	return render(request, 'califas/directores.html', context_dict)
 
-
+# What's the raison d'ëtre of this function?
 def base(request):
 
 	context = RequestContext(request)
 	context_dict ={'uno': 1}
+
 	return render(request, 'califas/base.html', context_dict)
 
-
+# I guess this is the function that gives me the bio of the chosen director, if so,
+# I must add all the data from the director, even better, pass the object and unwrap it
+# in the view.
 def director(request, director_name_slug): 
  
  	context_dict ={}
-	user = get_user_or_profile(request.user)
+	user = get_user_and_profile(request.user)
+	my_director = None
 
 	try:
 		directors = user['profile'].directors.all()
-		for direc in directors:
-			if direc.slug == director_name_slug:
-				director = direc
+		for director in directors:
+			if director.slug == director_name_slug:
+				my_director = director
 
 		titles = Title.objects.filter(
-						director=director, user_name=user['name']).order_by('-year')
+						director=my_director, user_name=user['name']).order_by('-year')
 		context_dict['titles'] = titles
-		context_dict['director_name'] = director
-		context_dict['director_name_slug'] = director.director_name_slug
+		context_dict['director_name'] = my_director
+		context_dict['director_name_slug'] = my_director.director_name_slug
 	except:
-		print "You have no directors %s " % request.user
+		print "You have no directors with that name %s " % request.user
 
 	return render(request, 'califas/director.html', context_dict)
 
+
 @login_required
-def nueva(request):
+def add_movie(request):
 
 	if request.method == 'POST':
-		director_found = False
-		user = get_user_or_profile(request.user)
+		director_exists = False
+		user = get_user_and_profile(request.user)
 
 		director_name = request.POST[u'director_name']
 	
@@ -124,12 +134,11 @@ def nueva(request):
 					print director.director_name, director_name
 
 					if director.director_name == director_name:
-						director_found = True
+						director_exists = True
 
-					
-				if director_found == False:	
+				# If the director was not found, create it
+				if director_exists == False:	
 					director = Director(director_name=director_name)
-					
 					director.save()
 	
 				user['profile'].directors.add(director)
@@ -151,8 +160,8 @@ def nueva(request):
 		#return render_to_response('califas/', directors_list, context) #HttpResponseRedirect('/califas/index.html')
 		return render(request, 'califas/index.html', {'directors_list':directors_list})
 
+	# If the supplied request was not a POST, display the form.
 	else:
-		# If the supplied request was not a post, display the form.
 		title_form = TitleForm()
 
 	# Bad form (or no details), no form supplied...
@@ -160,12 +169,16 @@ def nueva(request):
 		
 		return render(request, 'califas/nueva.html', {'title_form': title_form})
 
+
 # en esta view, vamos a dar el detalle de la pelicula seleccionada
-def pelicula(request, director_name_slug, movie_name_slug):
+# This should be requested via AJAX.
+def movie_detail(request, director_name_slug, movie_name_slug):
+
 	print "PELICULA.VIEW"
 	#movie_name = movie_name_detail.replace('_', ' ')
 	#director_name = director_name_url.replace('_', ' ')
 	context_dict = {'director_name': director_name_slug}
+
 	try:
 		director = Director.objects.get(slug=director_name_slug)
 		titles = Title.objects.filter(user_name=request.user, slug=movie_name_slug).order_by('-year')
@@ -175,14 +188,18 @@ def pelicula(request, director_name_slug, movie_name_slug):
 		pass
 
 	the_url = 'califas/pelicula.html'
+	# What's this for?
 	the_url = the_url.replace(' ', '')
 	return render(request, the_url, context_dict)
 
+# Check if the user is registered, if so, take him to index, else register him
+# = TODO = Change all this function to take the correct validation steps, 
+# this one is so bad-designed
 def registrarse(request):
 	registered = False
 
 	if request.method == 'POST':
-		# Va a haber dos formas en el registrarse.html
+		# Va a haber dos formas en el registrarse.html, user_form y profile_form
 		user_form = UserForm(data=request.POST)
 		profile_form = UserProfileForm(data=request.POST)
 
@@ -246,8 +263,10 @@ def user_login(request):
 
 @login_required
 def user_logout(request):
+
 	logout(request)
 
+	# Pass a "You are now logged out" message.
 	return HttpResponseRedirect('/califas/')
 
 
@@ -261,6 +280,7 @@ def friend_list(request):
 	for x in my_friends:
 		if x.user == user:
 			my_friends = x.friends.all()
+
 	amigos = {}
 	for y in my_friends:
 		amigos[y.friend_name] = y.friend_name
@@ -272,8 +292,8 @@ def friend_list(request):
 
 def perfil(request, username):
 
-	user = get_user_or_profile(request.user)
-	stalked_user = get_user_or_profile(username)
+	user = get_user_and_profile(request.user)
+	stalked_user = get_user_and_profile(username)
 	perfiles = UserProfile.objects.all()
 	mi_perfil = {}
 	print "www", stalked_user
@@ -306,6 +326,7 @@ def perfil(request, username):
 	return render(request, 'califas/perfil.html', context_dict)
 
 
+#This function must send a friendship request to the target user.
 def befriend(request):
 
 	usuario = str(request.GET[u'usuario'])
@@ -315,7 +336,9 @@ def befriend(request):
 	print "next_friend:" , next_friend
 	for a in next_friend:
 		if a.friend_name == amigarse:
+			# WTF why change the var in the middle of a loop??? Test this with changes
 			next_friend = a
+			break
 
 	user = UserProfile.objects.all()
 
@@ -332,7 +355,9 @@ def befriend(request):
 	return HttpResponseRedirect('/califas/amigos')
 
 
-def biografia(request, director_name_slug):
+# Is this function supposed to give the director's bio? 
+# There's already another one above doing the same!
+def chosen_director_filmography(request, director_name_slug):
 
 	context_dict = {}
 
@@ -346,21 +371,23 @@ def biografia(request, director_name_slug):
 	return render(request, 'califas/bio.html', context_dict)
 
 
+# The action is in the AJAX!
 def epocas(request):
 	return render(request, 'califas/epocas.html', {})
 
+
 def get_movies_by_age(request):
-	# Remove the last letter 's' so it can be used as a number.
-	vola = int(request.GET['value'][:-1])
-	vola2 = str(vola + 9)
-	print "&&&&&& ", vola, vola2
-	movies_from_age = Title.objects.all().filter(year__range=[vola, vola2])
+	# Remove the last letter 's' from the year so it can be used as a number.
+	age_1 = int(request.GET['value'][:-1])
+	age_2 = str(age_1 + 9)
+	movies_from_age = Title.objects.all().filter(year__range=[age_1, age_2])
 	movies_dict = {}
 	movies_list = []
 	k = 0
+
 	for i in movies_from_age:
 		movies_list.append({})
-		movies_list[k]["director"] = str(i.director.director_name)
+		movies_list[k]["director"] = i.director.director_name
 		movies_list[k]["movie_name"] = str(i.movie_name)
 		movies_list[k]["slug"] = str(i.slug)
 		movies_list[k]["year"] = str(i.year)
@@ -372,15 +399,26 @@ def get_movies_by_age(request):
 	print "WWWWWWWWWW ", las_movies
 	print 'movies_from_age ', movies_from_age
 
+	# This is AJAX
 	return HttpResponse(las_movies)
 
+# exitos
 def get_movies_by_rating(request):
 	titles = Title.objects.all().order_by('-rating')[:20]
-	print "----------", titles
-	# for ti in titles:
-	# 	print ti
 
-	return render(request, 'califas/exitos.html', {'titles': titles})
+	list_with_movie_name = []
+	unique_set = []
+	my_list = []
+
+	for i in range(len(titles)):
+		list_with_movie_name.append([titles[i], titles[i].movie_name])
+
+	for i in range(len(list_with_movie_name)):
+		if list_with_movie_name[i][1] not in unique_set:
+			my_list.append(list_with_movie_name[i][0])
+			unique_set.append(list_with_movie_name[i][1])
+
+	return render(request, 'califas/exitos.html', {'titles': my_list})
 
 
 def title_detail(request, movie_name_slug):

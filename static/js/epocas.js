@@ -4,12 +4,14 @@ $(document).ready(function () {
 		var value = document.getElementById('opts');
 		value = value.options[value.selectedIndex].text;
 
+		// Remove the container of the previously presented movies
 		$('.img-poster-holder').remove();
 
 		$.get('/califas/get_movies_by_age/', {value:value}, function (data){
 		
 			var lista = JSON.parse(data);
-			if(lista != ""){
+
+			if(lista){
 				for(var i = 0; i < lista.length; i+=1){
 					var imagen = (lista[i]["poster"]!="")?'<img class="img-big" src="../../media/'+lista[i]["poster"]+'"/>':
 					  '<img class="img-big" src="../../static/images/default.jpg"/>';
@@ -24,7 +26,7 @@ $(document).ready(function () {
 			}
 			else {
 				$('<div class="img-poster-holder">' +
-					"No hay películas de esta época :(<br/>"
+					"No hay películas de esta época.<br/>"
 				 ).appendTo("#movies-container");
 			}
 

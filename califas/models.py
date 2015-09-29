@@ -3,6 +3,8 @@ from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
 from django.utils import timezone
 
+from unidecode import unidecode
+
 class Director(models.Model):
 
 	nationality = models.CharField(max_length=50, blank=True)
@@ -14,7 +16,7 @@ class Director(models.Model):
 	death = models.IntegerField(default=0)
 
 	def save(self, *args, **kwargs):
-		self.slug = slugify(self.director_name) 
+		self.slug = slugify(unidecode(self.director_name)) 
 		super(Director, self).save(*args, **kwargs)
 
 	def __unicode__(self):
@@ -34,7 +36,7 @@ class Title(models.Model):
 	poster = models.ImageField(upload_to='movie_images', blank=True)
 
 	def save(self, *args, **kwargs):
-		self.slug = slugify(self.movie_name + '-' + str(self.year))
+		self.slug = slugify(unidecode(self.movie_name) + '-' + str(self.year))
 		super(Title, self).save(*args, **kwargs)
 
 	def __unicode__(self):

@@ -4,11 +4,18 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'cinesnob.settings')
 import django
 django.setup()
 
+from django.contrib.auth.models import User
 from califas.models import Director, Title
 
 
 def populate():
 	gen_review = "Great movie! I was shocked!",
+
+	# Populate the app with 5 fictitous users
+	beto = add_user(
+		{'username': 'beto', 'email': 'otreblatercero', 'password': 'beto'}
+	)
+
 
 	hitchcock = add_director('Alfred Hitchcock')
 	add_title(director=hitchcock,
@@ -65,13 +72,23 @@ def populate():
 		for p in Title.objects.filter(director=c):
 			print "- {0} - {1}".format(str(c), str(p))
 
+def add_user(args):
+	username = args['username']
+	email = args['email']
+	password = args['password']
+
+	c = User.objects.get_or_create(username=username, email=email)
+	c.save()
+	c.set_password(password)
+	c.save()
+
 def add_title(director, movie_name, year, genre, review, rating):
 	t = Title.objects.get_or_create(director=director, 
 									movie_name=movie_name,
 									year=year,
 									genre=genre,
 									review=review,
-									rating=rating	
+									rating=rating,
 									)
 	return t
 

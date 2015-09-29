@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
 	$('div.movie-detail').click(function(){
-
+		// Makes the popup visible
 		$('div#movie-pop-container').css('visibility', 'visible');
 		var pop = $('div#movie-pop-contents');
 		//alert($(this).text());

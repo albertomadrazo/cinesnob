@@ -9,6 +9,7 @@ TODO:
 	- Aumentar las estrellas a 10 para que haya más rango.
 	- Checar que no haya problemas con los caractéres extranjeros y hacer que
 	  el slug use sólo caracteres ASCII.
+	- Hacer funciones genericas de get_all_users, get_all_movies, get_all_directors, etc.
 	
 	Diseño
 
