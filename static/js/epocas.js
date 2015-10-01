@@ -1,4 +1,5 @@
 $(document).ready(function () {
+
 	$('#opts').click(function () {
 
 		var value = document.getElementById('opts');
@@ -13,14 +14,24 @@ $(document).ready(function () {
 
 			if(lista){
 				for(var i = 0; i < lista.length; i+=1){
-					var imagen = (lista[i]["poster"]!="")?'<img class="img-big" src="../../media/'+lista[i]["poster"]+'"/>':
-					  '<img class="img-big" src="../../static/images/default.jpg"/>';
-					 // alert(imagen);
-					$('<div class="img-poster-holder">'  +
-					  							  imagen +
-					  '<p>'+lista[i]['movie_name']+'</p>'+
-					  '<p>'+lista[i]['year']+'</p>'      +
-					  '<p>'+lista[i]['director']+'</p>'
+
+					var poster_path = (lista[i]["poster"]!="")
+											? "../../media/" + lista[i]["poster"]
+											: "../images/default.jpg";
+
+					var imagen = '<img class="ficha img-big" id="mi-imagen" src="'+ poster_path +'"/>'
+
+					// Put my div in the DOM
+					$('<div class="img-poster-holder movie-detail" id="'+ lista[i]['movie_name'] + '">'  +
+					  							    											  imagen + 
+					  							  												'<br />' +
+		  '<p class="ficha" id="movie-name" style="font-size:0.8em;">' + lista[i]['movie_name'] + '</p>' +
+					     '<p class="ficha" id="'+ lista[i]['rating'] + '">' + lista[i]['rating'] + '</p>'+
+					  	     '<p class="ficha" id="movie-director">' + lista[i]['director'] + '</p>'     +
+					 		 '<p class="invisible ficha" id="movie-genre">' + lista[i]['genre'] + '</p>' +
+					         '<p class="invisible ficha" id="movie-year">'  + lista[i]['year']+'</p>'    +
+					   '<p class="invisible ficha" id="movie-review">' + lista[i]['review']+ '</p>'      +
+					   '<p class="invisible ficha">' + poster_path + '</p></div>'
 						).appendTo("#movies-container");
 				}
 			}

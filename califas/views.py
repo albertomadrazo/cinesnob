@@ -1,4 +1,5 @@
 #--<encoding:utf8>--
+import unidecode
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from califas.models import Director, Title, UserProfile, Friend
@@ -390,14 +391,13 @@ def get_movies_by_age(request):
 		movies_list[k]["director"] = i.director.director_name
 		movies_list[k]["movie_name"] = str(i.movie_name)
 		movies_list[k]["slug"] = str(i.slug)
+		movies_list[k]["genre"] = str(i.genre)
 		movies_list[k]["year"] = str(i.year)
 		movies_list[k]["rating"] = str(i.rating)
+		movies_list[k]["review"] = i.review
 		movies_list[k]["poster"] = str(i.poster)
 		k += 1
-	print 'movies_list ', movies_list
 	las_movies = json.dumps(movies_list)
-	print "WWWWWWWWWW ", las_movies
-	print 'movies_from_age ', movies_from_age
 
 	# This is AJAX
 	return HttpResponse(las_movies)

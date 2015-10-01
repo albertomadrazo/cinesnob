@@ -3,9 +3,23 @@
 {% load get_range %}
 {% block head %}
 <link rel="stylesheet" type="text/css" href="{% static "css/images.css" %}"/>
+<link rel="stylesheet" type="text/css" href="{% static "css/exitos.css" %}"/>
+<link rel="stylesheet" type="text/css" href="{% static "css/movie-detail.css" %}"/>
 {% endblock %}
 {% block title %}CINESNOB - ÉPOCAS{% endblock %}
 {% block content %}
+
+{# The pop up that contains the movie details when clicking on a title #}
+<div id="movie-pop-container">
+
+	<div id="movie-pop">
+		<div id="movie-pop-close">X</div> <!-- This is the close button -->
+		<div id="movie-pop-contents"></div>
+	</div>
+	<div id="movie-pop-veil"></div>
+</div>
+
+
 Época
 <select id="opts">
 	<option>1900s</option>
@@ -22,10 +36,14 @@
 	<option>2010s</option>
 </select>
 <br/><br/>
+
+{# This div contains the titles by rows of 3 #}
 <div id="movies-container">
+
 </div>
 
 {% endblock %}
 {% block imports %}
+<script type="text/javascript" src="{% static "js/show_movie_detail.js" %}"></script>
 <script type="text/javascript" src="{% static "js/epocas.js" %}"></script>
 {% endblock %}
