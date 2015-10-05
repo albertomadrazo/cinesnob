@@ -423,3 +423,31 @@ def get_movies_by_rating(request):
 
 def title_detail(request, movie_name_slug):
 	pass
+
+
+def stats(request):
+	context_dict = {}
+	current_user = str(request.user.username)
+
+	if current_user:
+		the_user = get_user_and_profile(request.user)
+	else:
+		return render(request, 'califas/index.html', {})
+
+	if the_user:
+		titles_query = Title.objects.all().filter(user_name=the_user['name'])
+		# cuantas peliculas ha visto el usuario
+		context_dict['vistas'] = len(titles_query) 
+		context_dict['fav_gen'] = titles_query.order_by('genre')
+
+		fav_gen = {}
+		for i in context_dict['fav_gen']:
+			if str(i.genre) not in fav_gen:
+				fav_gen[str(i.genre)] = 1
+			else:
+				fav_gen[str(i.genre)] += 1
+		# estudiar esta linea que no le entiendo bien
+		user_fav_gen = max(fav_gen.iterkeys(), key = lambda k: fav_gen[k])
+		context_dict['user_fav_gen'] = [user_fav_gen, fav_gen[user_fav_gen]]
+
+	return render(request, 'califas/stats.html', {'stats': context_dict})

@@ -1,15 +1,15 @@
 TODO:
 	Programación
-
+	- Un script que popule la aplicación para demo.
 	- Tests
 	- Formatear el movie detail.
-	- Buscar la manera de reusar el código de exitos.js para cada ocasión 
+	* Buscar la manera de reusar el código de exitos.js para cada ocasión 
 	  que se quiera mostrar el detalle de una película.
 	- Subir la aplicación a internet.
 	- Aumentar las estrellas a 10 para que haya más rango.
-	- Checar que no haya problemas con los caractéres extranjeros y hacer que
-	  el slug use sólo caracteres ASCII.
 	- Hacer funciones genericas de get_all_users, get_all_movies, get_all_directors, etc.
+	- Hacer una auditoría de las tablas, pues tienen ciertos problemas con repeticiones, conflictos de slug, etc
+	- Página de estadísticas
 	
 	Diseño
 
@@ -23,4 +23,3 @@ WISHLIST
 	- Ajax para ver qué hacen los amigos del usuario.
 	- Que sea una aplicación de facebook, para que se puedan usar los amigos de ahí.
 	- Un visor de imágenes para que el usuario las corte a su gusto.
-	-
