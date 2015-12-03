@@ -11,9 +11,24 @@ from django.contrib.auth.models import User
 
 import json
 
+
+def get_director(director):
+	return Directors.get(name=director)
+
+
+def get_title(title):
+	return Title.get(name=title)
+
+
+def get_average_rating(subject):
+	average_rating = 0
+
+	# Get all the ratings of the title that are greater than 0
+	all_ratings = Review.objects.filter(rating__gt=0)
+	print all_ratings
+
 # Gets the username from the User class and the UserProfile class
 def get_user_and_profile(username):
-
 	user_and_profile = {}
 
 	user_name = User.objects.get(username=str(username))
@@ -25,9 +40,8 @@ def get_user_and_profile(username):
 	for my_user in user:
 		if my_user.user == user_name:
 			user_and_profile['profile'] = my_user
-			return user_and_profile
-
-	return None
+	
+	return user_and_profile
 
 
 def index(request):
@@ -37,19 +51,15 @@ def index(request):
 
 	# if the user is logged in
 	if current_user:
-		# the_user = get_user_and_profile(request.user)
-		# try:
-		# 	directors_list = the_user['profile'].directors.all() 
-		# 	context_dict = {'directors_list': directors_list}
-		# except:
-		# 	context_dict = {'directors_list': ''}
+
 		recommendations = Title.objects.all().order_by('-rating')[:6]
 		context_dict['recommendations'] = recommendations	
 
 		return render(request, 'califas/index.html', context_dict)
 
-	else:
-		return HttpResponseRedirect('/califas/login')# if the user is not logged in
+	else: # if not current_user
+		return HttpResponseRedirect('/califas/login')# user is not logged in
+
 
 # Function to show directors
 def show_directors(request):
@@ -59,18 +69,23 @@ def show_directors(request):
 	# if the user is logged in
 	if current_user:
 		the_user = get_user_and_profile(request.user)
+
 		try:
 			# Is this getting only the directors belonging to this specific user?
-			# What I want (I think I remember) is all the directors.
+			# FOR USE WHEN REMASTERED------------------
+			# directors_list = Director.objects.filter(user=the_user['profile'])
+
 			directors_list = the_user['profile'].directors.all() 
+
 			context_dict['directors_list'] = directors_list
 		except:
 			context_dict = {'directors_list': ''}
 
 	else:
-		return HttpResponseRedirect('/califas/login')# if the user is NOT logged in
+		return HttpResponseRedirect('/califas/login')# user is NOT logged in
 
 	return render(request, 'califas/directores.html', context_dict)
+
 
 # What's the raison d'ëtre of this function?
 def base(request):
@@ -90,6 +105,17 @@ def director(request, director_name_slug):
 	my_director = None
 
 	try:
+		# director = Director.get(slug=director_name_slug)
+
+		# if director:
+		# 	titles = Titles.filter(director=director)
+
+		# 	context_dict['director'] = director
+		# 	context_dict['titles'] = titles
+		
+		# FOR USE WHEN REMASTERED------------------
+		# directors_list = Director.objects.filter(user=the_user['profile'])
+
 		directors = user['profile'].directors.all()
 		for director in directors:
 			if director.slug == director_name_slug:
@@ -118,11 +144,11 @@ def add_movie(request):
 		title_form = TitleForm(request.POST, request.FILES)
 
 		#title_form.poster = request.FILES['poster']
-		print "$$$$$$$$$$", title_form
+		# print "title_form: ", title_form
 		# title_form.save(commit=False)
 		# have we been provided with a valid form?
 		if title_form.is_valid():
-			print "*"
+			print "title_form is valid"
 			nuevo_titulo = title_form.save(commit=False)
 			nuevo_titulo.user_name = user['name']
 
@@ -164,9 +190,6 @@ def add_movie(request):
 	# If the supplied request was not a POST, display the form.
 	else:
 		title_form = TitleForm()
-
-	# Bad form (or no details), no form supplied...
-	# Render the form with error messages(if any).
 		
 		return render(request, 'califas/nueva.html', {'title_form': title_form})
 

@@ -8,6 +8,7 @@ $(document).ready(function(){
 
 		// Pickup all the vars from the div
 		var pop = $('div#movie-pop-contents');
+		console.log(pop+"fuck");
 		var titulo   = $(this).children('p').eq(0).text();
 		var rating   = $(this).children('p').eq(1).text();
 		var director = $(this).children('p').eq(2).text();
@@ -16,7 +17,7 @@ $(document).ready(function(){
 		var review   = $(this).children('p').eq(5).text();
 		var poster   = $(this).children('p').eq(6).text();
 		var stars    = '';
-		alert(poster);
+		// alert(poster);
 		rating = parseInt(rating);
 		// append one star image per point of rating and put them inside a paragraph
 		for(var i=0; i<rating;i++)

@@ -19,13 +19,13 @@ RATINGS = (('1', ''),
 
 class DirectorForm(forms.ModelForm):
 	name = forms.CharField(max_length=128, help_text='Director')
-	about = forms.CharField(max_length=1500, help_text='Cuéntanos acerca de este director')
+	about = forms.TextField(max_length=1500, help_text='Cuéntanos acerca de este director')
 	birth = forms.IntegerField()
 	death = forms.IntegerField()
 	picture = forms.ImageField()
 
 	class Meta:
-		model = Director
+		model Director
 
 
 class TitleForm(forms.ModelForm):
@@ -41,7 +41,7 @@ class UserForm(forms.ModelForm):
 	password = forms.CharField(widget=forms.PasswordInput())
 
 	class Meta:
-		model = User
+		model User
 		fields = ('username', 'email', 'password',)
 
 
