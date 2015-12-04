@@ -2,13 +2,14 @@
 {% load static %}
 {% load get_range %}
 {% block head %}
-<link rel="stylesheet" type="text/css" href="{% static "css/images.css" %}" />
+<link rel="stylesheet" type="text/css" href="{% static "css/images.css" %}">
 {% endblock %}
 {% block title %}CINESNOB{% endblock %}
 {% block content %}	
 
 	{% if user.is_authenticated %}
-		<h3>Hola, {{ user }}, te recomendamos</h3><br />
+		<h3>Hola, {{ user }}, te recomendamos</h3>
+		<br>
 		{% if recommendations %}
 			{% for recom in recommendations %}
 				<div class="img-poster-holder">
@@ -18,7 +19,8 @@
 					<img class="img-big" src="{% static "images/default.jpg" %}" />
 				{% endif %}
 				<br/>
-				<p>{{ recom.movie_name }}</p>
+				<p>{{ recom.name }}</p>
+				<p>{{ recom.rating }}</p>
 				</div>
 				{% if forloop.counter0 == 2 %}
 					<br/>

@@ -37,6 +37,17 @@ class TitleForm(forms.ModelForm):
 		fields= ('name', 'year',)
 
 
+class ReviewForm(forms.ModelForm):
+	genre = forms.CharField(widget=forms.Select(choices=GENRE_CHOICES, attrs={'id':'opciones'}))
+	review = forms.CharField(widget=forms.Textarea, max_length=300, help_text='comentarios')
+	rating = forms.ChoiceField(widget=forms.RadioSelect(attrs={'id':'estrellas'}), choices=RATINGS, initial=0)
+	poster = forms.FileField()
+
+	class Meta:
+		model = Review
+		fields = ('genre', 'review', 'rating', 'poster')
+
+
 class UserForm(forms.ModelForm):
 	password = forms.CharField(widget=forms.PasswordInput())
 
@@ -49,4 +60,4 @@ class UserProfileForm(forms.ModelForm):
 
 	class Meta:
 		model = UserProfile
-		fields = ('name', 'email', 'website', 'about', 'avatar',)
+		fields = ('name', 'website', 'about', 'avatar',)

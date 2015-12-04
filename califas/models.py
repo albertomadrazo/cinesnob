@@ -24,7 +24,7 @@ class Title(models.Model):
 		super(Title, self).save(*args, **kwargs)
 
 	def __unicode__(self):
-		return self.name
+		return self.name # not necessary, maybe it's better to retrive Director
 
 
 class Review(models.Model):
@@ -39,7 +39,7 @@ class Review(models.Model):
 	title = models.ForeignKey(Title)
 
 	def __unicode__(self):
-		return self.title
+		return unicode(self.title)
 
 
 # model Friend > many to many
@@ -65,7 +65,7 @@ class UserProfile(models.Model):
 	friends = models.ManyToManyField(Friend, blank=True)
 
 	def __unicode__(self):
-		return self.user.username
+		return self.usr.username
 # model Director > one to many (Title),
 #		Director > many to many < UserProfile
 class Director(models.Model):

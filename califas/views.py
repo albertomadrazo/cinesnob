@@ -1,14 +1,15 @@
 #--<encoding:utf8>--
-import unidecode
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
-from califas.models import Director, Title, UserProfile, Friend
-from califas.forms import TitleForm, DirectorForm, UserForm, UserProfileForm
 from django.core.urlresolvers import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
+from califas.models import Director, Title, UserProfile, Friend, Review
+from califas.forms import TitleForm, DirectorForm, UserForm, UserProfileForm, ReviewForm
+
+import unidecode
 import json
 
 
@@ -35,10 +36,10 @@ def get_user_and_profile(username):
 	user_and_profile['name'] = user_name
 
 	user = UserProfile.objects.all()
-
+	print "$$$$$$$$$$ ", user
 	# = TODO = Needs a way to only pass the value of the User class if it doesn't find the UserProfile class
 	for my_user in user:
-		if my_user.user == user_name:
+		if my_user.usr == user_name:
 			user_and_profile['profile'] = my_user
 	
 	return user_and_profile
@@ -52,8 +53,62 @@ def index(request):
 	# if the user is logged in
 	if current_user:
 
-		recommendations = Title.objects.all().order_by('-rating')[:6]
-		context_dict['recommendations'] = recommendations	
+		all_titles = Title.objects.all()#.order_by('-rating')[:6]
+		# all_reviews = Review.objects.all()
+
+		recommendations = []
+		not_repeated_titles = []
+
+		for title in all_titles:#enumerate(all_titles):
+
+			print "title: ", title 	
+			title_reviews = Review.objects.filter(title__name=title, rating__gt=1)
+			print "title_reviews: ", title_reviews
+			rating_avg = 0
+			total_ratings = 0
+			opinion = []
+			genre = []
+			poster = []
+			for review in title_reviews:
+				total_ratings += 1
+				rating_avg += review.rating
+				opinion.append(review.review)
+				genre.append(review.genre)
+				poster.append(review.poster)
+
+			print "rating_avg: ", rating_avg
+			print "total_ratings: ", total_ratings
+			try:
+				rating = rating_avg/total_ratings
+			except:
+				rating = 1
+
+			dict_to_append = {
+				'name':     title.name,
+				'slug':     title.slug,
+				'year':     title.year,
+				'director': title.director, # esta me va a dar pedos
+				'genre':    genre,
+				'opinion':  opinion,
+				'rating':   rating,
+				'poster':   poster
+			}
+
+			recommendations.append(dict_to_append)
+
+		recos = []
+		for i in recommendations:
+			try:
+				if i['name'] not in not_repeated_titles:
+					# append the name
+					not_repeated_titles.append(i['name'])
+					# append the unrepeated recommendation to a new list
+					recos.append(i)
+			except:
+				pass
+
+
+		context_dict['recommendations'] = recos	
 
 		return render(request, 'califas/index.html', context_dict)
 
@@ -138,60 +193,60 @@ def add_movie(request):
 	if request.method == 'POST':
 		director_exists = False
 		user = get_user_and_profile(request.user)
+		print "######### ", user
+		director_name = request.POST[u'director_name'] 
+		# TODO: make a pop-up if the director doesn't exist in the database
+		# get or create director
+		director, created = Director.objects.get_or_create(name=director_name)
+		# Does the movie exists already?
+		try:
+			title_form = Title.objects.get(name=request.POST[u'name'])
+		except:
+			title_form = TitleForm(request.POST)
+			print "EXCEPTION!!!"
 
-		director_name = request.POST[u'director_name']
-	
-		title_form = TitleForm(request.POST, request.FILES)
+		print title_form
+		# title_form = TitleForm(request.POST)
+		review_form = ReviewForm(request.POST, request.FILES)
 
-		#title_form.poster = request.FILES['poster']
-		# print "title_form: ", title_form
-		# title_form.save(commit=False)
 		# have we been provided with a valid form?
-		if title_form.is_valid():
-			print "title_form is valid"
-			nuevo_titulo = title_form.save(commit=False)
-			nuevo_titulo.user_name = user['name']
+		if title_form.is_valid() and review_form.is_valid():
 
-			try:
-				director = user['profile'].directors.get(director_name=director_name)
-			except:
-				director_list = Director.objects.all()
+			review = review_form.save(commit=False)
+			titulo = title_form.save(commit=False)
+			# Establish a ManyToMany relationship for both director and user
+			director.users.add(user['profile'])
+			# director.save()
 
-				for director in director_list:
-					print director.director_name, director_name
+			user['profile'].directors.add(director)
 
-					if director.director_name == director_name:
-						director_exists = True
+			titulo.director = director
+			print titulo.director.slug, "FUCK THE SHIT!!!"
+			titulo.username = user['name']
+			titulo.save()
 
-				# If the director was not found, create it
-				if director_exists == False:	
-					director = Director(director_name=director_name)
-					director.save()
-	
-				user['profile'].directors.add(director)
+			review.poster = request.FILES['poster']
+			review.user = user['profile']
+			review.title = titulo
+			print "Con una chingada! ", review.title
+			print titulo
+			review.save()
 
-			nuevo_titulo.director = director
-			nuevo_titulo.poster = request.FILES['poster']
-			nuevo_titulo.save()
-#			# Now call the index() view.
-#			# The user will be shown the homepage.
-#			return index(request)
+		# The supplied form contains errors - just print them to the terminal
 		else:
-			print "**"
-
-#			# The supplied form contains errors - just print them to the terminal
+			print "Form ERRORS: "
 			print title_form.errors
 
-		directors_list = user['profile'].directors.all() #funciones.call_directors()
-		#url = HttpResponseRedirect(reverse('view.index'))
-		#return render_to_response('califas/', directors_list, context) #HttpResponseRedirect('/califas/index.html')
+		directors_list = Director.objects.all()
+
 		return render(request, 'califas/index.html', {'directors_list':directors_list})
 
 	# If the supplied request was not a POST, display the form.
 	else:
 		title_form = TitleForm()
+		review_form = ReviewForm()
 		
-		return render(request, 'califas/nueva.html', {'title_form': title_form})
+		return render(request, 'califas/nueva.html', {'title_form': title_form, 'review_form': review_form})
 
 
 # en esta view, vamos a dar el detalle de la pelicula seleccionada
@@ -231,12 +286,11 @@ def registrarse(request):
 			user = user_form.save()
 			# Now we hash the password with the set_password method.
 			user.set_password(user.password)
-
 			user.save()
-			profile = profile_form.save(commit=False)
 
-			profile.user = user
-			profile.nombre_usuario = str(profile.user.username)
+			profile = profile_form.save(commit=False)
+			profile.usr = user
+			profile.nombre_usuario = str(profile.usr.username)
 
 			# Here we create the UserProfile's friend table (ManyToMany)
 			befriend = Friend()

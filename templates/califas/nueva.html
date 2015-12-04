@@ -17,25 +17,29 @@
 		{{ hidden }}
 	{% endfor %}
 	
-	{% for field in title_form.movie_name %}
+	{% for field in title_form.name %}
 		{{ field.errors }}
 		{{ field.help_text }}
 		{{ field }}
 	{% endfor %}
+
 	<br />
+
 	{% for field in title_form.year %}
 		{{ field.errors }}
 		{{ field.help_text }}
 		{{ field }}
 	{% endfor %}
-	{% for field in title_form.genre %}
+
+	<br />
+
+	{% for field in review_form.genre %}
 		<div id="cont-opciones">
 		{{ field.errors }}
 		{{ field.help_text }}
 		{{ field }}
 	</div>
 	{% endfor %}
-	<br />
 
 	<div id="your_rating_visible">
 		<input type="checkbox" id='uno' onclick="starMeter(1);" />
@@ -44,21 +48,25 @@
 		<input type="checkbox" id='cuatro' onclick="starMeter(4);" />
 		<input type="checkbox" id='cinco' onclick="starMeter(5);" />
 	</div>
+
 	<div id="your_rating">
-		{% for check in title_form.rating %}
+		{% for check in review_form.rating %}
 			{{ check }}
 		{% endfor %}
 	</div>
+
 	<br />
-	{% for field in title_form.poster %}
+
+	{% for field in review_form.poster %}
 		{{ field }}
 	{% endfor %}
 
-	{% for field in title_form.review %}
+	{% for field in review_form.review %}
 		{{ field.errors }}
 		{{ field.help_text }}
 		{{ field }}
 	{% endfor %}
+
 	<input type="submit" name="submit" value="Agregar" />
 </form>
 {% endblock %}
@@ -67,3 +75,4 @@
 {% block imports %}
 	<script type="text/javascript" src="{% static "js/nueva.js" %}"></script>
 {% endblock %}
+
