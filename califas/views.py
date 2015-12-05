@@ -45,70 +45,71 @@ def get_user_and_profile(username):
 	return user_and_profile
 
 
-def index(request):
+def get_highest_rated_movies(qty):
+	all_titles = Title.objects.all()#.order_by('-rating')[:6]
 
+	recommendations = []
+	not_repeated_titles = []
+
+	for title in all_titles:#enumerate(all_titles):
+
+		title_reviews = Review.objects.filter(title__name=title,rating__gt=1)
+		rating_avg = 0
+		total_ratings = 0
+		opinion = []
+		genre = []
+		for review in title_reviews:
+			total_ratings += 1
+			rating_avg += review.rating
+			opinion.append(review.review)
+			genre.append(review.genre)
+			poster = review.poster
+
+		try:
+			rating = rating_avg/total_ratings
+		except:
+			rating = 1
+
+		dict_to_append = {
+			'name':     title.name,
+			'slug':     title.slug,
+			'year':     title.year,
+			'director': title.director, # esta me va a dar pedos
+			'genre':    genre,
+			'opinion':  opinion,
+			'rating':   rating,
+			'poster':   poster
+		}
+
+		recommendations.append(dict_to_append)
+
+	recos = []
+	for i in recommendations:
+		try:
+			if i['name'] not in not_repeated_titles:
+				# append the name
+				not_repeated_titles.append(i['name'])
+				# append the unrepeated recommendation to a new list
+				recos.append(i)
+		except:
+			pass
+
+	return recos
+
+def get_user_movies(user):
+	titles = Title.objects.filter(users__username=user)
+
+	return titles
+
+###########################################################################
+
+def index(request):
 	current_user = str(request.user.username)
 	context_dict = {}
 
 	# if the user is logged in
 	if current_user:
-
-		all_titles = Title.objects.all()#.order_by('-rating')[:6]
-		# all_reviews = Review.objects.all()
-
-		recommendations = []
-		not_repeated_titles = []
-
-		for title in all_titles:#enumerate(all_titles):
-
-			print "title: ", title 	
-			title_reviews = Review.objects.filter(title__name=title, rating__gt=1)
-			print "title_reviews: ", title_reviews
-			rating_avg = 0
-			total_ratings = 0
-			opinion = []
-			genre = []
-			poster = []
-			for review in title_reviews:
-				total_ratings += 1
-				rating_avg += review.rating
-				opinion.append(review.review)
-				genre.append(review.genre)
-				poster.append(review.poster)
-
-			print "rating_avg: ", rating_avg
-			print "total_ratings: ", total_ratings
-			try:
-				rating = rating_avg/total_ratings
-			except:
-				rating = 1
-
-			dict_to_append = {
-				'name':     title.name,
-				'slug':     title.slug,
-				'year':     title.year,
-				'director': title.director, # esta me va a dar pedos
-				'genre':    genre,
-				'opinion':  opinion,
-				'rating':   rating,
-				'poster':   poster
-			}
-
-			recommendations.append(dict_to_append)
-
-		recos = []
-		for i in recommendations:
-			try:
-				if i['name'] not in not_repeated_titles:
-					# append the name
-					not_repeated_titles.append(i['name'])
-					# append the unrepeated recommendation to a new list
-					recos.append(i)
-			except:
-				pass
-
-
-		context_dict['recommendations'] = recos	
+		context_dict['recommendations'] = get_highest_rated_movies(20)
 
 		return render(request, 'califas/index.html', context_dict)
 
@@ -118,7 +119,6 @@ def index(request):
 
 # Function to show directors
 def show_directors(request):
-
 	current_user = str(request.user.username)
 	context_dict = {}
 	# if the user is logged in
@@ -199,21 +199,33 @@ def add_movie(request):
 		# get or create director
 		director, created = Director.objects.get_or_create(name=director_name)
 		# Does the movie exists already?
+
+		valid_title_form = False
+		is_a_form = False
+
 		try:
 			title_form = Title.objects.get(name=request.POST[u'name'])
+			valid_title_form = True			
 		except:
 			title_form = TitleForm(request.POST)
-			print "EXCEPTION!!!"
+			if title_form.is_valid():
+				valid_title_form = True
+				is_a_form = True
 
 		print title_form
 		# title_form = TitleForm(request.POST)
 		review_form = ReviewForm(request.POST, request.FILES)
 
 		# have we been provided with a valid form?
-		if title_form.is_valid() and review_form.is_valid():
+		if (valid_title_form and title_form) and review_form.is_valid():
 
 			review = review_form.save(commit=False)
-			titulo = title_form.save(commit=False)
+			# commit only works on forms, not on models
+			if is_a_form:
+				titulo = title_form.save(commit=False)
+			else:
+				titulo = title_form
+
 			# Establish a ManyToMany relationship for both director and user
 			director.users.add(user['profile'])
 			# director.save()
@@ -225,7 +237,7 @@ def add_movie(request):
 			titulo.username = user['name']
 			titulo.save()
 
-			review.poster = request.FILES['poster']
+			review.poster = request.FILES[u'poster']
 			review.user = user['profile']
 			review.title = titulo
 			print "Con una chingada! ", review.title
@@ -481,26 +493,22 @@ def get_movies_by_age(request):
 
 # exitos
 def get_movies_by_rating(request):
-	titles = Title.objects.all().order_by('-rating')[:20]
 
-	list_with_movie_name = []
-	unique_set = []
-	my_list = []
+	titles = get_highest_rated_movies(20)
 
-	for i in range(len(titles)):
-		list_with_movie_name.append([titles[i], titles[i].movie_name])
-
-	for i in range(len(list_with_movie_name)):
-		if list_with_movie_name[i][1] not in unique_set:
-			my_list.append(list_with_movie_name[i][0])
-			unique_set.append(list_with_movie_name[i][1])
-
-	return render(request, 'califas/exitos.html', {'titles': my_list})
+	return render(request, 'califas/exitos.html', {'titles': titles})
 
 
 def title_detail(request, movie_name_slug):
 	pass
 
+def user_movies(request):
+	the_user = get_user_and_profile(request.user)
+	print the_user['profile']
+	titles = get_user_movies(the_user['profile'])
+	print "titles: ", titles
+	
+	return render(request, 'califas/mis_peliculas.html', {'titles': titles})
 
 def stats(request):
 	context_dict = {}

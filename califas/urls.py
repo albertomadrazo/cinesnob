@@ -22,4 +22,5 @@ urlpatterns = patterns('',
 		url(r'^directores/$', views.show_directors, name='directores'),
 		url(r'^exitos/$', views.get_movies_by_rating, name='exitos'),
 		url(r'^stats/$', views.stats, name='stats'),
+		url(r'^mis_peliculas/$', views.user_movies, name='user_movies'),
 	)

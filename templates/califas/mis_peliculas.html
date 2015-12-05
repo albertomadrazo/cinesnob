@@ -1,0 +1,45 @@
+{% extends 'califas/base.html' %}
+{% load static %}
+{% load get_range %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static "css/images.css" %}"/>
+<link rel="stylesheet" type="text/css" href="{% static "css/exitos.css" %}"/>
+<link rel="stylesheet" type="text/css" href="{% static "css/movie-detail.css" %}"/>
+{% endblock %}
+{% block title %}CINESNOB - MIS PEL&Iacute;CULAS{% endblock %}
+{% block content %}
+
+<div id="movie-pop-container">
+
+	<div id="movie-pop">
+		<div id="movie-pop-close">X</div> <!-- This is the close button -->
+		<div id="movie-pop-contents"></div>
+	</div>
+	<div id="movie-pop-veil"></div>
+</div>
+
+<h3>Mis Pel&iacute;culas:</h3><br/>
+<div id="movies-container">
+	{% if titles %}
+		{% for ti in titles %}
+			<div class="img-poster-holder movie-detail" id="{{ ti.movie_name }}">
+				<img class="ficha img-big" id="mi-imagen" src="{{ MEDIA_URL }}{{ ti.poster }}"/>
+				<br/>
+				<p class="ficha" style="font-size: 0.8em;" id="movie-name">{{ ti.movie_name }}</p>
+				<p class="ficha"           id="{{ ti.rating }}" >{{ ti.rating }}</p>
+				<p class="invisible ficha" id="movie-director">{{ ti.director }}</p>
+				<p class="invisible ficha" id="movie-genre">{{ ti.genre }}</p>
+				<p class="invisible ficha" id="movie-year">{{ ti.year }}</p>
+				<p class="invisible ficha" id="movie-review">{{ ti.review }}</p>
+				<p class="invisible ficha">{{ MEDIA_URL }}{{ ti.poster }}</p>
+			</div>
+		{% endfor %}
+	{% endif %}
+</div>
+
+
+{% endblock %}
+{% block imports %}
+<script type="text/javascript" src="{% static "js/show_movie_detail.js" %}"></script>
+
+{% endblock %}

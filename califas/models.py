@@ -6,6 +6,23 @@ from django.utils import timezone
 from unidecode import unidecode
 
 
+# model UserProfile > one to one < User
+class UserProfile(models.Model):
+
+	username = models.CharField(max_length=50)
+	name = models.CharField(max_length=100)
+	email = models.EmailField(max_length=100)
+	website = models.URLField(blank=True)
+	about = models.TextField(max_length=200, blank=True)
+	avatar = models.ImageField(upload_to='profile_images', default='default.jpg')
+
+	# The model's relationships with other tables
+	usr = models.OneToOneField(User)
+	directors = models.ManyToManyField('Director', blank=True)
+	friends = models.ManyToManyField(Friend, blank=True)
+
+	def __unicode__(self):
+		return self.usr.username
 
 
 # model Title 
@@ -49,23 +66,7 @@ class Friend(models.Model):
 	member_since = models.DateField(default=timezone.now())
 
 
-# model UserProfile > one to one < User
-class UserProfile(models.Model):
 
-	username = models.CharField(max_length=50)
-	name = models.CharField(max_length=100)
-	email = models.EmailField(max_length=100)
-	website = models.URLField(blank=True)
-	about = models.TextField(max_length=200, blank=True)
-	avatar = models.ImageField(upload_to='profile_images', default='default.jpg')
-
-	# The model's relationships with other tables
-	usr = models.OneToOneField(User)
-	directors = models.ManyToManyField('Director', blank=True)
-	friends = models.ManyToManyField(Friend, blank=True)
-
-	def __unicode__(self):
-		return self.usr.username
 # model Director > one to many (Title),
 #		Director > many to many < UserProfile
 class Director(models.Model):
