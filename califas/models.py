@@ -67,7 +67,11 @@ class Review(models.Model):
 # model Friend > many to many
 class Friend(models.Model):
 
+<<<<<<< HEAD
 	friends = models.ManyToManyField('UserProfile')
+=======
+	friend_name = models.CharField(max_length=100, default='')
+>>>>>>> See no advance here...
 	member_since = models.DateField(default=timezone.now())
 
 
@@ -86,6 +90,7 @@ class Director(models.Model):
 	# The model's relationships with other tables
 	users = models.ManyToManyField(UserProfile, blank=True)
 
+<<<<<<< HEAD
 	def save(self, *args, **kwargs):
 		try:
 			self.name = unidecode(unicode(self.name, "utf-8")).encode("utf-8")
@@ -97,3 +102,7 @@ class Director(models.Model):
 
 	def __unicode__(self):
 		return self.name
+=======
+	def __unicode__(self):
+		return self.user.username
+>>>>>>> See no advance here...

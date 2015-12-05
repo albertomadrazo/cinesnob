@@ -4,6 +4,30 @@
 		"selected_items":
 		[
 			[
+				"get_user",
+				"get_user_and_profile"
+			],
+			[
+				"get_",
+				"get_user_movies"
+			],
+			[
+				"ratin",
+				"rating_avg"
+			],
+			[
+				"recom",
+				"recommendations"
+			],
+			[
+				"dire",
+				"director_name"
+			],
+			[
+				"review",
+				"review_form"
+			],
+			[
 				"movie-po",
 				"movie-pop-close"
 			],
@@ -283,6 +307,7 @@
 	},
 	"buffers":
 	[
+<<<<<<< HEAD
 		{
 			"file": "califas/views.py",
 			"settings":
@@ -371,6 +396,8 @@
 				"line_ending": "Unix"
 			}
 		}
+=======
+>>>>>>> See no advance here...
 	],
 	"build_system": "",
 	"command_palette":
@@ -430,6 +457,7 @@
 	},
 	"file_history":
 	[
+<<<<<<< HEAD
 		"/home/alberto/Desktop/web/django/cinesnob/califas/models.py",
 		"/home/alberto/.config/sublime-text-3/Packages/Default/Preferences.sublime-settings",
 		"/home/alberto/Desktop/web/django/cinesnob/califas/views.py",
@@ -438,10 +466,32 @@
 		"/home/alberto/Desktop/web/django/cinesnob/static/js/epocas.js",
 		"/home/alberto/Desktop/web/django/cinesnob/templates/califas/nueva.html",
 		"/home/alberto/Desktop/web/django/cinesnob/califas/urls.py",
+=======
+		"/home/alberto/Desktop/web/django/cinesnob/templates/califas/epocas.html",
+		"/home/alberto/Desktop/web/django/cinesnob/califas/admin.py",
+		"/home/alberto/Desktop/web/django/cinesnob/califas/views.py",
+		"/home/alberto/Desktop/web/django/cinesnob/califas/urls.py",
+		"/home/alberto/Desktop/web/django/cinesnob/templates/califas/base.html",
+		"/home/alberto/Desktop/web/django/cinesnob/templates/califas/nueva.html",
+		"/home/alberto/Desktop/web/django/cinesnob/static/js/califas.js",
+		"/home/alberto/Desktop/web/django/cinesnob/static/js/epocas.js",
+		"/home/alberto/Desktop/web/django/cinesnob/static/js/exitos.js",
+		"/home/alberto/Desktop/web/django/cinesnob/static/js/menu.js",
+		"/home/alberto/Desktop/web/django/cinesnob/static/js/nueva.js",
+		"/home/alberto/Desktop/web/django/cinesnob/static/js/show_movie_detail.js",
+		"/home/alberto/Desktop/web/django/cinesnob/califas/models.py",
+		"/home/alberto/Desktop/web/django/cinesnob/califas/forms.py",
+		"/home/alberto/Desktop/web/django/cinesnob/templates/califas/index.html",
+		"/home/alberto/Desktop/web/django/cinesnob/templates/califas/mis_peliculas.html",
+		"/home/alberto/.config/sublime-text-3/Packages/Default/Preferences.sublime-settings",
+		"/home/alberto/Desktop/web/putamadre.html",
+		"/home/alberto/Desktop/web/django/cinesnob/static/css/images.css",
+>>>>>>> See no advance here...
 		"/home/alberto/Desktop/web/django/cinesnob/templates/califas/login.html",
 		"/home/alberto/Desktop/web/django/cinesnob/templates/califas/registrarse.html",
 		"/home/alberto/Desktop/web/bootstrap_sandbox/tutorial/index.html",
 		"/home/alberto/Desktop/web/django/cinesnob/templates/califas/miminu.html",
+<<<<<<< HEAD
 		"/home/alberto/Desktop/web/django/cinesnob/static/js/menu.js",
 		"/home/alberto/Desktop/web/django/cinesnob/static/css/style.css",
 		"/home/alberto/Desktop/web/django/cinesnob/templates/califas/pelicula.html",
@@ -458,6 +508,18 @@
 		"/home/alberto/Desktop/web/django/cinesnob/templates/califas/amigos.html",
 		"/home/alberto/Desktop/web/django/cinesnob/templates/califas/epocas.html",
 		"/home/alberto/Desktop/web/django/cinesnob/califas/forms.py",
+=======
+		"/home/alberto/Desktop/web/django/cinesnob/static/css/style.css",
+		"/home/alberto/Desktop/web/django/cinesnob/templates/califas/pelicula.html",
+		"/home/alberto/Desktop/web/django/cinesnob/dummy2/movie-detail.html",
+		"/home/alberto/Desktop/web/django/cinesnob/templates/califas/exitos.html",
+		"/home/alberto/Desktop/web/django/cinesnob/static/css/movie-detail.css",
+		"/home/alberto/Desktop/web/django/cinesnob/static/css/exitos.css",
+		"/home/alberto/Desktop/web/django/cinesnob/TODO.txt",
+		"/home/alberto/Desktop/web/bootstrap_sandbox/tutorial/js/bootstrap.min.js",
+		"/home/alberto/Desktop/web/django/cinesnob/templates/califas/directores.html",
+		"/home/alberto/Desktop/web/django/cinesnob/templates/califas/amigos.html",
+>>>>>>> See no advance here...
 		"/home/alberto/Desktop/web/git-projects/cinesnob/dummy2/style.css",
 		"/home/alberto/Desktop/web/timer.html",
 		"/home/alberto/Desktop/web/bootstrap_sandbox/tutorial/read.html",
@@ -552,12 +614,16 @@
 		"/home/alberto/Desktop/web/flanagan/8-3.html",
 		"/home/alberto/Desktop/web/flanagan/8-4.html",
 		"/home/alberto/Desktop/web/django/cinesnub/templates/califas/new.html",
+<<<<<<< HEAD
 		"/home/alberto/Desktop/web/flanagan/13-1.html",
 		"/home/alberto/Desktop/web/flanagan/13-4.html",
 		"/home/alberto/Desktop/web/flanagan/13-3.html",
 		"/home/alberto/Desktop/web/flanagan/13-2.html",
 		"/home/alberto/Desktop/web/css/positioning.html",
 		"/home/alberto/Desktop/web/flanagan/ch06.html"
+=======
+		"/home/alberto/Desktop/web/flanagan/13-1.html"
+>>>>>>> See no advance here...
 	],
 	"find":
 	{
@@ -568,6 +634,7 @@
 		"height": 93.0,
 		"where_history":
 		[
+			"/home/alberto/Desktop/web/django/cinesnob",
 			"/home/alberto/Desktop/web/git-projects/cinesnob/",
 			"/home/alberto/Desktop/web/git-projects/cinesnob2/",
 			""
@@ -578,6 +645,12 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+<<<<<<< HEAD
+=======
+			"movies",
+			"name",
+			"director_name",
+>>>>>>> See no advance here...
 			"print",
 			"directors.all",
 			"ruler",
@@ -710,6 +783,7 @@
 	"groups":
 	[
 		{
+<<<<<<< HEAD
 			"selected": 1,
 			"sheets":
 			[
@@ -1044,6 +1118,20 @@
 					"stack_index": 0,
 					"type": "text"
 				}
+=======
+			"sheets":
+			[
+			]
+		},
+		{
+			"sheets":
+			[
+			]
+		},
+		{
+			"sheets":
+			[
+>>>>>>> See no advance here...
 			]
 		}
 	],
@@ -1081,7 +1169,11 @@
 		"cols":
 		[
 			0.0,
+<<<<<<< HEAD
 			0.521283530445,
+=======
+			0.509549527049,
+>>>>>>> See no advance here...
 			1.0
 		],
 		"rows":
@@ -1137,7 +1229,11 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
+<<<<<<< HEAD
 	"side_bar_width": 243.0,
+=======
+	"side_bar_width": 201.0,
+>>>>>>> See no advance here...
 	"status_bar_visible": true,
 	"template_settings":
 	{
