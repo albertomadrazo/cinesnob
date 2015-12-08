@@ -19,7 +19,7 @@ class UserProfile(models.Model):
 	# The model's relationships with other tables
 	usr = models.OneToOneField(User)
 	directors = models.ManyToManyField('Director', blank=True)
-	friends = models.ManyToManyField(Friend, blank=True)
+	friends = models.ManyToManyField('Friend', blank=True)
 
 	def __unicode__(self):
 		return self.usr.username
@@ -28,8 +28,8 @@ class UserProfile(models.Model):
 # model Title 
 class Title(models.Model):
 
-	name = models.CharField(max_length=128)
-	slug = models.SlugField(unique=False)
+	name = models.CharField(max_length=128, unique=True)
+	slug = models.SlugField(unique=True)
 	year = models.IntegerField(default=1900)
 
 	# The model's relationships with other tables
@@ -53,7 +53,7 @@ class Review(models.Model):
 
 	# The model's relationships with other tables
 	user = models.ForeignKey('UserProfile')
-	title = models.ForeignKey(Title)
+	title = models.ForeignKey('Title')
 
 	def __unicode__(self):
 		return unicode(self.title)

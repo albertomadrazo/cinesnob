@@ -11,6 +11,8 @@ from califas.forms import TitleForm, DirectorForm, UserForm, UserProfileForm, Re
 
 import unidecode
 import json
+import random
+from operator import itemgetter
 
 
 def get_director(director):
@@ -21,12 +23,20 @@ def get_title(title):
 	return Title.get(name=title)
 
 
-def get_average_rating(subject):
-	average_rating = 0
+def get_average_rating(title):
+	all_ratings = Review.objects.filter(title__name=title, rating__gt=0)
+	rating_sum = number_of_reviews = average = 0
 
-	# Get all the ratings of the title that are greater than 0
-	all_ratings = Review.objects.filter(rating__gt=0)
-	print all_ratings
+	for index, rating in enumerate(all_ratings):
+		rating_sum += rating.rating
+		number_of_reviews = index + 1
+
+	if rating_sum > 0 and number_of_reviews > 0:
+		average = rating_sum / number_of_reviews
+
+	return average
+	# # Get all the ratings of the title that are greater than 0
+	# all_ratings = Review.objects.filter(rating__gt=0)
 
 # Gets the username from the User class and the UserProfile class
 def get_user_and_profile(username):
@@ -36,7 +46,6 @@ def get_user_and_profile(username):
 	user_and_profile['name'] = user_name
 
 	user = UserProfile.objects.all()
-	print "$$$$$$$$$$ ", user
 	# = TODO = Needs a way to only pass the value of the User class if it doesn't find the UserProfile class
 	for my_user in user:
 		if my_user.usr == user_name:
@@ -45,30 +54,55 @@ def get_user_and_profile(username):
 	return user_and_profile
 
 
-def get_highest_rated_movies(qty):
-	all_titles = Title.objects.all()#.order_by('-rating')[:6]
-
-	recommendations = []
+def remove_repeated_titles(titles):
 	not_repeated_titles = []
+	result = []
 
-	for title in all_titles:#enumerate(all_titles):
+	for i in titles:
+		try:
+			if i['name'] not in not_repeated_titles:
+				# append the name
+				not_repeated_titles.append(i['name'])
+				# append the unrepeated recommendation to a new list
+				result.append(i)
+		except:
+			pass
 
-		title_reviews = Review.objects.filter(title__name=title,rating__gt=1)
-		rating_avg = 0
-		total_ratings = 0
+	return result
+
+
+def match_title_with_review(titles, reviews):
+	titles_with_reviews
+
+	return result
+
+
+def get_title_reviews(title, reviews):
+	title = title.users.username
+
+
+def sort_title(titles, field):
+	sorted_list = sorted(titles, key=itemgetter(field), reverse=True)
+
+	return sorted_list
+
+def get_movies(movie_filter, qty):
+	# all_titles = Title.objects.all()#.order_by('-rating')[:qty]
+	all_reviews = Review.objects.all()
+	recommendations = []
+
+	for title in movie_filter:
+		stringify_title = str(title)
+		title_reviews = [p for p in all_reviews if p.title.name==stringify_title]
 		opinion = []
 		genre = []
+
 		for review in title_reviews:
-			total_ratings += 1
-			rating_avg += review.rating
 			opinion.append(review.review)
 			genre.append(review.genre)
 			poster = review.poster
 
-		try:
-			rating = rating_avg/total_ratings
-		except:
-			rating = 1
+		rating = get_average_rating(title)
 
 		dict_to_append = {
 			'name':     title.name,
@@ -82,34 +116,47 @@ def get_highest_rated_movies(qty):
 		}
 
 		recommendations.append(dict_to_append)
+		recommendations = sort_title(recommendations, 'rating')
 
-	recos = []
-	for i in recommendations:
-		try:
-			if i['name'] not in not_repeated_titles:
-				# append the name
-				not_repeated_titles.append(i['name'])
-				# append the unrepeated recommendation to a new list
-				recos.append(i)
-		except:
-			pass
+	return remove_repeated_titles(recommendations)
 
-	return recos
 
 def get_user_movies(user):
-	titles = Title.objects.filter(users__username=user)
+	titles = Title.objects.filter(users=user)
+	reviews = Review.objects.filter(user=user)
 
-	return titles
+	reviews_dict = {}
+	for y in reviews:
+		reviews_dict[str(y.title.name)] = y
+
+	print reviews_dict
+
+	results = []
+
+	for x in titles:
+		movie_details = {
+			'name': str(x.name),
+			'director': x.director,#directors_dict[str(x)],
+			'year': x.year,
+			'genre':  reviews_dict[str(x.name)].genre,
+			'rating': reviews_dict[str(x.name)].rating,#['rating'],
+			'poster': reviews_dict[str(x.name)].poster#['poster']
+		}
+		results.append(movie_details)
+	print 'results:'
+	print results
+
+	return results
 
 ###########################################################################
 
 def index(request):
 	current_user = str(request.user.username)
 	context_dict = {}
-
+	movie_filter = Title.objects.all()
 	# if the user is logged in
 	if current_user:
-		context_dict['recommendations'] = get_highest_rated_movies(20)
+		context_dict['recommendations'] = get_movies(movie_filter, 20)
 
 		return render(request, 'califas/index.html', context_dict)
 
@@ -160,17 +207,6 @@ def director(request, director_name_slug):
 	my_director = None
 
 	try:
-		# director = Director.get(slug=director_name_slug)
-
-		# if director:
-		# 	titles = Titles.filter(director=director)
-
-		# 	context_dict['director'] = director
-		# 	context_dict['titles'] = titles
-		
-		# FOR USE WHEN REMASTERED------------------
-		# directors_list = Director.objects.filter(user=the_user['profile'])
-
 		directors = user['profile'].directors.all()
 		for director in directors:
 			if director.slug == director_name_slug:
@@ -193,7 +229,7 @@ def add_movie(request):
 	if request.method == 'POST':
 		director_exists = False
 		user = get_user_and_profile(request.user)
-		print "######### ", user
+		print "user and profile", user
 		director_name = request.POST[u'director_name'] 
 		# TODO: make a pop-up if the director doesn't exist in the database
 		# get or create director
@@ -205,7 +241,7 @@ def add_movie(request):
 
 		try:
 			title_form = Title.objects.get(name=request.POST[u'name'])
-			valid_title_form = True			
+			valid_title_form = True	
 		except:
 			title_form = TitleForm(request.POST)
 			if title_form.is_valid():
@@ -236,6 +272,7 @@ def add_movie(request):
 			print titulo.director.slug, "FUCK THE SHIT!!!"
 			titulo.username = user['name']
 			titulo.save()
+			titulo.users.add(user['profile'])
 
 			review.poster = request.FILES[u'poster']
 			review.user = user['profile']
@@ -261,8 +298,8 @@ def add_movie(request):
 		return render(request, 'califas/nueva.html', {'title_form': title_form, 'review_form': review_form})
 
 
-# en esta view, vamos a dar el detalle de la pelicula seleccionada
-# This should be requested via AJAX.
+# Give the detail of the selected movie
+# This is requested via AJAX.
 def movie_detail(request, director_name_slug, movie_name_slug):
 
 	print "PELICULA.VIEW"
@@ -302,7 +339,8 @@ def registrarse(request):
 
 			profile = profile_form.save(commit=False)
 			profile.usr = user
-			profile.nombre_usuario = str(profile.usr.username)
+			profile.username = str(profile.usr.username)
+			# profile.nombre_usuario = str(profile.usr.username)
 
 			# Here we create the UserProfile's friend table (ManyToMany)
 			befriend = Friend()
@@ -469,39 +507,47 @@ def epocas(request):
 def get_movies_by_age(request):
 	# Remove the last letter 's' from the year so it can be used as a number.
 	age_1 = int(request.GET['value'][:-1])
+	# add a range of 9 years so it completes the decade, ex. 199 8
 	age_2 = str(age_1 + 9)
-	movies_from_age = Title.objects.all().filter(year__range=[age_1, age_2])
+
+	movie_filter = Title.objects.filter(year__range=[age_1, age_2])
+	movies_from_age = get_movies(movie_filter, 20)
+
+	print "$$$$$$$$$$$", movies_from_age
+	
+	# directors = Director.objects.all()
+
 	movies_dict = {}
 	movies_list = []
-	k = 0
 
-	for i in movies_from_age:
+	# random_choice = 
+
+	for k, i in enumerate(movies_from_age):
 		movies_list.append({})
-		movies_list[k]["director"] = i.director.director_name
-		movies_list[k]["movie_name"] = str(i.movie_name)
-		movies_list[k]["slug"] = str(i.slug)
-		movies_list[k]["genre"] = str(i.genre)
-		movies_list[k]["year"] = str(i.year)
-		movies_list[k]["rating"] = str(i.rating)
-		movies_list[k]["review"] = i.review
-		movies_list[k]["poster"] = str(i.poster)
-		k += 1
+		movies_list[k]["director"] = str(i['director'])
+		movies_list[k]["movie_name"] = str(i['name'])
+		movies_list[k]["slug"] = str(i['slug'])
+		movies_list[k]["genre"] = str(i['genre'][0])#random.choice(str(i['genre']))
+		movies_list[k]["year"] = str(i['year'])
+		movies_list[k]["rating"] = i['rating']
+		movies_list[k]["review"] = random.choice(i['opinion'])
+		movies_list[k]["poster"] = str(i['poster'])
+
 	las_movies = json.dumps(movies_list)
+	# print "$$$$$$$$$$$", las_movies
 
 	# This is AJAX
 	return HttpResponse(las_movies)
 
 # exitos
 def get_movies_by_rating(request):
-
-	titles = get_highest_rated_movies(20)
+	movie_filter = Title.objects.all()
+	titles = get_movies(movie_filter, 20)
 
 	return render(request, 'califas/exitos.html', {'titles': titles})
 
 
-def title_detail(request, movie_name_slug):
-	pass
-
+@login_required
 def user_movies(request):
 	the_user = get_user_and_profile(request.user)
 	print the_user['profile']
@@ -509,6 +555,7 @@ def user_movies(request):
 	print "titles: ", titles
 	
 	return render(request, 'califas/mis_peliculas.html', {'titles': titles})
+
 
 def stats(request):
 	context_dict = {}
