@@ -5,24 +5,25 @@
 	<meta charset="UTF-8">
 	{% block head %}{% endblock %}
 	<title>{% block title %}{% endblock %}</title>
+	<link rel="stylesheet" type="text/css" href="{% static "css/reset.css" %}" />
 	<link rel="stylesheet" type="text/css" href="{% static "css/style.css" %}" />
 </head>
 
 <body>
 	<div id='header'>
 		<div id="fronton">
-			<div id="title-holder"><h1 class="title">CINESNOB</h1></div>
-			<div id="social-icons">
-				<div class='icon-social' id='icon-facebook'>
-					<a href="http://www.facebook.com/cinesnob"><img src="{% static "images/facebook.jpg" %}"></a>
-				</div>
-				<div class='icon-social' id='icon-twitter'>
-					<img src="{% static "images/twitter.jpg" %}">
-				</div>
-				<div class='icon-social' id='icon-googleplus'>
-					<img src="{% static "images/google.jpg" %}">
-				</div>
+		<h1 class="title">CINESNOB</h1><!--
+		--><div id="social-icons">
+			<div class='icon-social' id='icon-facebook'>
+				<a href="http://www.facebook.com/cinesnob"><img src="{% static "images/facebook.jpg" %}"></a>
 			</div>
+			<div class='icon-social' id='icon-twitter'>
+				<img src="{% static "images/twitter.jpg" %}">
+			</div>
+			<div class='icon-social' id='icon-googleplus'>
+				<img src="{% static "images/google.jpg" %}">
+			</div>
+		</div>
 		</div>
 		<div id="menu-container">
 			<ul class="menu">

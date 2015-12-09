@@ -1,0 +1,30 @@
+<div id="movie-pop-container">
+
+	<div id="movie-pop">
+		<div id="movie-pop-close">X</div> <!-- This is the close button -->
+		<div id="movie-pop-contents"></div>
+	</div>
+	<div id="movie-pop-veil"></div>
+</div>
+
+<div id="posters-container">
+
+{% if titles %}
+	{% for ti in titles %}
+		<div class="img-poster-holder movie-detail" id="{{ ti.slug }}">
+			<img class="ficha img-big" id="mi-imagen" src="{{ MEDIA_URL }}{{ ti.poster }}"/>
+			<br/>
+			<p class="ficha" style="font-size: 0.8em;" id="movie-name">{{ ti.name }}</p>
+			<p class="ficha rating" data-rating="{{ ti.rating }}"></p>
+			<p class="invisible ficha" id="movie-director">{{ ti.director }}</p>
+			<p class="invisible ficha" id="movie-genre">{{ ti.genre }}</p>
+			<p class="invisible ficha" id="movie-year">{{ ti.year }}</p>
+			<p class="invisible ficha" id="movie-review">{{ ti.opinion }}</p>
+			<p class="invisible ficha">{{ MEDIA_URL }}{{ ti.poster }}</p>
+		</div>
+	{% endfor %}
+{% else %}
+	<li>Que vayas a tu cine favorito!</li>
+{% endif %}
+
+</div>

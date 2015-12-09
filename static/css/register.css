@@ -1,0 +1,32 @@
+*,
+*:before,
+*:after {
+	box-sizing: border-box;
+}
+
+#register-container{
+	margin: 0 auto;
+	float:left;
+}
+
+#form-container{
+	/*background: blue;*/
+	float:left;
+}
+
+#avatar-container{
+	display: inline-block;
+	float:left;
+/*	background-color: green;
+*/}
+
+#preview-avatar{
+	border-radius: 5px;
+	width: 150px;
+	height: 200px;
+}
+
+#id_about{
+	width: 180px;
+	height: 100px;
+}

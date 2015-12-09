@@ -3,38 +3,22 @@
 {% load get_range %}
 {% block head %}
 <link rel="stylesheet" type="text/css" href="{% static "css/images.css" %}">
+<link rel="stylesheet" type="text/css" href="{% static "css/movie-detail.css" %}">
+
 {% endblock %}
 {% block title %}CINESNOB{% endblock %}
 {% block content %}	
 
-	{% if user.is_authenticated %}
-		<h3>Hola, {{ user }}, te recomendamos</h3>
-		<br>
-		{% if recommendations %}
-			{% for recom in recommendations %}
-				<div class="img-poster-holder">
-				{% if recom.poster != "" %}
-					<img class="img-big" src="{{ MEDIA_URL }}{{ recom.poster }}" />
-				{% elif recom.poster == "" %}
-					<img class="img-big" src="{% static "images/default.jpg" %}" />
-				{% endif %}
-				<br/>
-				<p>{{ recom.name }}</p>
-				<p>{{ recom.rating }}</p>
-				</div>
-				{% if forloop.counter0 == 2 %}
-					<br/>
-				{% endif %}
-			{% endfor %}
-		{% else %}
-			<li>Que vayas a tu cine favorito!</li>
-		{% endif %}
-	
-	{% else %}
-		Patrañas!
-	{% endif %}
+{% if user.is_authenticated %}
+	<h3>Hola, {{ user }}, te recomendamos</h3>
+	<br>
+	{% include "califas/show_movies.html" %}
+{% else %}
+	Patrañas!
+{% endif %}
 	
 
 {% endblock %}
 {% block imports %}
+<script type="text/javascript" src="{% static "js/show_movie_detail.js" %}"></script>
 {% endblock %}

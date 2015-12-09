@@ -14,6 +14,7 @@ import json
 import random
 from operator import itemgetter
 
+import ajax_functions
 
 def get_director(director):
 	return Directors.get(name=director)
@@ -110,7 +111,7 @@ def get_movies(movie_filter, qty):
 			'year':     title.year,
 			'director': title.director, # esta me va a dar pedos
 			'genre':    genre,
-			'opinion':  opinion,
+			'opinion':   opinion,
 			'rating':   rating,
 			'poster':   poster
 		}
@@ -156,7 +157,7 @@ def index(request):
 	movie_filter = Title.objects.all()
 	# if the user is logged in
 	if current_user:
-		context_dict['recommendations'] = get_movies(movie_filter, 20)
+		context_dict['titles'] = get_movies(movie_filter, 20)
 
 		return render(request, 'califas/index.html', context_dict)
 
@@ -302,9 +303,6 @@ def add_movie(request):
 # This is requested via AJAX.
 def movie_detail(request, director_name_slug, movie_name_slug):
 
-	print "PELICULA.VIEW"
-	#movie_name = movie_name_detail.replace('_', ' ')
-	#director_name = director_name_url.replace('_', ' ')
 	context_dict = {'director_name': director_name_slug}
 
 	try:
@@ -431,17 +429,17 @@ def perfil(request, username):
 		print perfiles
 		print perfil
 		print "w", stalked_user['profile']
-		if perfil.user == stalked_user['profile'].user:
-			mi_perfil['user'] = perfil.user
+		if perfil.usr == stalked_user['profile'].usr:
+			mi_perfil['user'] = perfil.usr
 			mi_perfil['website'] = perfil.website
-			mi_perfil['picture'] = perfil.picture
-			mi_perfil['about'] = perfil.about_user
+			mi_perfil['picture'] = perfil.avatar
+			mi_perfil['about'] = perfil.about
 
 	# Las 3 peliculas favoritas del usuario
 	directors = stalked_user['profile'].directors.all()
 
 	#directors = Director.objects.filter(user_name=username) # .Title.objects.all()
-	movies = Title.objects.filter(user_name=stalked_user['name']).order_by('-rating')[:3]
+	movies = Title.objects.filter(users=stalked_user['name'])
 
 	print "Mis pelis: ", movies
 
@@ -503,41 +501,6 @@ def chosen_director_filmography(request, director_name_slug):
 def epocas(request):
 	return render(request, 'califas/epocas.html', {})
 
-
-def get_movies_by_age(request):
-	# Remove the last letter 's' from the year so it can be used as a number.
-	age_1 = int(request.GET['value'][:-1])
-	# add a range of 9 years so it completes the decade, ex. 199 8
-	age_2 = str(age_1 + 9)
-
-	movie_filter = Title.objects.filter(year__range=[age_1, age_2])
-	movies_from_age = get_movies(movie_filter, 20)
-
-	print "$$$$$$$$$$$", movies_from_age
-	
-	# directors = Director.objects.all()
-
-	movies_dict = {}
-	movies_list = []
-
-	# random_choice = 
-
-	for k, i in enumerate(movies_from_age):
-		movies_list.append({})
-		movies_list[k]["director"] = str(i['director'])
-		movies_list[k]["movie_name"] = str(i['name'])
-		movies_list[k]["slug"] = str(i['slug'])
-		movies_list[k]["genre"] = str(i['genre'][0])#random.choice(str(i['genre']))
-		movies_list[k]["year"] = str(i['year'])
-		movies_list[k]["rating"] = i['rating']
-		movies_list[k]["review"] = random.choice(i['opinion'])
-		movies_list[k]["poster"] = str(i['poster'])
-
-	las_movies = json.dumps(movies_list)
-	# print "$$$$$$$$$$$", las_movies
-
-	# This is AJAX
-	return HttpResponse(las_movies)
 
 # exitos
 def get_movies_by_rating(request):

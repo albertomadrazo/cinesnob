@@ -2,6 +2,7 @@
 
 from django.conf.urls import patterns, url
 from califas import views
+from califas import ajax_functions
 
 urlpatterns = patterns('',
 		url(r'^$', views.index, name='index'), # director_name_url es el 2do parametro
@@ -18,7 +19,7 @@ urlpatterns = patterns('',
 		url(r'^befriend/$', views.befriend, name='befriend'),
 		url(r'^bio/(?P<director_name_slug>[\w\-]+)/$', views.chosen_director_filmography, name='biografia'),
 		url(r'^epocas/$', views.epocas, name='epocas'),
-		url(r'^get_movies_by_age/$', views.get_movies_by_age, name='get_movies_by_age'),
+		url(r'^get_movies_by_age/$', ajax_functions.get_movies_by_age, name='get_movies_by_age'),
 		url(r'^directores/$', views.show_directors, name='directores'),
 		url(r'^exitos/$', views.get_movies_by_rating, name='exitos'),
 		url(r'^stats/$', views.stats, name='stats'),

@@ -7,10 +7,18 @@
 	width: 150px;
 	height: 200px;
 }
+
 .img-poster-holder{
 	display: inline-block;
-	margin: 0 10px 15px 1px;
+	margin: 0 15px 15px 1px;
 	float: left;
+}
+
+.description{
+	margin: 0 auto;
+	font-size: 14px;
+	display: block;
+	text-align: left;
 }
 
 .img-content{
@@ -21,4 +29,11 @@
 
 img{
 	border-radius: 5px;
+}
+
+#posters-container{
+	margin: 0 auto;
+	/*border: 1px solid red;*/
+	width: 80%;
+	overflow: hidden;
 }

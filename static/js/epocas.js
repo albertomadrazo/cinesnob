@@ -12,7 +12,7 @@ $(document).ready(function () {
 		
 			var lista = JSON.parse(data);
 
-			if(lista){
+			if(lista and lista[0]){
 				for(var i = 0; i < lista.length; i+=1){
 
 					var poster_path = (lista[i]["poster"]!="")
@@ -25,7 +25,7 @@ $(document).ready(function () {
 					$('<div class="img-poster-holder movie-detail" id="'+ lista[i]['movie_name'] + '">'  +
 					  							    											  imagen + 
 					  							  												'<br />' +
-		  '<p class="ficha" id="movie-name" style="font-size:0.8em;">' + lista[i]['movie_name'] + '</p>' +
+		  '<p class="ficha" id="movie-name">' + lista[i]['movie_name'] + '</p>' +
 					     '<p class="ficha" id="'+ lista[i]['rating'] + '">' + lista[i]['rating'] + '</p>'+
 					  	     '<p class="ficha" id="movie-director">' + lista[i]['director'] + '</p>'     +
 					 		 '<p class="invisible ficha" id="movie-genre">' + lista[i]['genre'] + '</p>' +

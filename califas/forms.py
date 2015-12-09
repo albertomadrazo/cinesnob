@@ -42,7 +42,7 @@ class ReviewForm(forms.ModelForm):
 	genre = forms.CharField(widget=forms.Select(choices=GENRE_CHOICES, attrs={'id':'opciones'}))
 	review = forms.CharField(widget=forms.Textarea, max_length=300, help_text='comentarios')
 	rating = forms.ChoiceField(widget=forms.RadioSelect(attrs={'id':'estrellas'}), choices=RATINGS, initial=0)
-	poster = forms.FileField()
+	poster = forms.ImageField()
 
 	class Meta:
 		model = Review
@@ -50,15 +50,24 @@ class ReviewForm(forms.ModelForm):
 
 
 class UserForm(forms.ModelForm):
-	password = forms.CharField(widget=forms.PasswordInput())
+	password = forms.CharField(widget=forms.PasswordInput(), help_text='contraseña')
 
 	class Meta:
 		model = User
-		fields = ('username', 'email', 'password',)
+		fields = ('username', 'email', 'password', 'first_name')
+		help_texts = {
+			'username': 'Usuario',
+			'email': 'correo electrónico',
+		}
 
 
 class UserProfileForm(forms.ModelForm):
-
 	class Meta:
 		model = UserProfile
-		fields = ('name', 'website', 'about', 'avatar',)
+		avatar = forms.ImageField()
+		fields = ('website', 'about', 'avatar',)
+		help_texts = {
+			'website': 'url',
+			'about': 'acerca de ti',
+			'avatar': 'avatar'
+		}

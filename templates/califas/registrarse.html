@@ -1,14 +1,17 @@
 {% extends "califas/base.html"%}
 {% load static %}
-{% block head %}{% endblock %}
+{% block head %}
+	<link rel="stylesheet" type="text/css" href="{% static "css/register.css" %}">
+{% endblock %}
 {% block title %}{% endblock %}
 {% block content %}
+<div id="register-container">
+	<div id="form-container">
 	{% if registered %}
 		<h2>Bienvenido a Cinesnub.</h2>	
 		<a href="/califas/">Iniciar tu recorrido</a><br />
 	{% else %}
 		<h2>Regístrate aquí!</h2>
-
 		<form id="user_form" method="post" action="/califas/registrarse/"
 				enctype="multipart/form-data">
 
@@ -16,15 +19,33 @@
 
 			<!-- Display each form. the as_p method wraps each element in a paragraph
 				thus, every element appears on a new line. -->
-			{{ user_form.as_p }}
-			<br/>
-			{{ profile_form.as_p }}
+			nombre de usuario<br>
+			{{ user_form.username }}<br>
+			contrase&ntilde;a<br>
+			{{ user_form.password }}<br>			
+			contrase&ntilde;a (de nuevo)<br>
+			{{ user_form.password }}<br>
+			nombre<br>
+			{{ user_form.first_name }}<br>
+			Sitio web<br>
+			{{ profile_form.website }}<br>
+			Acerca de ti<br>
+			{{ profile_form.about }}<br>		
+			Avatar<br>
+			{{ profile_form.avatar }}<br>
 
 			<input type="submit" name="submit" value="Register" />
 		</form>
+	</div>
+
 	{% endif %}
+	<div id="avatar-container">
+	</div>
+</div>
 {% endblock %}
 {% block imports %}
+	<script type="text/javascript" src="{% static "js/jquery.js" %}"></script>
+	<script type="text/javascript" src="{% static "js/register.js" %}"></script>
 {% endblock %}
 </body>
 </html>

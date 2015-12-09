@@ -66,7 +66,6 @@ class Friend(models.Model):
 	member_since = models.DateField(default=timezone.now())
 
 
-
 # model Director > one to many (Title),
 #		Director > many to many < UserProfile
 class Director(models.Model):
