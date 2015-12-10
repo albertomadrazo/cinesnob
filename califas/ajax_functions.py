@@ -36,7 +36,7 @@ def get_movies_by_age(request):
 		movies_list[k]["genre"] = str(i['genre'][0])
 		movies_list[k]["year"] = str(i['year'])
 		movies_list[k]["rating"] = i['rating']
-		movies_list[k]["review"] = random.choice(i['opinion'])
+		movies_list[k]["opinion"] = random.choice(i['opinion'])
 		movies_list[k]["poster"] = str(i['poster'])
 
 	las_movies = json.dumps(movies_list)

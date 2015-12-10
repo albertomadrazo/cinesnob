@@ -14,7 +14,7 @@
 		<div class="img-poster-holder movie-detail" id="{{ ti.slug }}">
 			<img class="ficha img-big" id="mi-imagen" src="{{ MEDIA_URL }}{{ ti.poster }}"/>
 			<br/>
-			<p class="ficha" style="font-size: 0.8em;" id="movie-name">{{ ti.name }}</p>
+			<p class="ficha" id="movie-name">{{ ti.name }}</p>
 			<p class="ficha rating" data-rating="{{ ti.rating }}"></p>
 			<p class="invisible ficha" id="movie-director">{{ ti.director }}</p>
 			<p class="invisible ficha" id="movie-genre">{{ ti.genre }}</p>
@@ -23,8 +23,8 @@
 			<p class="invisible ficha">{{ MEDIA_URL }}{{ ti.poster }}</p>
 		</div>
 	{% endfor %}
-{% else %}
-	<li>Que vayas a tu cine favorito!</li>
+{# {% else %} #}
+	{# <li>Que vayas a tu cine favorito!</li> #}
 {% endif %}
 
 </div>

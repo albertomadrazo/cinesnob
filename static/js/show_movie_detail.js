@@ -4,7 +4,7 @@ function paintStars(rating){
 		stars += '<img src="/static/images/star.png">'; 
 	}
 
-	stars = '<p id="rating">'+stars+'</p>';
+	stars = '<span class="format-stars">'+stars+'</span>';
 
 	return stars;
 }
@@ -39,7 +39,6 @@ $(document).ready(function(){
 		rating = parseInt(rating);
 		// append one star image per point of rating and put them inside a paragraph
 		stars = paintStars(rating);
-
 		// $('div#movie-review').removeClass('invisible');
 		// alert(year);
 		pop.append(

@@ -30,8 +30,8 @@ class DirectorForm(forms.ModelForm):
 
 
 class TitleForm(forms.ModelForm):
-	name = forms.CharField(max_length=128, widget=forms.TextInput(attrs={'placeholder':'película'}))
-	year = forms.IntegerField(widget=forms.TextInput(attrs={'placeholder':'año'}))
+	name = forms.CharField(max_length=128, widget=forms.TextInput())
+	year = forms.IntegerField(widget=forms.TextInput())
 
 	class Meta:
 		model = Title

@@ -1,24 +1,25 @@
 {% extends "califas/base.html"%}
 {% load static %}
 {% block head %}
-	<link rel="stylesheet" type="text/css" href="{% static "css/register.css" %}">
+	<link rel="stylesheet" type="text/css" href="{% static "css/forms.css" %}">
 {% endblock %}
-{% block title %}{% endblock %}
+{% block title %}CINESNOB - REGISTRO{% endblock %}
 {% block content %}
+
 <div id="register-container">
+
+	<div id="orientation"><h2>Reg&iacute;strate aqu&iacute;!</h2></div>
+
 	<div id="form-container">
 	{% if registered %}
 		<h2>Bienvenido a Cinesnub.</h2>	
 		<a href="/califas/">Iniciar tu recorrido</a><br />
 	{% else %}
-		<h2>Regístrate aquí!</h2>
 		<form id="user_form" method="post" action="/califas/registrarse/"
 				enctype="multipart/form-data">
 
 			{% csrf_token %}
 
-			<!-- Display each form. the as_p method wraps each element in a paragraph
-				thus, every element appears on a new line. -->
 			nombre de usuario<br>
 			{{ user_form.username }}<br>
 			contrase&ntilde;a<br>

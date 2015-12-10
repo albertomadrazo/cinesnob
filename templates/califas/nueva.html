@@ -1,74 +1,87 @@
 {% extends "califas/base.html" %}
 {% load static %}
 {% block head %}
-
 <link rel="stylesheet" type="text/css" href="{% static "css/style-nueva.css" %}" />
-
+	<link rel="stylesheet" type="text/css" href="{% static "css/forms.css" %}">
 {% endblock %}
 {% block content %}
-<h2>Nueva Película</h2>
-<br/>
-<form id="category_form" method="post" action="/califas/nueva/" enctype="multipart/form-data">
-	{% csrf_token %}
 
-	<input type="text" id="director_name" name="director_name" placeholder="Director" /><br />
+<div id="register-container">
+	<div id="orientation"><h2>Nueva Pel&iacute;cula</h2></div>
 
-	{% for hidden in title_form.hidden_fields %}
-		{{ hidden }}
-	{% endfor %}
+	<div id="form-container">
+		<form id="category_form" method="post" action="/califas/nueva/" enctype="multipart/form-data">
+			{% csrf_token %}
+
+			<p>pel&iacute;cula</p>
+			{% for field in title_form.name %}
+				{{ field.errors }}
+				{{ field.help_text }}
+				{{ field }}
+			{% endfor %}
+			
+			<p>director</p>
+			<input type="text" id="director_name" name="director_name"><br>
+
+			{% for hidden in title_form.hidden_fields %}
+				{{ hidden }}
+			{% endfor %}
 	
-	{% for field in title_form.name %}
-		{{ field.errors }}
-		{{ field.help_text }}
-		{{ field }}
-	{% endfor %}
 
-	<br />
+			<br />
+			
+			<p>a&ntilde;o</p>
+			{% for field in title_form.year %}
+				{{ field.errors }}
+				{{ field.help_text }}
+				{{ field }}
+			{% endfor %}
 
-	{% for field in title_form.year %}
-		{{ field.errors }}
-		{{ field.help_text }}
-		{{ field }}
-	{% endfor %}
+			<br />
+			
+			<p>g&eacute;nero</p>
+			{% for field in review_form.genre %}
+				<div id="cont-opciones">
+				{{ field.errors }}
+				{{ field.help_text }}
+				{{ field }}
+			</div>
+			{% endfor %}
 
-	<br />
+			<div id="your_rating_visible">
+				<input type="checkbox" id='uno' onclick="starMeter(1);" checked="true">
+				<input type="checkbox" id='dos' onclick="starMeter(2);">
+				<input type="checkbox" id='tres' onclick="starMeter(3);">
+				<input type="checkbox" id='cuatro' onclick="starMeter(4);">
+				<input type="checkbox" id='cinco' onclick="starMeter(5);">
+			</div>
 
-	{% for field in review_form.genre %}
-		<div id="cont-opciones">
-		{{ field.errors }}
-		{{ field.help_text }}
-		{{ field }}
+			<div id="your_rating">
+				{% for check in review_form.rating %}
+					{{ check }}
+				{% endfor %}
+			</div>
+
+			<br>
+
+			{% for field in review_form.poster %}
+				{{ field }}
+			{% endfor %}
+
+			{% for field in review_form.review %}
+				{{ field.errors }}
+				{{ field.help_text }}
+				{{ field }}
+			{% endfor %}
+
+			<input type="submit" name="submit" value="Agregar" />
+		</form>
 	</div>
-	{% endfor %}
 
-	<div id="your_rating_visible">
-		<input type="checkbox" id='uno' onclick="starMeter(1);" />
-		<input type="checkbox" id='dos' onclick="starMeter(2);" />
-		<input type="checkbox" id='tres' onclick="starMeter(3);" />
-		<input type="checkbox" id='cuatro' onclick="starMeter(4);" />
-		<input type="checkbox" id='cinco' onclick="starMeter(5);" />
+	<div id="avatar-container">
 	</div>
 
-	<div id="your_rating">
-		{% for check in review_form.rating %}
-			{{ check }}
-		{% endfor %}
-	</div>
-
-	<br />
-
-	{% for field in review_form.poster %}
-		{{ field }}
-	{% endfor %}
-
-	{% for field in review_form.review %}
-		{{ field.errors }}
-		{{ field.help_text }}
-		{{ field }}
-	{% endfor %}
-
-	<input type="submit" name="submit" value="Agregar" />
-</form>
+</div>
 {% endblock %}
 <script type="text/javascript" src="{% static "js/jquery.js" %}"></script>
 <script type="text/javascript" src="{% static "js/califas.js" %}"></script>

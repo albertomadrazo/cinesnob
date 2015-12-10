@@ -15,11 +15,8 @@ a:link, a:hover, a:visited{
 
 #header{
 	margin: 0 auto;
-	/*text-align: center;*/
-	/*display: block;*/
 	width: 640px;
 	height: 60px;
-	/*margin-bottom: 30px;*/
 	background: #111;
 	/*border: 1px red solid;*/
 	border-radius: 15px 15px 0 0;
@@ -30,6 +27,8 @@ a:link, a:hover, a:visited{
 	/*border: 1px red solid;*/
 	display: block;
 	width: 600px;
+	/*background-color: olive;*/
+	overflow: hidden;
 }
 
 .title{
@@ -39,6 +38,7 @@ a:link, a:hover, a:visited{
 	font-weight: bolder;
 	color: #ddd;
 	display: inline-block;
+	float: left;
 }
 
 #social-icons{
@@ -47,6 +47,7 @@ a:link, a:hover, a:visited{
 	display: inline-block;
 	margin-top: 5px;
 	float: right;
+	margin-right:30px;
 }
 #menu-container{
 	/*border: 1px red solid;*/
@@ -103,7 +104,7 @@ a:link, a:hover, a:visited{
 }
 
 #content-container{
-	overflow: hidden;
+	/*overflow: hidden;*/
 	margin: 0 auto;
 	margin-top: 0;
 	width: 640px;

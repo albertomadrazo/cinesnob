@@ -1,18 +1,23 @@
 {% extends "califas/base.html"%}
 {% load static %}
-{% block head %}{% endblock %}
+{% block head %}
+	<link rel="stylesheet" type="text/css" href="{% static "css/forms.css" %}">
+{% endblock %}
 {% block title %}{% endblock %}
 {% block content %}
-	<h1>Entrar a Cinesnub</h1>
-
-	<form id="login_form" method="post" action="{% url 'user_login' %}">
-		{% csrf_token %}
-		Usuario:<br/><input type="text" name="username" value="" size="30" /><br />
-		Contraseña:<br/><input type="password" name="password" value="" size="30" /><br />
-		<input type="submit" value="submit" />
-	</form>
+	
+<div id="register-container">
+	<div id="orientation"><h2>Iniciar Sesi&oacute;n</h2></div>
+	<div id="form-container">
+		<form id="login_form" method="post" action="{% url 'user_login' %}">
+			{% csrf_token %}
+			Usuario:<br/><input type="text" name="username" value="" size="30" /><br />
+			Contraseña:<br/><input type="password" name="password" value="" size="30" /><br />
+			<input type="submit" value="submit" />
+		</form>
 	<p>¿No eres miembro del club?<br/>
 	<a href="{% url 'registrarse' %}">¡REGÍSTRATE!</a></p>
+</div>
 {% endblock %}
 {% block imports %}
 {% endblock %}
