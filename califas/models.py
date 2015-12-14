@@ -37,19 +37,24 @@ class Title(models.Model):
 	director = models.ForeignKey('Director')
 
 	def save(self, *args, **kwargs):
-		self.slug = slugify(unidecode(self.name) + '-' + str(self.year))
+		try:
+			self.name = unidecode(unicode(self.name, "utf-8"))
+		except:
+			self.name = unidecode(self.name)
+			
+		self.slug = slugify(self.name+'-'+str(self.year))
 		super(Title, self).save(*args, **kwargs)
 
 	def __unicode__(self):
-		return self.name # not necessary, maybe it's better to retrive Director
+		return self.name # not necessary, maybe it's better to retrieve Director
 
 
 class Review(models.Model):
 
 	genre = models.CharField(max_length=100)
-	review = models.TextField(max_length=300)
+	review = models.TextField(max_length=1000)
 	rating = models.IntegerField(default=0)
-	poster = models.ImageField(upload_to='movie_images', blank=True)
+	poster = models.ImageField(upload_to='movie_images')
 
 	# The model's relationships with other tables
 	user = models.ForeignKey('UserProfile')
@@ -73,7 +78,7 @@ class Director(models.Model):
 	nationality = models.CharField(max_length=50, blank=True)
 	name = models.CharField(max_length=128, unique=True)
 	slug = models.SlugField(unique=True) 
-	about = models.TextField(max_length=500)
+	about = models.TextField(max_length=2000)
 	birth = models.IntegerField(default=0)
 	death = models.IntegerField(default=0)
 	picture = models.ImageField(upload_to='director_images', default='default.jpg')
@@ -82,7 +87,12 @@ class Director(models.Model):
 	users = models.ManyToManyField(UserProfile, blank=True)
 
 	def save(self, *args, **kwargs):
-		self.slug = slugify(unidecode(self.name)) 
+		try:
+			self.name = unidecode(unicode(self.name, "utf-8")).encode("utf-8")
+		except:
+
+			self.name = unidecode(self.name)
+		self.slug = slugify(self.name) 
 		super(Director, self).save(*args, **kwargs)
 
 	def __unicode__(self):

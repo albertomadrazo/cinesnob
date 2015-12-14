@@ -9,7 +9,6 @@ urlpatterns = patterns('',
 		# de la funcion director() en view
 		url(r'^director/(?P<director_name_slug>[\w\-]+)/$', views.director, name='director'),
 		url(r'^nueva/$', views.add_movie, name='nueva'),
-		url(r'^base/$', views.base, name='base'),
 		url(r'^pelicula/(?P<director_name_slug>[\w\-]+)/(?P<movie_name_slug>[\w\-]+)$', views.movie_detail, name='pelicula'),
 		url(r'^registrarse/$', views.registrarse, name='registrarse'),
 		url(r'^login/$', views.user_login, name='user_login'),

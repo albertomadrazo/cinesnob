@@ -5,7 +5,10 @@ import django
 django.setup()
 
 from django.contrib.auth.models import User
-from califas.models import Director, Title
+from califas.models import Director, Title, UserProfile, Review, Friend
+
+import unidecode
+import random
 
 
 def populate():

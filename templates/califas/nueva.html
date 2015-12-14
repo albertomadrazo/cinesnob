@@ -1,5 +1,5 @@
 {% extends "califas/base.html" %}
-{% load static %}
+{% load staticfiles %}
 {% block head %}
 <link rel="stylesheet" type="text/css" href="{% static "css/style-nueva.css" %}" />
 	<link rel="stylesheet" type="text/css" href="{% static "css/forms.css" %}">
@@ -16,7 +16,6 @@
 			<p>pel&iacute;cula</p>
 			{% for field in title_form.name %}
 				{{ field.errors }}
-				{{ field.help_text }}
 				{{ field }}
 			{% endfor %}
 			
@@ -26,14 +25,10 @@
 			{% for hidden in title_form.hidden_fields %}
 				{{ hidden }}
 			{% endfor %}
-	
-
-			<br />
-			
+				
 			<p>a&ntilde;o</p>
 			{% for field in title_form.year %}
 				{{ field.errors }}
-				{{ field.help_text }}
 				{{ field }}
 			{% endfor %}
 
@@ -43,17 +38,16 @@
 			{% for field in review_form.genre %}
 				<div id="cont-opciones">
 				{{ field.errors }}
-				{{ field.help_text }}
 				{{ field }}
 			</div>
 			{% endfor %}
-
+			<br>
 			<div id="your_rating_visible">
-				<input type="checkbox" id='uno' onclick="starMeter(1);" checked="true">
-				<input type="checkbox" id='dos' onclick="starMeter(2);">
-				<input type="checkbox" id='tres' onclick="starMeter(3);">
-				<input type="checkbox" id='cuatro' onclick="starMeter(4);">
-				<input type="checkbox" id='cinco' onclick="starMeter(5);">
+				<input type="checkbox" id='uno' onclick="starMeter(1);" ><label for="uno"></label>
+				<input type="checkbox" id='dos' onclick="starMeter(2);"><label for="dos"></label>
+				<input type="checkbox" id='tres' onclick="starMeter(3);"><label for="tres"></label>
+				<input type="checkbox" id='cuatro' onclick="starMeter(4);"><label for="cuatro"></label>
+				<input type="checkbox" id='cinco' onclick="starMeter(5);"><label for="cinco"></label>
 			</div>
 
 			<div id="your_rating">
@@ -67,14 +61,13 @@
 			{% for field in review_form.poster %}
 				{{ field }}
 			{% endfor %}
-
+			<br>
 			{% for field in review_form.review %}
 				{{ field.errors }}
-				{{ field.help_text }}
 				{{ field }}
 			{% endfor %}
-
-			<input type="submit" name="submit" value="Agregar" />
+			<br>
+			<input type="submit" name="submit" class="btn" value="Agregar">
 		</form>
 	</div>
 
@@ -83,9 +76,10 @@
 
 </div>
 {% endblock %}
-<script type="text/javascript" src="{% static "js/jquery.js" %}"></script>
-<script type="text/javascript" src="{% static "js/califas.js" %}"></script>
 {% block imports %}
+	<script type="text/javascript" src="{% static "js/jquery.js" %}"></script>
 	<script type="text/javascript" src="{% static "js/nueva.js" %}"></script>
+	<script type="text/javascript" src="{% static "js/register.js" %}"></script>
+
 {% endblock %}
 

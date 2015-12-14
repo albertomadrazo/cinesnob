@@ -72,16 +72,6 @@ def remove_repeated_titles(titles):
 	return result
 
 
-def match_title_with_review(titles, reviews):
-	titles_with_reviews
-
-	return result
-
-
-def get_title_reviews(title, reviews):
-	title = title.users.username
-
-
 def sort_title(titles, field):
 	sorted_list = sorted(titles, key=itemgetter(field), reverse=True)
 
@@ -119,7 +109,7 @@ def get_movies(movie_filter, qty):
 		recommendations.append(dict_to_append)
 		recommendations = sort_title(recommendations, 'rating')
 
-	return remove_repeated_titles(recommendations)
+	return remove_repeated_titles(recommendations)[:20]
 
 
 def get_user_movies(user):
@@ -139,9 +129,10 @@ def get_user_movies(user):
 			'name': str(x.name),
 			'director': x.director,#directors_dict[str(x)],
 			'year': x.year,
-			'genre':  reviews_dict[str(x.name)].genre,
+			'genre':  [reviews_dict[str(x.name)].genre],
 			'rating': reviews_dict[str(x.name)].rating,#['rating'],
-			'poster': reviews_dict[str(x.name)].poster#['poster']
+			'poster': reviews_dict[str(x.name)].poster,#['poster']
+			'opinion': [reviews_dict[str(x.name)].review]
 		}
 		results.append(movie_details)
 	print 'results:'
@@ -174,12 +165,7 @@ def show_directors(request):
 		the_user = get_user_and_profile(request.user)
 
 		try:
-			# Is this getting only the directors belonging to this specific user?
-			# FOR USE WHEN REMASTERED------------------
-			# directors_list = Director.objects.filter(user=the_user['profile'])
-
 			directors_list = the_user['profile'].directors.all() 
-
 			context_dict['directors_list'] = directors_list
 		except:
 			context_dict = {'directors_list': ''}
@@ -189,14 +175,6 @@ def show_directors(request):
 
 	return render(request, 'califas/directores.html', context_dict)
 
-
-# What's the raison d'ëtre of this function?
-def base(request):
-
-	context = RequestContext(request)
-	context_dict ={'uno': 1}
-
-	return render(request, 'califas/base.html', context_dict)
 
 # I guess this is the function that gives me the bio of the chosen director, if so,
 # I must add all the data from the director, even better, pass the object and unwrap it
@@ -249,8 +227,6 @@ def add_movie(request):
 				valid_title_form = True
 				is_a_form = True
 
-		print title_form
-		# title_form = TitleForm(request.POST)
 		review_form = ReviewForm(request.POST, request.FILES)
 
 		# have we been provided with a valid form?
@@ -265,7 +241,6 @@ def add_movie(request):
 
 			# Establish a ManyToMany relationship for both director and user
 			director.users.add(user['profile'])
-			# director.save()
 
 			user['profile'].directors.add(director)
 
@@ -284,8 +259,9 @@ def add_movie(request):
 
 		# The supplied form contains errors - just print them to the terminal
 		else:
-			print "Form ERRORS: "
+			print "Form ERRORS:"
 			print title_form.errors
+			print review_form.errors
 
 		directors_list = Director.objects.all()
 
@@ -300,7 +276,6 @@ def add_movie(request):
 
 
 # Give the detail of the selected movie
-# This is requested via AJAX.
 def movie_detail(request, director_name_slug, movie_name_slug):
 
 	context_dict = {'director_name': director_name_slug}
@@ -329,6 +304,8 @@ def registrarse(request):
 		user_form = UserForm(data=request.POST)
 		profile_form = UserProfileForm(data=request.POST)
 
+		print request.POST
+		print "WWWWW", request.POST['password']
 		if user_form.is_valid() and profile_form.is_valid():
 			user = user_form.save()
 			# Now we hash the password with the set_password method.
@@ -345,8 +322,8 @@ def registrarse(request):
 			befriend.friend_name = user.username
 			befriend.save()
 
-			if 'picture' in request.FILES:
-				profile.picture = request.FILES['picture']
+			if 'avatar' in request.FILES:
+				profile.avatar = request.FILES['avatar']
 
 			# Now we save
 			profile.save()
@@ -515,7 +492,8 @@ def user_movies(request):
 	the_user = get_user_and_profile(request.user)
 	print the_user['profile']
 	titles = get_user_movies(the_user['profile'])
-	print "titles: ", titles
+	print "titles: "
+	print ">>>>>>>>>>>>>>>>>>>>>>>",titles[0]
 	
 	return render(request, 'califas/mis_peliculas.html', {'titles': titles})
 

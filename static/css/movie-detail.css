@@ -58,6 +58,8 @@
 #rr{
 	padding-left: 0.3em;
 	padding-bottom: 10px;
+	font-size: 25px;
+	font-weight: bolder;
 }
 #ficha{
 	display: inline-block;

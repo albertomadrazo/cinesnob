@@ -17,7 +17,7 @@ from operator import itemgetter
 import views
 
 def get_movies_by_age(request):
-	# Remove the last letter 's' from the year so it can be used as a number.
+	# Remove the last letter 's' from the year and convert to integer.
 	age_1 = int(request.GET['value'][:-1])
 	# add a range of 9 years so it completes the decade, ex. 199 8
 	age_2 = str(age_1 + 9)
@@ -33,10 +33,10 @@ def get_movies_by_age(request):
 		movies_list[k]["director"] = str(i['director'])
 		movies_list[k]["movie_name"] = str(i['name'])
 		movies_list[k]["slug"] = str(i['slug'])
-		movies_list[k]["genre"] = str(i['genre'][0])
+		movies_list[k]["genre"] = i['genre']#[0]
 		movies_list[k]["year"] = str(i['year'])
 		movies_list[k]["rating"] = i['rating']
-		movies_list[k]["opinion"] = random.choice(i['opinion'])
+		movies_list[k]["opinion"] = i['opinion']#random.choice(i['opinion'])
 		movies_list[k]["poster"] = str(i['poster'])
 
 	las_movies = json.dumps(movies_list)
