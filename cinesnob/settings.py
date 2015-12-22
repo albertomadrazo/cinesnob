@@ -158,7 +158,7 @@ TEMPLATE_DIRS = (
 # Parse database configuration from $DATABASE_URL
 import dj_database_url
 # DATABASES['default'] = dj_database_url.config()
-DATABASES['default'] =  dj_database_url.config(default='postgres://user:alberto@localhost/cinesnob')
+DATABASES['default'] =  dj_database_url.config(default='postgres://alberto:cinesnob@localhost/cinesnob')
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
