@@ -179,7 +179,7 @@ STATICFILES_DIRS = (
  )
 
 AWS_QUERYSTRING_AUTH = False
-AWS_ACCESS_KEY_ID = os.environ['AKIAJ4B6GKD6XZD4PFBA']
+#AWS_ACCESS_KEY_ID = os.environ['AKIAJ4B6GKD6XZD4PFBA']
 AWS_SECRET_ACCESS_KEY = os.environ['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']
 AWS_STORAGE_BUCKET_NAME = os.environ['cinesnob-images']
 if DEBUG == False:
