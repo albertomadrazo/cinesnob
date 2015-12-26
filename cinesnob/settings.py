@@ -180,8 +180,8 @@ STATICFILES_DIRS = (
 
 AWS_QUERYSTRING_AUTH = False
 #AWS_ACCESS_KEY_ID = os.environ['AKIAJ4B6GKD6XZD4PFBA']
-AWS_SECRET_ACCESS_KEY = os.environ['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']
-AWS_STORAGE_BUCKET_NAME = os.environ['cinesnob-images']
+#AWS_SECRET_ACCESS_KEY = os.environ['fk/ftpiX35yyyHnHiabOWMqpnRo35bBW/sxuDNH8']
+#AWS_STORAGE_BUCKET_NAME = os.environ['cinesnob-images']
 if DEBUG == False:
     MEDIA_URL = 'http://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
  #Access Key ID: AKIAJ4B6GKD6XZD4PFBA
