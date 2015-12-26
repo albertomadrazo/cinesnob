@@ -34,7 +34,7 @@ a:link, a:hover, a:visited{
 .title{
 	margin: 0 auto;
 	/*border: 1px red solid;*/
-	font: 30px Helvetica, sans-serif;	
+	font: 30px Helvetica, sans-serif;
 	font-weight: bolder;
 	color: #ddd;
 	display: inline-block;
@@ -67,8 +67,8 @@ a:link, a:hover, a:visited{
 	float:left;
 }
 #menu-perfil{
-	width: 25%;	
-	float:left;	
+	width: 25%;
+	float:left;
 }
 #menu-camaradas{
 	width: 25%;
@@ -120,7 +120,7 @@ a:link, a:hover, a:visited{
 }
 
 .icon-social{
-	padding-left: 0.3em;	
+	padding-left: 0.3em;
 	display: inline-block;
 }
 

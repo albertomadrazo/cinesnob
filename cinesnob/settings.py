@@ -28,7 +28,7 @@ DATABASE_PATH = os.path.join(BASE_DIR, 'califas.db')
 SECRET_KEY = production_secrets()['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 TEMPLATE_DEBUG = True
 
@@ -47,6 +47,7 @@ INSTALLED_APPS = (
     'califas',
 )
 
+INSTALLED_APPS += ('storages',)
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
 
 MIDDLEWARE_CLASSES = (
@@ -172,6 +173,16 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
 
-# STATICFILES_DIRS = (
-#     os.path.join(BASE_DIR, 'static'),
-# )
+STATICFILES_DIRS = (
+    STATIC_PATH,
+    # os.path.join(BASE_DIR, 'static'),
+ )
+
+AWS_QUERYSTRING_AUTH = False
+AWS_ACCESS_KEY_ID = os.environ['AKIAJ4B6GKD6XZD4PFBA']
+AWS_SECRET_ACCESS_KEY = os.environ['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']
+AWS_STORAGE_BUCKET_NAME = os.environ['cinesnob-images']
+if DEBUG == False:
+    MEDIA_URL = 'http://%s.s3.amazonaws.com/', % AWS_STORAGE_BUCKET_NAME
+ #Access Key ID: AKIAJ4B6GKD6XZD4PFBA
+ #Secret Access Key: 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

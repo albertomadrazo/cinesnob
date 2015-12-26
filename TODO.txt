@@ -1,16 +1,15 @@
 TODO:
 	Programación
-	- Un script que popule la aplicación para demo.
 	- Tests
-	- Formatear el movie detail.
-	* Buscar la manera de reusar el código de exitos.js para cada ocasión 
-	  que se quiera mostrar el detalle de una película.
-	- Subir la aplicación a internet.
+
 	- Aumentar las estrellas a 10 para que haya más rango.
 	- Hacer funciones genericas de get_all_users, get_all_movies, get_all_directors, etc.
 	- Hacer una auditoría de las tablas, pues tienen ciertos problemas con repeticiones, conflictos de slug, etc
 	- Página de estadísticas
-	
+	- Que el usuario pueda buscar las imágenes en internet
+	- Que lo que suba el usuario se guarde en AWS
+	admin-cinesnob
+
 	Diseño
 
 	- Hacer el diseño responsive

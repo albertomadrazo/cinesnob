@@ -5,7 +5,6 @@ from django.utils import timezone
 
 from unidecode import unidecode
 
-
 # model UserProfile > one to one < User
 class UserProfile(models.Model):
 
@@ -25,11 +24,11 @@ class UserProfile(models.Model):
 		return self.usr.username
 
 
-# model Title 
+# model Title
 class Title(models.Model):
 
 	name = models.CharField(max_length=128, unique=True)
-	slug = models.SlugField(unique=True)
+	slug = models.SlugField(unique=True, max_length=250)
 	year = models.IntegerField(default=1900)
 
 	# The model's relationships with other tables
@@ -41,7 +40,7 @@ class Title(models.Model):
 			self.name = unidecode(unicode(self.name, "utf-8"))
 		except:
 			self.name = unidecode(self.name)
-			
+
 		self.slug = slugify(self.name+'-'+str(self.year))
 		super(Title, self).save(*args, **kwargs)
 
@@ -77,7 +76,7 @@ class Director(models.Model):
 
 	nationality = models.CharField(max_length=50, blank=True)
 	name = models.CharField(max_length=128, unique=True)
-	slug = models.SlugField(unique=True) 
+	slug = models.SlugField(unique=True, max_length=250)
 	about = models.TextField(max_length=2000)
 	birth = models.IntegerField(default=0)
 	death = models.IntegerField(default=0)
@@ -92,7 +91,7 @@ class Director(models.Model):
 		except:
 
 			self.name = unidecode(self.name)
-		self.slug = slugify(self.name) 
+		self.slug = slugify(self.name)
 		super(Director, self).save(*args, **kwargs)
 
 	def __unicode__(self):
