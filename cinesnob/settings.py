@@ -185,8 +185,8 @@ AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
 AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
 
 MEDIA_URL = 'http://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
-STATICFILES_STORAGE = 's3utils.StaticRootS3BotoStorage'#'storages.backends.s3boto.s3BotoStorage'
-DEFAULT_FILE_STORAGE = 's3utils.MediaRootS3BotoStorage'#'storages.backends.s3boto.s3BotoStorage'
+STATICFILES_STORAGE = 'cinesnob.s3utils.StaticRootS3BotoStorage'#'storages.backends.s3boto.s3BotoStorage'
+DEFAULT_FILE_STORAGE = 'cinesnob.s3utils.MediaRootS3BotoStorage'#'storages.backends.s3boto.s3BotoStorage'
 
 #if DEBUG == False:
 #    MEDIA_URL = 'http://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
