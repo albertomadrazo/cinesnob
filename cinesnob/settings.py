@@ -1,4 +1,3 @@
-from __future__ import absolute_import
 """
 Django settings for tst project.
 
@@ -11,7 +10,7 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-#from production_secrets import production_secrets
+from production_secrets import production_secrets
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
@@ -26,11 +25,10 @@ DATABASE_PATH = os.path.join(BASE_DIR, 'califas.db')
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '9%*vgy0+6mir39xw45mgli42d+3vcayi*qm4vdw&k4v73(vpdw'
-#production_secrets()['SECRET_KEY']
+SECRET_KEY = production_secrets()['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 TEMPLATE_DEBUG = True
 
@@ -179,17 +177,13 @@ STATICFILES_DIRS = (
     STATIC_PATH,
     # os.path.join(BASE_DIR, 'static'),
  )
+
 AWS_QUERYSTRING_AUTH = False
 AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
 AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
 AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
-
-MEDIA_URL = 'http://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
-STATICFILES_STORAGE = 'cinesnob.s3utils.StaticRootS3BotoStorage'#'storages.backends.s3boto.s3BotoStorage'
-DEFAULT_FILE_STORAGE = 'cinesnob.s3utils.MediaRootS3BotoStorage'#'storages.backends.s3boto.s3BotoStorage'
-
-#if DEBUG == False:
-#    MEDIA_URL = 'http://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
-#    STATICFILES_STORAGE = 'storages.backends.s3boto.s3BotoStorage'
+if DEBUG == False:
+    MEDIA_URL = 'http://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
+    STATICFILES_STORAGE = 'storages.backends.s3boto.s3BotoStorage'
  #Access Key ID: AKIAJ4B6GKD6XZD4PFBA
  #Secret Access Key: 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
