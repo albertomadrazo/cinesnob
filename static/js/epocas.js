@@ -19,10 +19,8 @@ $(document).ready(function () {
 
 		// Get the movies of that age via AJAX
 		$.get('/califas/get_movies_by_age/', {value:value}, function (data){
-		
-			var lista = JSON.parse(data);
 
-			console.log(lista)
+			var lista = JSON.parse(data);
 
 			if(lista && lista[0]){
 				for(var i = 0; i < lista.length; i+=1){
@@ -63,7 +61,6 @@ $(document).ready(function () {
 
 	// If a title is too long, shorten it
 	var all_titles = $('.movie-name').map(function(){
-		console.log("ujule");
 		var current_title = $(this).find('a');//.text();
 		// current_title.text("cabronazo!");
 		if(current_title.text().length > 20){

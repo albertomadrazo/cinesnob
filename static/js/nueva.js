@@ -1,4 +1,4 @@
-/* TODO: 
+/* TODO:
   -evitar que se vaya sin escribir un genero
 */
 var globos = { 'generoSeleccionado': false };
@@ -34,20 +34,17 @@ function starMeter(rating){
 	if((rating<1) && (rating>5)){
 		return;
 	}
-		
+
 	//STARS_APP.starsNumber = rating;
 	//					0      1      2       3       4         5
 	var starArray = ['cero', 'uno', 'dos', 'tres', 'cuatro', 'cinco'];
 	for(var a=rating; a>=1; a-=1){
 		//$(starArray[a]).checked(true);
-		console.log("--"+a);
 		document.getElementById(starArray[a]).checked = true;
 	}
 
 	for(var b=rating+1; b<=5; b+=1){
 		//$("input[type='radio']").val(b).checked(false);
-		console.log(b);
-		console.log(starArray[b]);
 		document.getElementById(starArray[b]).checked = false;
 	}
 	$('#estrellas_'+(rating-1)).attr('checked', 'checked');
@@ -72,4 +69,3 @@ function addNewGenre(){
 	$('#new-option, #new-option-button').remove();
 	globos['generoSeleccionado'] = true;
 }
-

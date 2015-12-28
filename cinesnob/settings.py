@@ -179,7 +179,6 @@ STATICFILES_DIRS = (
     STATIC_PATH,
     # os.path.join(BASE_DIR, 'static'),
  )
-
 AWS_QUERYSTRING_AUTH = False
 AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
 AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
@@ -187,6 +186,8 @@ AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
 
 MEDIA_URL = 'http://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
 STATICFILES_STORAGE = 'storages.backends.s3boto.s3BotoStorage'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.s3BotoStorage'
+
 #if DEBUG == False:
 #    MEDIA_URL = 'http://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
 #    STATICFILES_STORAGE = 'storages.backends.s3boto.s3BotoStorage'
