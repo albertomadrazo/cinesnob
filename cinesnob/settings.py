@@ -26,7 +26,8 @@ DATABASE_PATH = os.path.join(BASE_DIR, 'califas.db')
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = production_secrets()['SECRET_KEY']
+SECRET_KEY = '9%*vgy0+6mir39xw45mgli42d+3vcayi*qm4vdw&k4v73(vpdw'
+#production_secrets()['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
