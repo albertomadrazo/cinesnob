@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 """
 Django settings for tst project.
 
@@ -11,7 +12,6 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 from production_secrets import production_secrets
-from __future__ import absolute_import
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
