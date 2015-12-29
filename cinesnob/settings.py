@@ -94,13 +94,13 @@ USE_L10N = True
 USE_TZ = True
 
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/') # Absolute path to the media directory
-
+#MEDIA_ROOT = os.path.join(BASE_DIR, 'media/') # Absolute path to the media directory
+MEDIA_ROOT = 'media'
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
 # Examples: "http://example.com/media/", "http://media.example.com/"
 
-MEDIA_URL = '/media/'
+# MEDIA_URL = '/media/'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
