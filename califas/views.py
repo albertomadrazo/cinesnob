@@ -51,7 +51,7 @@ def get_user_and_profile(username):
 	for my_user in user:
 		if my_user.usr == user_name:
 			user_and_profile['profile'] = my_user
-	
+
 	return user_and_profile
 
 
@@ -123,18 +123,21 @@ def get_user_movies(user):
 	print reviews_dict
 
 	results = []
+	try:
+		for x in titles:
+			movie_details = {
+				'name': str(x.name),
+				'director': x.director,#directors_dict[str(x)],
+				'year': x.year,
+				'genre':  [reviews_dict[str(x.name)].genre],
+				'rating': reviews_dict[str(x.name)].rating,#['rating'],
+				'poster': reviews_dict[str(x.name)].poster,#['poster']
+				'opinion': [reviews_dict[str(x.name)].review]
+				}
 
-	for x in titles:
-		movie_details = {
-			'name': str(x.name),
-			'director': x.director,#directors_dict[str(x)],
-			'year': x.year,
-			'genre':  [reviews_dict[str(x.name)].genre],
-			'rating': reviews_dict[str(x.name)].rating,#['rating'],
-			'poster': reviews_dict[str(x.name)].poster,#['poster']
-			'opinion': [reviews_dict[str(x.name)].review]
-		}
-		results.append(movie_details)
+			results.append(movie_details)
+	except:
+		pass
 	print 'results:'
 	print results
 
@@ -165,7 +168,7 @@ def show_directors(request):
 		the_user = get_user_and_profile(request.user)
 
 		try:
-			directors_list = the_user['profile'].directors.all() 
+			directors_list = the_user['profile'].directors.all()
 			context_dict['directors_list'] = directors_list
 		except:
 			context_dict = {'directors_list': ''}
@@ -179,8 +182,8 @@ def show_directors(request):
 # I guess this is the function that gives me the bio of the chosen director, if so,
 # I must add all the data from the director, even better, pass the object and unwrap it
 # in the view.
-def director(request, director_name_slug): 
- 
+def director(request, director_name_slug):
+
  	context_dict ={}
 	user = get_user_and_profile(request.user)
 	my_director = None
@@ -209,7 +212,7 @@ def add_movie(request):
 		director_exists = False
 		user = get_user_and_profile(request.user)
 		print "user and profile", user
-		director_name = request.POST[u'director_name'] 
+		director_name = request.POST[u'director_name']
 		# TODO: make a pop-up if the director doesn't exist in the database
 		# get or create director
 		director, created = Director.objects.get_or_create(name=director_name)
@@ -220,7 +223,7 @@ def add_movie(request):
 
 		try:
 			title_form = Title.objects.get(name=request.POST[u'name'])
-			valid_title_form = True	
+			valid_title_form = True
 		except:
 			title_form = TitleForm(request.POST)
 			if title_form.is_valid():
@@ -271,7 +274,7 @@ def add_movie(request):
 	else:
 		title_form = TitleForm()
 		review_form = ReviewForm()
-		
+
 		return render(request, 'califas/nueva.html', {'title_form': title_form, 'review_form': review_form})
 
 
@@ -294,7 +297,7 @@ def movie_detail(request, director_name_slug, movie_name_slug):
 	return render(request, the_url, context_dict)
 
 # Check if the user is registered, if so, take him to index, else register him
-# = TODO = Change all this function to take the correct validation steps, 
+# = TODO = Change all this function to take the correct validation steps,
 # this one is so bad-designed
 def registrarse(request):
 	registered = False
@@ -333,13 +336,13 @@ def registrarse(request):
 		else:
 			print user_form.errors, profile_form.errors
 
-	else: 
+	else:
 		user_form = UserForm()
 		profile_form = UserProfileForm()
 
-	return render(request, 'califas/registrarse.html', 
-			{'user_form': user_form, 
-			'profile_form': profile_form, 
+	return render(request, 'califas/registrarse.html',
+			{'user_form': user_form,
+			'profile_form': profile_form,
 			'registered': registered} )
 
 
@@ -421,8 +424,8 @@ def perfil(request, username):
 	print "Mis pelis: ", movies
 
 	context_dict = {
-		'mi_perfil': mi_perfil, 
-		'directors': directors, 
+		'mi_perfil': mi_perfil,
+		'directors': directors,
 		'favorite_movies': movies
 	}
 
@@ -458,7 +461,7 @@ def befriend(request):
 	return HttpResponseRedirect('/califas/amigos')
 
 
-# Is this function supposed to give the director's bio? 
+# Is this function supposed to give the director's bio?
 # There's already another one above doing the same!
 def chosen_director_filmography(request, director_name_slug):
 
@@ -494,7 +497,7 @@ def user_movies(request):
 	titles = get_user_movies(the_user['profile'])
 	print "titles: "
 	print ">>>>>>>>>>>>>>>>>>>>>>>",titles[0]
-	
+
 	return render(request, 'califas/mis_peliculas.html', {'titles': titles})
 
 
@@ -510,7 +513,7 @@ def stats(request):
 	if the_user:
 		titles_query = Title.objects.all().filter(user_name=the_user['name'])
 		# cuantas peliculas ha visto el usuario
-		context_dict['vistas'] = len(titles_query) 
+		context_dict['vistas'] = len(titles_query)
 		context_dict['fav_gen'] = titles_query.order_by('genre')
 
 		fav_gen = {}
