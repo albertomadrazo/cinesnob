@@ -41,7 +41,7 @@ $(document).ready(function () {
 					// Put my div in the DOM
 					var img_poster_holder =
 					'<div class="img-poster-holder movie-detail" id="'+ lista[i]['slug'] + '">'+imagen +'<br />'+
-'<p class="ficha movie-name"><a title="'+lista[i]['movie_name']+'" data-title="'+lista[i]['movie_name']+'" alt="'+lista[i]['movie_name']+'"> '+lista[i]['movie_name']+'</a></p>'+
+'<p class="ficha movie-name" data-title="'+lista[i]['movie_name']+'"><a title="'+lista[i]['movie_name']+'" alt="'+lista[i]['movie_name']+'"> '+lista[i]['movie_name']+'</a></p>'+
 					'<p class="ficha rating" data-rating="'+lista[i]['rating']+'">' + lstars + '</p>'+
 					'<p class="invisible ficha" id="movie-director">' + lista[i]['director'] + '</p>'+
 					'<ul>';
