@@ -45,8 +45,9 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'califas',
-    'storages',
 )
+
+INSTALLED_APPS += 'storages',
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
 
