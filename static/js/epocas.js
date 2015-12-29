@@ -25,7 +25,8 @@ $(document).ready(function () {
 			console.log(lista)
 
 			// media folder in aws:
-			var aws_media = "http://cinesnob-images.s3.amazonaws.com/movie_images/";
+			var aws_media = "http://cinesnob-images.s3.amazonaws.com/";
+
 			if(lista && lista[0]){
 				for(var i = 0; i < lista.length; i+=1){
 					var lstars = parseInt(lista[i]['rating']);
@@ -40,7 +41,7 @@ $(document).ready(function () {
 					// Put my div in the DOM
 					var img_poster_holder =
 					'<div class="img-poster-holder movie-detail" id="'+ lista[i]['slug'] + '">'+imagen +'<br />'+
-'<p class="ficha movie-name"><a title="'+lista[i]['movie_name']+'" data-title="'+lista[i]['movie_name']+'alt="'+lista[i]['movie_name']+'"> '+lista[i]['movie_name']+'</a></p>'+
+'<p class="ficha movie-name"><a title="'+lista[i]['movie_name']+'" data-title="'+lista[i]['movie_name']+'" alt="'+lista[i]['movie_name']+'"> '+lista[i]['movie_name']+'</a></p>'+
 					'<p class="ficha rating" data-rating="'+lista[i]['rating']+'">' + lstars + '</p>'+
 					'<p class="invisible ficha" id="movie-director">' + lista[i]['director'] + '</p>'+
 					'<ul>';
