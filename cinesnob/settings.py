@@ -48,7 +48,7 @@ INSTALLED_APPS = (
     'califas',
     'storages',
 )
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+#DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 AWS_S3_SECURE_URLS = False
 AWS_QUERYSTRING_AUTH = False
 
@@ -181,6 +181,10 @@ STATICFILES_DIRS = (
     STATIC_PATH,
     # os.path.join(BASE_DIR, 'static'),
  )
+from s3utils import *
+
+DEFAULT_FILE_STORAGE = 's3utils.MediaRootS3BotoStorage'
+STATICFILES_STORAGE = 's3utils.StaticRootS3BotoStorage'
 
 AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
 AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
