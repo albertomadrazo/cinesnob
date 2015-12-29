@@ -19,18 +19,20 @@ $(document).ready(function () {
 
 		// Get the movies of that age via AJAX
 		$.get('/califas/get_movies_by_age/', {value:value}, function (data){
-		
+
 			var lista = JSON.parse(data);
 
 			console.log(lista)
 
+			// media folder in aws:
+			var aws_media = "http://cinesnob-images.s3.amazonaws.com/movie_images/";
 			if(lista && lista[0]){
 				for(var i = 0; i < lista.length; i+=1){
 					var lstars = parseInt(lista[i]['rating']);
 					lstars = paintStars(lstars);
 
 					var poster_path = (lista[i]["poster"]!="")
-											? "../../media/" + lista[i]["poster"]
+											? aws_media + lista[i]["poster"]
 											: "../images/default.jpg";
 
 					var imagen = '<img class="ficha img-big" id="mi-imagen" src="'+ poster_path +'"/>'
@@ -38,7 +40,7 @@ $(document).ready(function () {
 					// Put my div in the DOM
 					var img_poster_holder =
 					'<div class="img-poster-holder movie-detail" id="'+ lista[i]['slug'] + '">'+imagen +'<br />'+
-'<p class="ficha movie-name"><a title="'+lista[i]['movie_name']+'" alt="'+lista[i]['movie_name']+'"> '+lista[i]['movie_name']+'</a></p>'+
+'<p class="ficha movie-name"><a title="'+lista[i]['movie_name']+'" data-title="'+lista[i]['movie_name']+'alt="'+lista[i]['movie_name']+'"> '+lista[i]['movie_name']+'</a></p>'+
 					'<p class="ficha rating" data-rating="'+lista[i]['rating']+'">' + lstars + '</p>'+
 					'<p class="invisible ficha" id="movie-director">' + lista[i]['director'] + '</p>'+
 					'<ul>';

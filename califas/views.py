@@ -123,19 +123,21 @@ def get_user_movies(user):
 	print reviews_dict
 
 	results = []
+	try: # This try is for the movies that were saved before the desmadre
+		for x in titles:
+			movie_details = {
+				'name': str(x.name),
+				'director': x.director,#directors_dict[str(x)],
+				'year': x.year,
+				'genre':  [reviews_dict[str(x.name)].genre],
+				'rating': reviews_dict[str(x.name)].rating,#['rating'],
+				'poster': reviews_dict[str(x.name)].poster,#['poster']
+				'opinion': [reviews_dict[str(x.name)].review]
+				}
 
-	for x in titles:
-		movie_details = {
-			'name': str(x.name),
-			'director': x.director,#directors_dict[str(x)],
-			'year': x.year,
-			'genre':  [reviews_dict[str(x.name)].genre],
-			'rating': reviews_dict[str(x.name)].rating,#['rating'],
-			'poster': reviews_dict[str(x.name)].poster,#['poster']
-			'opinion': [reviews_dict[str(x.name)].review]
-		}
-		results.append(movie_details)
-
+			results.append(movie_details)
+	except:
+		pass
 	print 'results:'
 	print results
 
