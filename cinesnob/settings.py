@@ -45,9 +45,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'califas',
+    'storages',
 )
-
-INSTALLED_APPS += 'storages',
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
 
@@ -75,7 +74,7 @@ DATABASES = {
         'NAME': 'cinesnob',#os.path.join(BASE_DIR, 'db.sqlite3'),
         'USER': 'alberto',
         'PASSWORD': 'cinesnob',
-        'HOST': 'localhost',
+        'HOST': 'localhost',#'postgres://nidfmzgnteqanl:GiYTRwUbL2rzPU-WWXMEEeTkOp@ec2-107-22-184-127.compute-1.amazonaws.com:5432/dccmb5j2h051sp',#
         'PORT': '',
     }
 }
@@ -94,17 +93,20 @@ USE_L10N = True
 USE_TZ = True
 
 
-#MEDIA_ROOT = os.path.join(BASE_DIR, 'media/') # Absolute path to the media directory
-MEDIA_ROOT = 'media'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/') # Absolute path to the media directory
+
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
 # Examples: "http://example.com/media/", "http://media.example.com/"
 
-# MEDIA_URL = '/media/'
+MEDIA_URL = '/media/'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
+development = True
 
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+if development:
+    #STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+    print "Huevos!"
 
 STATIC_URL = '/static/'
 
@@ -159,7 +161,7 @@ TEMPLATE_DIRS = (
 
 # Parse database configuration from $DATABASE_URL
 import dj_database_url
-DATABASES['default'] = dj_database_url.config()
+DATABASES['default'] = dj_database_url.config(default='postgres://nidfmzgnteqanl:GiYTRwUbL2rzPU-WWXMEEeTkOp@ec2-107-22-184-127.compute-1.amazonaws.com:5432/dccmb5j2h051sp')
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
@@ -173,13 +175,13 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
 
-#STATICFILES_DIRS = (
-#    os.path.join(BASE_DIR, 'static'),
-#)
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
 
 AWS_QUERYSTRING_AUTH = False
 AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
 AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
 AWS_STORAGE_BUCKET_NAME = os.environ['S3_BUCKET_NAME']
-MEDIA_URL = 'http://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
+MEDIA_URL = 'http://%s.s3.amazonaws.com/your-folder/' % AWS_STORAGE_BUCKET_NAME
 DEFAULT_FILE_STORAGE = "storages.backends.s3boto.S3BotoStorage"
