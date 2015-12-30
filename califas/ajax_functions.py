@@ -1,19 +1,5 @@
-#--<encoding:utf8>--
-from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, redirect
-from django.core.urlresolvers import reverse
-from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
-
-from califas.models import Director, Title, UserProfile, Friend, Review
-from califas.forms import TitleForm, DirectorForm, UserForm, UserProfileForm, ReviewForm
-
-import unidecode
-import json
-import random
-from operator import itemgetter
-
+from general_imports import *
+from generic_functions import *
 import views
 
 def get_movies_by_age(request):
@@ -46,9 +32,19 @@ def get_movies_by_age(request):
 
 
 @login_required
-def delete_title(request, title_slug):
-	user = get_user_and_profile()['profile']
-	Title.objects.get(slug=title_slug, users=user)
+def delete_title(request):
+	print "***********************"
+	print request
+	print "***********************"
+	to_del = request.POST['value']
+	print "to_del = ", to_del
+	print type(request.user)
+	print 'request.user =============================', str(request.user)
+	current_user = UserProfile.objects.get(username=str(request.user))
+	# user = get_user_and_profile(request.user)['profile']
+	print "current_user =", current_user
+	print type(current_user)
+	title_to_delete = Title.objects.filter(users=current_user, name=to_del)
 	print 'title_to_delete > ', title_to_delete
-
+	title_to_delete.delete()
 	return HttpResponse("OK")

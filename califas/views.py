@@ -1,19 +1,5 @@
-#--<encoding:utf8>--
-from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, redirect
-from django.core.urlresolvers import reverse
-from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
-
-from califas.models import Director, Title, UserProfile, Friend, Review
-from califas.forms import TitleForm, DirectorForm, UserForm, UserProfileForm, ReviewForm
-
-import unidecode
-import json
-import random
-from operator import itemgetter
-
+from general_imports import *
+from generic_functions import *
 import ajax_functions
 
 def get_director(director):
@@ -38,21 +24,6 @@ def get_average_rating(title):
 	return average
 	# # Get all the ratings of the title that are greater than 0
 	# all_ratings = Review.objects.filter(rating__gt=0)
-
-# Gets the username from the User class and the UserProfile class
-def get_user_and_profile(username):
-	user_and_profile = {}
-
-	user_name = User.objects.get(username=str(username))
-	user_and_profile['name'] = user_name
-
-	user = UserProfile.objects.all()
-	# = TODO = Needs a way to only pass the value of the User class if it doesn't find the UserProfile class
-	for my_user in user:
-		if my_user.usr == user_name:
-			user_and_profile['profile'] = my_user
-
-	return user_and_profile
 
 
 def remove_repeated_titles(titles):
@@ -127,6 +98,7 @@ def get_user_movies(user):
 		for x in titles:
 			movie_details = {
 				'name': str(x.name),
+				'slug': str(x.slug),
 				'director': x.director,#directors_dict[str(x)],
 				'year': x.year,
 				'genre':  [reviews_dict[str(x.name)].genre],
@@ -495,8 +467,8 @@ def user_movies(request):
 	the_user = get_user_and_profile(request.user)
 	print the_user['profile']
 	titles = get_user_movies(the_user['profile'])
-	print "titles: "
-	print ">>>>>>>>>>>>>>>>>>>>>>>",titles[0]
+	# print "titles: "
+	# print ">>>>>>>>>>>>>>>>>>>>>>>",titles[0]
 
 	return render(request, 'califas/mis_peliculas.html', {'titles': titles})
 
