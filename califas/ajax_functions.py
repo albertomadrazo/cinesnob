@@ -43,3 +43,12 @@ def get_movies_by_age(request):
 
 	# This is AJAX
 	return HttpResponse(las_movies)
+
+
+@login_required
+def delete_title(request, title_slug):
+	user = get_user_and_profile()['profile']
+	Title.objects.get(slug=title_slug, users=user)
+	print 'title_to_delete > ', title_to_delete
+
+	return HttpResponse("OK")
