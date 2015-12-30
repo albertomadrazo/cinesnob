@@ -159,7 +159,7 @@ TEMPLATE_DIRS = (
 
 # Parse database configuration from $DATABASE_URL
 import dj_database_url
-DATABASES['default'] = dj_database_url.config()
+DATABASES['default'] = dj_database_url.config(default='postgres://nidfmzgnteqanl:GiYTRwUbL2rzPU-WWXMEEeTkOp@ec2-107-22-184-127.compute-1.amazonaws.com:5432/dccmb5j2h051sp')
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')

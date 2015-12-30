@@ -2,5 +2,5 @@ db.sqlite3
 califas.db
 production_secrets.py
 cinesnob/production_secrets.py
-*pyc
+*.pyc
 # staticfiles
