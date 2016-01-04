@@ -8,7 +8,7 @@ TODO:
 	- Hacer funciones genericas de get_all_users, get_all_movies, get_all_directors, etc.
 	- Hacer una auditoría de las tablas, pues tienen ciertos problemas con repeticiones, conflictos de slug, etc
 	- Página de estadísticas
-	- Update y Delete de peliculas
+	- Update de peliculas
 
 	Diseño
 
